@@ -1,0 +1,5 @@
+# CPU执行方案：沿用已验证的PyTorch构建，通过--device cpu运行，不调用GPU。
+# 与CUDA执行方案使用同一构建，以保持当前验证结果；下载包较大。
+--extra-index-url https://download.pytorch.org/whl/cu130
+-r requirements-common.txt
+torch==2.14.0+cu130

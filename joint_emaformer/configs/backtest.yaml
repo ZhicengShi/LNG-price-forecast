@@ -1,0 +1,27 @@
+# 回测每个起点从头训练；改training_seeds可复核7、2026等种子。
+data_config: ../../config.yaml
+profiles:
+- all
+- selected
+training_seeds:
+- 42
+primary_seed: 42
+model_configs:
+  all: all.yaml
+  selected: selected.yaml
+output_dir: ../outputs/backtest
+start: common_earliest
+end: null
+analysis:
+  input_dir: ../reference/backtest
+  output_dir: ../outputs/analysis
+  confidence: 0.95
+  bootstrap_repeats: 5000
+  bootstrap_seed: 20261015
+  block_months: 12
+  sensitivity_blocks:
+  - 6
+  - 12
+  - 18
+  interval_min_residuals: 24
+  interval_residual_window: 60

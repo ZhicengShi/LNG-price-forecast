@@ -1,0 +1,10 @@
+{
+  "all_checks_passed": true,
+  "independent_copy": true,
+  "path_contains_spaces": true,
+  "started_from_other_directory": true,
+  "weights_reloaded": 18,
+  "future_prediction": true,
+  "copied_package": "D:\\LNGPre\\tmp\\single region relocation check",
+  "verification_output": "D:\\LNGPre\\tmp\\single_relocation_verification"
+}

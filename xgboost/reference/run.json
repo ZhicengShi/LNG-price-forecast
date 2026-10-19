@@ -1,0 +1,138 @@
+{
+  "config": {
+    "data_config": "../config.yaml",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "output_dir": "outputs",
+    "candidate_features": "all",
+    "seeds": [
+      42,
+      7,
+      2026
+    ],
+    "ranking": {
+      "folds": 3,
+      "fold_months": 15,
+      "model": "depth2",
+      "permutation_repeats": 20,
+      "permutation_block_months": 3,
+      "permutation_seed": 42000
+    },
+    "combination": {
+      "greedy_pool": 8,
+      "greedy_max": 5
+    },
+    "parameters": {
+      "base": {
+        "objective": "reg:squarederror",
+        "tree_method": "hist",
+        "min_child_weight": 5,
+        "reg_lambda": 5,
+        "subsample": 0.9,
+        "colsample_bytree": 0.9,
+        "n_jobs": 1,
+        "verbosity": 0
+      },
+      "variants": {
+        "depth2": {
+          "n_estimators": 200,
+          "max_depth": 2,
+          "learning_rate": 0.03
+        },
+        "depth3": {
+          "n_estimators": 200,
+          "max_depth": 3,
+          "learning_rate": 0.03
+        }
+      }
+    }
+  },
+  "data_config": {
+    "data": {
+      "shanghai": "D:\\LNGPre\\experiment_reproduction\\data\\上海_处理后数据表.xlsx",
+      "zhejiang": "D:\\LNGPre\\experiment_reproduction\\data\\浙江_处理后数据表.xlsx",
+      "jiangsu": "D:\\LNGPre\\experiment_reproduction\\data\\江苏_处理后数据表.xlsx"
+    },
+    "period": {
+      "start": "2015-01",
+      "train_end": "2022-11",
+      "validation_end": "2024-07",
+      "test_end": "2026-05"
+    },
+    "window": {
+      "seq_len": 12,
+      "pred_len": 3
+    },
+    "preprocessing": {
+      "missing": "ffill"
+    },
+    "features": {
+      "all": "all",
+      "selected": {
+        "shanghai": [
+          "终端非居民天然气价格（分省）",
+          "管道气进口价格",
+          "管道气进口量（全国）",
+          "LNG产量（全国）"
+        ],
+        "zhejiang": [
+          "终端非居民天然气价格（分省）",
+          "TTF期货价格",
+          "制造业PMI增速（全国）"
+        ],
+        "jiangsu": [
+          "终端非居民天然气价格（分省）",
+          "天然气产量（全国总量）",
+          "LNG产量（全国）",
+          "采暖度日数HDD（分省）",
+          "柴油价格（0#柴油）"
+        ]
+      }
+    },
+    "runtime": {
+      "device": "auto",
+      "threads": 4,
+      "seed": 42
+    }
+  },
+  "config_sha256": "47e401c3af5cb15ee3861d9da29c6456d13fcff94f9e365c3392a83f10dd5e2c",
+  "data_config_sha256": "8edc9dcfcd333eecb8462ae1a1d572c23ff36303a4d04c5d3f990392ea62b3fd",
+  "reference_checks": [
+    {
+      "region": "shanghai",
+      "passed": true,
+      "candidates": 132,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329"
+    },
+    {
+      "region": "zhejiang",
+      "passed": true,
+      "candidates": 116,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193"
+    },
+    {
+      "region": "jiangsu",
+      "passed": true,
+      "candidates": 134,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+    }
+  ],
+  "selected_regions": [
+    "shanghai",
+    "zhejiang",
+    "jiangsu"
+  ],
+  "selection_uses_test": false
+}

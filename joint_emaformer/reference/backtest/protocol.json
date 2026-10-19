@@ -1,0 +1,26 @@
+{
+  "profiles": [
+    "all",
+    "selected"
+  ],
+  "training_seeds": [
+    42,
+    7,
+    2026
+  ],
+  "primary_seed": 42,
+  "initial_train_months": 9,
+  "origins": 126,
+  "first_month": "2015-01",
+  "selection_cutoff_month": "2024-07",
+  "data_sha256": {
+    "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
+    "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
+    "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+  },
+  "first_history_cutoff": "2015-09",
+  "last_history_cutoff": "2026-02",
+  "last_target_month": "2026-05",
+  "initial_feature_selection_end_month": "2024-07",
+  "retrospective_earlier_origins": true
+}

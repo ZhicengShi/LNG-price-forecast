@@ -1,0 +1,1289 @@
+{
+  "upload": {
+    "created": true,
+    "dataset": {
+      "data_version": "data_777988436e8349529f2e1547",
+      "name": "HTTP流程验证数据",
+      "note": "",
+      "created_at": "2026-10-18T13:24:48.487837+00:00",
+      "source": "upload",
+      "is_default": false,
+      "status": "valid",
+      "first_month": "2015-01",
+      "latest_observed_month": "2026-06",
+      "months": 138,
+      "regions": [
+        {
+          "region": "shanghai",
+          "region_name": "上海",
+          "filename": "latest_shanghai.xlsx",
+          "months": 138,
+          "first_month": "2015-01",
+          "latest_observed_month": "2026-06",
+          "missing_counts": {
+            "JKM现货价格": 0,
+            "LNG进口价格": 0,
+            "TTF期货价格": 0,
+            "Henry Hub期货价格": 0,
+            "Brent原油价格": 0,
+            "管道气进口价格": 0,
+            "美元/人民币汇率": 0,
+            "LNG进口量（全国）": 0,
+            "管道气进口量（全国）": 0,
+            "LNG进口量（区域）": 0,
+            "天然气产量（全国总量）": 0,
+            "天然气产量（区域）": 0,
+            "LNG产量（全国）": 0,
+            "门站价基准价格（分省）": 0,
+            "中国液化天然气出厂价格指数": 0,
+            "工业增加值（分省）": 24,
+            "制造业PMI增速（全国）": 0,
+            "GDP增速（分省）": 0,
+            "平均气温（分省）": 0,
+            "采暖度日数HDD（分省）": 0,
+            "非居民天然气消费量（分省）": 138,
+            "柴油价格（0#柴油）": 1,
+            "动力煤价格": 0,
+            "终端非居民天然气价格（分省）": 0
+          },
+          "all_empty_columns": [
+            "非居民天然气消费量（分省）"
+          ]
+        },
+        {
+          "region": "zhejiang",
+          "region_name": "浙江",
+          "filename": "latest_zhejiang.xlsx",
+          "months": 138,
+          "first_month": "2015-01",
+          "latest_observed_month": "2026-06",
+          "missing_counts": {
+            "JKM现货价格": 0,
+            "LNG进口价格": 0,
+            "TTF期货价格": 0,
+            "Henry Hub期货价格": 0,
+            "Brent原油价格": 0,
+            "管道气进口价格": 0,
+            "美元/人民币汇率": 0,
+            "LNG进口量（全国）": 0,
+            "管道气进口量（全国）": 0,
+            "LNG进口量（区域）": 46,
+            "天然气产量（全国总量）": 0,
+            "天然气产量（区域）": 42,
+            "LNG产量（全国）": 0,
+            "门站价基准价格（分省）": 3,
+            "中国液化天然气出厂价格指数": 0,
+            "工业增加值（分省）": 23,
+            "制造业PMI增速（全国）": 0,
+            "GDP增速（分省）": 138,
+            "平均气温（分省）": 0,
+            "采暖度日数HDD（分省）": 0,
+            "非居民天然气消费量（分省）": 138,
+            "柴油价格（0#柴油）": 1,
+            "动力煤价格": 0,
+            "终端非居民天然气价格（分省）": 0
+          },
+          "all_empty_columns": [
+            "GDP增速（分省）",
+            "非居民天然气消费量（分省）"
+          ]
+        },
+        {
+          "region": "jiangsu",
+          "region_name": "江苏",
+          "filename": "latest_jiangsu.xlsx",
+          "months": 138,
+          "first_month": "2015-01",
+          "latest_observed_month": "2026-06",
+          "missing_counts": {
+            "JKM现货价格": 0,
+            "LNG进口价格": 0,
+            "TTF期货价格": 0,
+            "Henry Hub期货价格": 0,
+            "Brent原油价格": 0,
+            "管道气进口价格": 0,
+            "美元/人民币汇率": 0,
+            "LNG进口量（全国）": 0,
+            "管道气进口量（全国）": 0,
+            "LNG进口量（区域）": 4,
+            "天然气产量（全国总量）": 0,
+            "天然气产量（区域）": 0,
+            "LNG产量（全国）": 0,
+            "门站价基准价格（分省）": 6,
+            "中国液化天然气出厂价格指数": 0,
+            "工业增加值（分省）": 138,
+            "制造业PMI增速（全国）": 0,
+            "GDP增速（分省）": 138,
+            "平均气温（分省）": 0,
+            "采暖度日数HDD（分省）": 0,
+            "非居民天然气消费量（分省）": 138,
+            "柴油价格（0#柴油）": 1,
+            "动力煤价格": 0,
+            "终端非居民天然气价格（分省）": 0
+          },
+          "all_empty_columns": [
+            "工业增加值（分省）",
+            "GDP增速（分省）",
+            "非居民天然气消费量（分省）"
+          ]
+        }
+      ],
+      "warnings": [
+        {
+          "code": "EMPTY_COLUMNS",
+          "region": "shanghai",
+          "month": null,
+          "field": null,
+          "message": "存在全空的非目标字段，训练时按方案处理",
+          "suggestion": null
+        },
+        {
+          "code": "EMPTY_COLUMNS",
+          "region": "zhejiang",
+          "month": null,
+          "field": null,
+          "message": "存在全空的非目标字段，训练时按方案处理",
+          "suggestion": null
+        },
+        {
+          "code": "EMPTY_COLUMNS",
+          "region": "jiangsu",
+          "month": null,
+          "field": null,
+          "message": "存在全空的非目标字段，训练时按方案处理",
+          "suggestion": null
+        }
+      ],
+      "compatible_models": [
+        {
+          "model_version": "selected-a03df2b66e12a63a",
+          "profile": "selected",
+          "can_predict": true,
+          "reasons": []
+        },
+        {
+          "model_version": "all-f1add7685a763d0d",
+          "profile": "all",
+          "can_predict": true,
+          "reasons": []
+        }
+      ]
+    }
+  },
+  "tuning": {
+    "kind": "tuning",
+    "name": "自动调参｜all｜截至2026-05",
+    "profile": "all",
+    "model_name": "三地区融合EMAformer",
+    "data_version": "data_c3c524c9ee651c29052eeb81",
+    "device": "cpu",
+    "status": "succeeded",
+    "stage": "finalizing",
+    "submitted_at": "2026-10-18T13:24:49.703330+00:00",
+    "started_at": "2026-10-18T13:24:49.734795+00:00",
+    "finished_at": "2026-10-18T13:24:53.811744+00:00",
+    "elapsed_seconds": 4.070893493655603,
+    "queue_position": null,
+    "progress": {
+      "unit": "fit",
+      "completed_units": 3,
+      "total_units": 3,
+      "phase_percent": 100.0,
+      "current_epoch": null,
+      "max_epochs": null
+    },
+    "warnings": [],
+    "error": null,
+    "status_url": "/tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15",
+    "request": {
+      "profile": "all",
+      "data_version": "data_c3c524c9ee651c29052eeb81"
+    },
+    "resolved_split": {
+      "first_month": "2015-01",
+      "training_cutoff": "2024-06",
+      "validation_start": "2024-07",
+      "validation_end": "2026-02",
+      "test_start": "2026-03",
+      "test_end": "2026-05",
+      "latest_observed_month": "2026-05",
+      "pred_len": 3
+    },
+    "tuning_id": "tune_083d1a6e5cc74f39925a18a4c29c4f15",
+    "resolved_search": {
+      "search_trials": 1,
+      "finalists": 1,
+      "validation_folds": 1,
+      "fold_months": 3,
+      "replications_per_fold": 3,
+      "include_initial_candidates": true,
+      "initial_candidates_count": 1,
+      "search_space": {
+        "activation": [
+          "gelu",
+          "relu"
+        ],
+        "attention_dropout": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "batch_size": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "channel_embedding": [
+          true,
+          false
+        ],
+        "cycle": [
+          0,
+          12,
+          24,
+          48
+        ],
+        "d_model": [
+          32,
+          64,
+          128,
+          256,
+          512
+        ],
+        "dropout": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "e_layers": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "embedding_dropout": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "ff_multiplier": [
+          2,
+          4,
+          8
+        ],
+        "grad_clip": [
+          0.0,
+          0.5,
+          1.0,
+          5.0
+        ],
+        "head_dropout": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "head_layers": [
+          1,
+          2,
+          3
+        ],
+        "head_multiplier": [
+          1,
+          2
+        ],
+        "loss": [
+          "mse",
+          "smooth_l1",
+          "mae",
+          "mape"
+        ],
+        "lr_log10": [
+          -5.0,
+          -2.5
+        ],
+        "max_epochs": [
+          24,
+          48,
+          96
+        ],
+        "missing": [
+          "linear_history",
+          "ffill"
+        ],
+        "n_heads": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "norm_first": [
+          false,
+          true
+        ],
+        "optimizer": [
+          "Adam",
+          "AdamW"
+        ],
+        "output_mode": [
+          "level",
+          "delta"
+        ],
+        "patience": [
+          6,
+          10,
+          15
+        ],
+        "residual_scale": [
+          0.1,
+          0.25,
+          0.5,
+          1.0
+        ],
+        "scheduler": [
+          "none",
+          "cosine",
+          "plateau"
+        ],
+        "seq_len": [
+          6,
+          12,
+          18,
+          24,
+          36
+        ],
+        "weight_decay": [
+          0.0,
+          1e-06,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01
+        ],
+        "window_norm": [
+          true,
+          false
+        ]
+      },
+      "max_duration_minutes": null,
+      "planned_fits": 4,
+      "folds": [
+        {
+          "fold": 1,
+          "training_cutoff": "2025-11",
+          "validation_start": "2025-12",
+          "validation_end": "2026-02"
+        }
+      ]
+    },
+    "best_so_far": {
+      "trial": 1,
+      "rank": 1,
+      "phase": "confirmation",
+      "status": "complete",
+      "parameters": {
+        "activation": "gelu",
+        "attention_dropout": 0.1,
+        "batch_size": 64,
+        "channel_embedding": true,
+        "cycle": 0,
+        "d_model": 32,
+        "dropout": 0.1,
+        "e_layers": 1,
+        "embedding_dropout": 0.1,
+        "ff_multiplier": 4,
+        "grad_clip": 1.0,
+        "head_dropout": 0.1,
+        "head_layers": 1,
+        "head_multiplier": 1,
+        "loss": "mse",
+        "lr": 0.0001,
+        "max_epochs": 1,
+        "missing": "linear_history",
+        "n_heads": 4,
+        "norm_first": false,
+        "optimizer": "AdamW",
+        "output_mode": "delta",
+        "patience": 1,
+        "residual_scale": 0.1,
+        "scheduler": "none",
+        "seq_len": 6,
+        "weight_decay": 0.0001,
+        "window_norm": true
+      },
+      "score_mape_percent": 0.612284825963512,
+      "regions": [
+        {
+          "region": "shanghai",
+          "region_name": "上海",
+          "origins": 3,
+          "by_horizon": [
+            {
+              "horizon": 1,
+              "observations": 3,
+              "mape_percent": 4.1938195830596385e-05,
+              "accuracy_score_percent": 99.99995806180416
+            },
+            {
+              "horizon": 2,
+              "observations": 3,
+              "mape_percent": 4.433977196481695e-05,
+              "accuracy_score_percent": 99.99995566022804
+            },
+            {
+              "horizon": 3,
+              "observations": 3,
+              "mape_percent": 4.6140954062023715e-05,
+              "accuracy_score_percent": 99.99995385904593
+            }
+          ],
+          "average_mape_percent": 4.413964061914568e-05,
+          "average_accuracy_score_percent": 99.99995586035938
+        },
+        {
+          "region": "zhejiang",
+          "region_name": "浙江",
+          "origins": 3,
+          "by_horizon": [
+            {
+              "horizon": 1,
+              "observations": 3,
+              "mape_percent": 0.0011993707568706046,
+              "accuracy_score_percent": 99.99880062924314
+            },
+            {
+              "horizon": 2,
+              "observations": 3,
+              "mape_percent": 1.0782170433883957,
+              "accuracy_score_percent": 98.92178295661161
+            },
+            {
+              "horizon": 3,
+              "observations": 3,
+              "mape_percent": 1.07821968005859,
+              "accuracy_score_percent": 98.9217803199414
+            }
+          ],
+          "average_mape_percent": 0.7192120314012854,
+          "average_accuracy_score_percent": 99.28078796859872
+        },
+        {
+          "region": "jiangsu",
+          "region_name": "江苏",
+          "origins": 3,
+          "by_horizon": [
+            {
+              "horizon": 1,
+              "observations": 3,
+              "mape_percent": 0.00046072903176901185,
+              "accuracy_score_percent": 99.99953927096823
+            },
+            {
+              "horizon": 2,
+              "observations": 3,
+              "mape_percent": 1.6765353370178497,
+              "accuracy_score_percent": 98.32346466298215
+            },
+            {
+              "horizon": 3,
+              "observations": 3,
+              "mape_percent": 1.6757988544962756,
+              "accuracy_score_percent": 98.32420114550372
+            }
+          ],
+          "average_mape_percent": 1.1175983068486315,
+          "average_accuracy_score_percent": 98.88240169315137
+        }
+      ],
+      "fits_completed": 3,
+      "fits_planned": 3,
+      "best_epoch": null,
+      "elapsed_seconds": 0.7809999999954016,
+      "error": null
+    },
+    "result_available": true,
+    "results_url": "/tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15/results"
+  },
+  "recommendation": {
+    "tuning_id": "tune_083d1a6e5cc74f39925a18a4c29c4f15",
+    "status": "succeeded",
+    "result_available": true,
+    "profile": "all",
+    "data_version": "data_c3c524c9ee651c29052eeb81",
+    "selection_cutoff": "2026-02",
+    "objective": "mean_validation_mape_percent",
+    "recommended_trial": 1,
+    "recommended_parameters": {
+      "activation": "gelu",
+      "attention_dropout": 0.1,
+      "batch_size": 64,
+      "channel_embedding": true,
+      "cycle": 0,
+      "d_model": 32,
+      "dropout": 0.1,
+      "e_layers": 1,
+      "embedding_dropout": 0.1,
+      "ff_multiplier": 4,
+      "grad_clip": 1.0,
+      "head_dropout": 0.1,
+      "head_layers": 1,
+      "head_multiplier": 1,
+      "loss": "mse",
+      "lr": 0.0001,
+      "max_epochs": 1,
+      "missing": "linear_history",
+      "n_heads": 4,
+      "norm_first": false,
+      "optimizer": "AdamW",
+      "output_mode": "delta",
+      "patience": 1,
+      "residual_scale": 0.1,
+      "scheduler": "none",
+      "seq_len": 6,
+      "weight_decay": 0.0001,
+      "window_norm": true
+    },
+    "frozen_training_plan": {
+      "epochs": 1,
+      "lr_schedule": [
+        0.0001
+      ]
+    },
+    "selection_rule": "按三地区、折与内部重复等权验证MAPE选择；并列比较最差地区，再比较候选编号",
+    "phase": "confirmation",
+    "items": [
+      {
+        "trial": 1,
+        "rank": 1,
+        "phase": "confirmation",
+        "status": "complete",
+        "parameters": {
+          "activation": "gelu",
+          "attention_dropout": 0.1,
+          "batch_size": 64,
+          "channel_embedding": true,
+          "cycle": 0,
+          "d_model": 32,
+          "dropout": 0.1,
+          "e_layers": 1,
+          "embedding_dropout": 0.1,
+          "ff_multiplier": 4,
+          "grad_clip": 1.0,
+          "head_dropout": 0.1,
+          "head_layers": 1,
+          "head_multiplier": 1,
+          "loss": "mse",
+          "lr": 0.0001,
+          "max_epochs": 1,
+          "missing": "linear_history",
+          "n_heads": 4,
+          "norm_first": false,
+          "optimizer": "AdamW",
+          "output_mode": "delta",
+          "patience": 1,
+          "residual_scale": 0.1,
+          "scheduler": "none",
+          "seq_len": 6,
+          "weight_decay": 0.0001,
+          "window_norm": true
+        },
+        "score_mape_percent": 0.612284825963512,
+        "regions": [
+          {
+            "region": "shanghai",
+            "region_name": "上海",
+            "origins": 3,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 3,
+                "mape_percent": 4.1938195830596385e-05,
+                "accuracy_score_percent": 99.99995806180416
+              },
+              {
+                "horizon": 2,
+                "observations": 3,
+                "mape_percent": 4.433977196481695e-05,
+                "accuracy_score_percent": 99.99995566022804
+              },
+              {
+                "horizon": 3,
+                "observations": 3,
+                "mape_percent": 4.6140954062023715e-05,
+                "accuracy_score_percent": 99.99995385904593
+              }
+            ],
+            "average_mape_percent": 4.413964061914568e-05,
+            "average_accuracy_score_percent": 99.99995586035938
+          },
+          {
+            "region": "zhejiang",
+            "region_name": "浙江",
+            "origins": 3,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 3,
+                "mape_percent": 0.0011993707568706046,
+                "accuracy_score_percent": 99.99880062924314
+              },
+              {
+                "horizon": 2,
+                "observations": 3,
+                "mape_percent": 1.0782170433883957,
+                "accuracy_score_percent": 98.92178295661161
+              },
+              {
+                "horizon": 3,
+                "observations": 3,
+                "mape_percent": 1.07821968005859,
+                "accuracy_score_percent": 98.9217803199414
+              }
+            ],
+            "average_mape_percent": 0.7192120314012854,
+            "average_accuracy_score_percent": 99.28078796859872
+          },
+          {
+            "region": "jiangsu",
+            "region_name": "江苏",
+            "origins": 3,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 3,
+                "mape_percent": 0.00046072903176901185,
+                "accuracy_score_percent": 99.99953927096823
+              },
+              {
+                "horizon": 2,
+                "observations": 3,
+                "mape_percent": 1.6765353370178497,
+                "accuracy_score_percent": 98.32346466298215
+              },
+              {
+                "horizon": 3,
+                "observations": 3,
+                "mape_percent": 1.6757988544962756,
+                "accuracy_score_percent": 98.32420114550372
+              }
+            ],
+            "average_mape_percent": 1.1175983068486315,
+            "average_accuracy_score_percent": 98.88240169315137
+          }
+        ],
+        "fits_completed": 3,
+        "fits_planned": 3,
+        "best_epoch": null,
+        "elapsed_seconds": 0.7809999999954016,
+        "error": null
+      }
+    ]
+  },
+  "training": {
+    "kind": "training",
+    "name": "自动训练｜all｜截至2026-05",
+    "profile": "all",
+    "model_name": "三地区融合EMAformer",
+    "data_version": "data_c3c524c9ee651c29052eeb81",
+    "device": "cpu",
+    "status": "succeeded",
+    "stage": "registering",
+    "submitted_at": "2026-10-18T13:24:53.978640+00:00",
+    "started_at": "2026-10-18T13:24:54.412082+00:00",
+    "finished_at": "2026-10-18T13:24:57.686450+00:00",
+    "elapsed_seconds": 3.269150665284542,
+    "queue_position": null,
+    "progress": {
+      "unit": "epoch",
+      "completed_units": 1,
+      "total_units": 1,
+      "phase_percent": 100.0,
+      "current_epoch": 1,
+      "max_epochs": 1
+    },
+    "warnings": [],
+    "error": null,
+    "status_url": "/trainings/train_9084d5fc844349129b7776a18a4772c3",
+    "request": {
+      "mode": "holdout",
+      "tuning_id": "tune_083d1a6e5cc74f39925a18a4c29c4f15"
+    },
+    "resolved_split": {
+      "first_month": "2015-01",
+      "training_cutoff": "2026-02",
+      "validation_start": null,
+      "validation_end": null,
+      "test_start": "2026-03",
+      "test_end": "2026-05",
+      "latest_observed_month": "2026-05",
+      "pred_len": 3
+    },
+    "training_id": "train_9084d5fc844349129b7776a18a4772c3",
+    "parameters": {
+      "activation": "gelu",
+      "attention_dropout": 0.1,
+      "batch_size": 64,
+      "channel_embedding": true,
+      "cycle": 0,
+      "d_model": 32,
+      "dropout": 0.1,
+      "e_layers": 1,
+      "embedding_dropout": 0.1,
+      "ff_multiplier": 4,
+      "grad_clip": 1.0,
+      "head_dropout": 0.1,
+      "head_layers": 1,
+      "head_multiplier": 1,
+      "loss": "mse",
+      "lr": 0.0001,
+      "max_epochs": 1,
+      "missing": "linear_history",
+      "n_heads": 4,
+      "norm_first": false,
+      "optimizer": "AdamW",
+      "output_mode": "delta",
+      "patience": 1,
+      "residual_scale": 0.1,
+      "scheduler": "none",
+      "seq_len": 6,
+      "weight_decay": 0.0001,
+      "window_norm": true
+    },
+    "training_plan": {
+      "epochs": 1,
+      "lr_schedule": [
+        0.0001
+      ]
+    },
+    "tuning_id": "tune_083d1a6e5cc74f39925a18a4c29c4f15",
+    "result": {
+      "model_version": "all-2a3a08b24aeae59a",
+      "display_name": "全变量｜训练截至2026-02｜2026-10-18 训练",
+      "registered_at": "2026-10-18T13:24:57.677878+00:00",
+      "trained_at": "2026-10-18T13:24:57.569633+00:00",
+      "model_training_cutoff": "2026-02",
+      "parameter_selection_cutoff": "2026-02",
+      "epochs_completed": 1,
+      "evaluation": {
+        "recent_backtest": {
+          "available": false,
+          "reason": "当前模型未登记此类评价证据",
+          "basis": "same_parameters_features_rolling_refit_protocol",
+          "version": null,
+          "first_forecast_month": null,
+          "last_forecast_month": null,
+          "last_target_month": null,
+          "regions": []
+        },
+        "registered_model_test": {
+          "available": true,
+          "reason": null,
+          "basis": "registered_checkpoint_fixed_weight_holdout",
+          "version": "6060c148896acb93d3f627b79c2f418a463c12c6a02fde65a0c39fb25fb17426",
+          "first_forecast_month": "2026-03",
+          "last_forecast_month": "2026-03",
+          "last_target_month": "2026-05",
+          "regions": [
+            {
+              "region": "shanghai",
+              "region_name": "上海",
+              "origins": 1,
+              "by_horizon": [
+                {
+                  "horizon": 1,
+                  "observations": 1,
+                  "mape_percent": 2.0815282376255966,
+                  "accuracy_score_percent": 97.91847176237441
+                },
+                {
+                  "horizon": 2,
+                  "observations": 1,
+                  "mape_percent": 3.883498828148771,
+                  "accuracy_score_percent": 96.11650117185123
+                },
+                {
+                  "horizon": 3,
+                  "observations": 1,
+                  "mape_percent": 3.8835002277363797,
+                  "accuracy_score_percent": 96.11649977226362
+                }
+              ],
+              "average_mape_percent": 3.282842431170249,
+              "average_accuracy_score_percent": 96.71715756882975
+            },
+            {
+              "region": "zhejiang",
+              "region_name": "浙江",
+              "origins": 1,
+              "by_horizon": [
+                {
+                  "horizon": 1,
+                  "observations": 1,
+                  "mape_percent": 0.0001600869510614972,
+                  "accuracy_score_percent": 99.99983991304894
+                },
+                {
+                  "horizon": 2,
+                  "observations": 1,
+                  "mape_percent": 1.1099989499639937,
+                  "accuracy_score_percent": 98.890001050036
+                },
+                {
+                  "horizon": 3,
+                  "observations": 1,
+                  "mape_percent": 1.8232543123546756,
+                  "accuracy_score_percent": 98.17674568764532
+                }
+              ],
+              "average_mape_percent": 0.9778044497565769,
+              "average_accuracy_score_percent": 99.02219555024342
+            },
+            {
+              "region": "jiangsu",
+              "region_name": "江苏",
+              "origins": 1,
+              "by_horizon": [
+                {
+                  "horizon": 1,
+                  "observations": 1,
+                  "mape_percent": 0.00035185625794912983,
+                  "accuracy_score_percent": 99.99964814374205
+                },
+                {
+                  "horizon": 2,
+                  "observations": 1,
+                  "mape_percent": 7.013389000582524,
+                  "accuracy_score_percent": 92.98661099941748
+                },
+                {
+                  "horizon": 3,
+                  "observations": 1,
+                  "mape_percent": 7.013370737345081,
+                  "accuracy_score_percent": 92.98662926265492
+                }
+              ],
+              "average_mape_percent": 4.6757038647285185,
+              "average_accuracy_score_percent": 95.32429613527148
+            }
+          ]
+        },
+        "interpretation": "精度得分=100-MAPE（百分数）。本次为固定新权重留出测试；无保留标签时不生成测试指标。"
+      },
+      "test_csv_url": "/trainings/train_9084d5fc844349129b7776a18a4772c3/csv",
+      "model_url": "/models/all-2a3a08b24aeae59a"
+    }
+  },
+  "new_model_prediction": {
+    "prediction_id": "pred_9b3589aa97df4ec9b6bb7783157abbfa",
+    "generated_at": "2026-10-18T13:24:57.860439+00:00",
+    "predictions": [
+      {
+        "region": "shanghai",
+        "region_name": "上海",
+        "target_month": "2026-06",
+        "horizon": 1,
+        "prediction": 4.120021427100929,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "zhejiang",
+        "region_name": "浙江",
+        "target_month": "2026-06",
+        "horizon": 1,
+        "prediction": 3.819109510172372,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "jiangsu",
+        "region_name": "江苏",
+        "target_month": "2026-06",
+        "horizon": 1,
+        "prediction": 3.83113935455189,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "shanghai",
+        "region_name": "上海",
+        "target_month": "2026-07",
+        "horizon": 2,
+        "prediction": 4.12003681351388,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "zhejiang",
+        "region_name": "浙江",
+        "target_month": "2026-07",
+        "horizon": 2,
+        "prediction": 3.819109245463274,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "jiangsu",
+        "region_name": "江苏",
+        "target_month": "2026-07",
+        "horizon": 2,
+        "prediction": 3.8311659646893337,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "shanghai",
+        "region_name": "上海",
+        "target_month": "2026-08",
+        "horizon": 3,
+        "prediction": 4.120042550983294,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "zhejiang",
+        "region_name": "浙江",
+        "target_month": "2026-08",
+        "horizon": 3,
+        "prediction": 3.8191099204714742,
+        "unit": "元/立方米"
+      },
+      {
+        "region": "jiangsu",
+        "region_name": "江苏",
+        "target_month": "2026-08",
+        "horizon": 3,
+        "prediction": 3.8311687743874945,
+        "unit": "元/立方米"
+      }
+    ],
+    "prediction_intervals": {
+      "method": "matured_absolute_residual_order_statistic",
+      "confidence": 0.95,
+      "calibration_basis": "same_parameters_features_rolling_refit_protocol",
+      "calibration_version": null,
+      "min_residuals": 24,
+      "residual_window": 24,
+      "interpretation": "此区间描述价格波动。",
+      "items": [
+        {
+          "region": "shanghai",
+          "target_month": "2026-06",
+          "horizon": 1,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "zhejiang",
+          "target_month": "2026-06",
+          "horizon": 1,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "jiangsu",
+          "target_month": "2026-06",
+          "horizon": 1,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "shanghai",
+          "target_month": "2026-07",
+          "horizon": 2,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "zhejiang",
+          "target_month": "2026-07",
+          "horizon": 2,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "jiangsu",
+          "target_month": "2026-07",
+          "horizon": 2,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "shanghai",
+          "target_month": "2026-08",
+          "horizon": 3,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "zhejiang",
+          "target_month": "2026-08",
+          "horizon": 3,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        },
+        {
+          "region": "jiangsu",
+          "target_month": "2026-08",
+          "horizon": 3,
+          "available": false,
+          "lower": null,
+          "upper": null,
+          "calibration_count": 0,
+          "latest_calibration_target_month": null,
+          "reason": "当前模型未登记匹配的回测校准记录",
+          "historical_coverage_percent": null,
+          "historical_coverage_count": 0
+        }
+      ]
+    },
+    "evaluation": {
+      "recent_backtest": {
+        "available": false,
+        "reason": "当前模型未登记此类评价证据",
+        "basis": "same_parameters_features_rolling_refit_protocol",
+        "version": null,
+        "first_forecast_month": null,
+        "last_forecast_month": null,
+        "last_target_month": null,
+        "regions": []
+      },
+      "registered_model_test": {
+        "available": true,
+        "reason": null,
+        "basis": "registered_checkpoint_fixed_weight_holdout",
+        "version": "6060c148896acb93d3f627b79c2f418a463c12c6a02fde65a0c39fb25fb17426",
+        "first_forecast_month": "2026-03",
+        "last_forecast_month": "2026-03",
+        "last_target_month": "2026-05",
+        "regions": [
+          {
+            "region": "shanghai",
+            "region_name": "上海",
+            "origins": 1,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 1,
+                "mape_percent": 2.0815282376255966,
+                "accuracy_score_percent": 97.91847176237441
+              },
+              {
+                "horizon": 2,
+                "observations": 1,
+                "mape_percent": 3.883498828148771,
+                "accuracy_score_percent": 96.11650117185123
+              },
+              {
+                "horizon": 3,
+                "observations": 1,
+                "mape_percent": 3.8835002277363797,
+                "accuracy_score_percent": 96.11649977226362
+              }
+            ],
+            "average_mape_percent": 3.282842431170249,
+            "average_accuracy_score_percent": 96.71715756882975
+          },
+          {
+            "region": "zhejiang",
+            "region_name": "浙江",
+            "origins": 1,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 1,
+                "mape_percent": 0.0001600869510614972,
+                "accuracy_score_percent": 99.99983991304894
+              },
+              {
+                "horizon": 2,
+                "observations": 1,
+                "mape_percent": 1.1099989499639937,
+                "accuracy_score_percent": 98.890001050036
+              },
+              {
+                "horizon": 3,
+                "observations": 1,
+                "mape_percent": 1.8232543123546756,
+                "accuracy_score_percent": 98.17674568764532
+              }
+            ],
+            "average_mape_percent": 0.9778044497565769,
+            "average_accuracy_score_percent": 99.02219555024342
+          },
+          {
+            "region": "jiangsu",
+            "region_name": "江苏",
+            "origins": 1,
+            "by_horizon": [
+              {
+                "horizon": 1,
+                "observations": 1,
+                "mape_percent": 0.00035185625794912983,
+                "accuracy_score_percent": 99.99964814374205
+              },
+              {
+                "horizon": 2,
+                "observations": 1,
+                "mape_percent": 7.013389000582524,
+                "accuracy_score_percent": 92.98661099941748
+              },
+              {
+                "horizon": 3,
+                "observations": 1,
+                "mape_percent": 7.013370737345081,
+                "accuracy_score_percent": 92.98662926265492
+              }
+            ],
+            "average_mape_percent": 4.6757038647285185,
+            "average_accuracy_score_percent": 95.32429613527148
+          }
+        ]
+      },
+      "interpretation": "精度得分=100-MAPE（百分数）。回测按每起点重新训练的协议评价；固定权重测试属于当前登记权重。各自按最后若干完整且已成熟起点评分，注明月份及样本数；未来实际价格未知。"
+    },
+    "model_status": {
+      "model_name": "三地区融合EMAformer",
+      "service_version": "2.0.0",
+      "model_version": "all-2a3a08b24aeae59a",
+      "checkpoint_sha256": "2a3a08b24aeae59a43be99942bc42898ac2a1909560dbdc1afe84823171dff36",
+      "profile": "all",
+      "device": "cpu",
+      "registered_at": "2026-10-18T13:24:57.677878+00:00",
+      "loaded_at": "2026-10-18T13:24:57.707210+00:00",
+      "trained_at": "2026-10-18T13:24:57.569633+00:00",
+      "training_time_status": "recorded",
+      "model_training_cutoff": "2026-02",
+      "parameter_selection_cutoff": "2026-02",
+      "latest_observed_month": "2026-05",
+      "data_imported_at": "2026-10-18T13:24:46.540439+00:00",
+      "data_version": "data_c3c524c9ee651c29052eeb81",
+      "data_sha256": {
+        "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
+        "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
+        "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+      },
+      "historical_reference_matches": true,
+      "seq_len": 6,
+      "pred_len": 3,
+      "input_features": {
+        "shanghai": [
+          "JKM现货价格",
+          "LNG进口价格",
+          "TTF期货价格",
+          "Henry Hub期货价格",
+          "Brent原油价格",
+          "管道气进口价格",
+          "美元/人民币汇率",
+          "LNG进口量（全国）",
+          "管道气进口量（全国）",
+          "天然气产量（全国总量）",
+          "LNG产量（全国）",
+          "中国液化天然气出厂价格指数",
+          "制造业PMI增速（全国）",
+          "柴油价格（0#柴油）",
+          "动力煤价格",
+          "终端非居民天然气价格（分省）",
+          "LNG进口量（区域）",
+          "天然气产量（区域）",
+          "门站价基准价格（分省）",
+          "工业增加值（分省）",
+          "GDP增速（分省）",
+          "平均气温（分省）",
+          "采暖度日数HDD（分省）"
+        ],
+        "zhejiang": [
+          "JKM现货价格",
+          "LNG进口价格",
+          "TTF期货价格",
+          "Henry Hub期货价格",
+          "Brent原油价格",
+          "管道气进口价格",
+          "美元/人民币汇率",
+          "LNG进口量（全国）",
+          "管道气进口量（全国）",
+          "天然气产量（全国总量）",
+          "LNG产量（全国）",
+          "中国液化天然气出厂价格指数",
+          "制造业PMI增速（全国）",
+          "柴油价格（0#柴油）",
+          "动力煤价格",
+          "终端非居民天然气价格（分省）",
+          "门站价基准价格（分省）",
+          "工业增加值（分省）",
+          "平均气温（分省）",
+          "采暖度日数HDD（分省）"
+        ],
+        "jiangsu": [
+          "JKM现货价格",
+          "LNG进口价格",
+          "TTF期货价格",
+          "Henry Hub期货价格",
+          "Brent原油价格",
+          "管道气进口价格",
+          "美元/人民币汇率",
+          "LNG进口量（全国）",
+          "管道气进口量（全国）",
+          "天然气产量（全国总量）",
+          "LNG产量（全国）",
+          "中国液化天然气出厂价格指数",
+          "制造业PMI增速（全国）",
+          "柴油价格（0#柴油）",
+          "动力煤价格",
+          "终端非居民天然气价格（分省）",
+          "LNG进口量（区域）",
+          "天然气产量（区域）",
+          "门站价基准价格（分省）",
+          "平均气温（分省）",
+          "采暖度日数HDD（分省）"
+        ]
+      }
+    }
+  },
+  "interpretation": "1候选、1轮和1折的小预算技术流程验证，不作为最优模型或正式精度结论"
+}

@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "source": "original experiment records",
+  "regions": [
+    {
+      "region": "shanghai",
+      "passed": true,
+      "candidates": 132,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329"
+    },
+    {
+      "region": "zhejiang",
+      "passed": true,
+      "candidates": 116,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193"
+    },
+    {
+      "region": "jiangsu",
+      "passed": true,
+      "candidates": 134,
+      "features_match": true,
+      "ranking_match": true,
+      "validation_metrics_match": true,
+      "data_sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+    }
+  ],
+  "total_candidates": 382,
+  "combination_monthly_metrics_checked": true,
+  "existing_neural_network_feature_order_match": true,
+  "selection_uses_test": false,
+  "tests_passed": 8,
+  "source_code_sha256": "e6225eae38aba9fe20dfb21219876bd9c4a6e5e775395dcbabf483909537a3b1",
+  "data_versions": {
+    "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
+    "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
+    "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+  },
+  "versions": {
+    "python": "3.11.16",
+    "xgboost": "3.2.0",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1"
+  }
+}

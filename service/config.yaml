@@ -1,0 +1,27 @@
+# 相对路径以本YAML所在目录为准；原实验配置不改写。
+data_config: ../config.yaml
+model_registry: models.yaml
+storage_dir: ../outputs/service
+host: 127.0.0.1
+port: 8000
+device: cpu
+threads: 4
+api_key_env: LNG_API_KEY
+max_months: 2400
+recent_origins: 20
+search_config: ../joint_emaformer/configs/search.yaml
+max_loaded_models: 2
+idempotency_hours: 24
+upload:
+  file_bytes: 20971520
+  total_bytes: 62914560
+  expanded_bytes: 209715200
+jobs:
+  holdout_months: 3
+  validation_months: 20
+  max_duration_minutes: null
+  max_queued: 20
+interval:
+  confidence: 0.95
+  min_residuals: 24
+  residual_window: 24

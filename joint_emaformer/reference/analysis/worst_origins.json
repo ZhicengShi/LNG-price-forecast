@@ -1,0 +1,194 @@
+{
+  "all_shanghai": [
+    {
+      "origin_index": 75,
+      "history_cutoff": "2021-03",
+      "first_forecast_month": "2021-04",
+      "average_MAPE": 30.05095079602034
+    },
+    {
+      "origin_index": 73,
+      "history_cutoff": "2021-01",
+      "first_forecast_month": "2021-02",
+      "average_MAPE": 19.04837495201785
+    },
+    {
+      "origin_index": 72,
+      "history_cutoff": "2020-12",
+      "first_forecast_month": "2021-01",
+      "average_MAPE": 17.977269309687784
+    },
+    {
+      "origin_index": 74,
+      "history_cutoff": "2021-02",
+      "first_forecast_month": "2021-03",
+      "average_MAPE": 15.823219638150881
+    },
+    {
+      "origin_index": 41,
+      "history_cutoff": "2018-05",
+      "first_forecast_month": "2018-06",
+      "average_MAPE": 13.401177920754892
+    }
+  ],
+  "all_zhejiang": [
+    {
+      "origin_index": 86,
+      "history_cutoff": "2022-02",
+      "first_forecast_month": "2022-03",
+      "average_MAPE": 21.161468555870226
+    },
+    {
+      "origin_index": 87,
+      "history_cutoff": "2022-03",
+      "first_forecast_month": "2022-04",
+      "average_MAPE": 16.17416556038634
+    },
+    {
+      "origin_index": 14,
+      "history_cutoff": "2016-02",
+      "first_forecast_month": "2016-03",
+      "average_MAPE": 12.551406981279149
+    },
+    {
+      "origin_index": 116,
+      "history_cutoff": "2024-08",
+      "first_forecast_month": "2024-09",
+      "average_MAPE": 12.539161311684381
+    },
+    {
+      "origin_index": 85,
+      "history_cutoff": "2022-01",
+      "first_forecast_month": "2022-02",
+      "average_MAPE": 11.689991355049623
+    }
+  ],
+  "all_jiangsu": [
+    {
+      "origin_index": 51,
+      "history_cutoff": "2019-03",
+      "first_forecast_month": "2019-04",
+      "average_MAPE": 17.024050663090808
+    },
+    {
+      "origin_index": 82,
+      "history_cutoff": "2021-10",
+      "first_forecast_month": "2021-11",
+      "average_MAPE": 16.96886995104963
+    },
+    {
+      "origin_index": 70,
+      "history_cutoff": "2020-10",
+      "first_forecast_month": "2020-11",
+      "average_MAPE": 15.026720569963757
+    },
+    {
+      "origin_index": 10,
+      "history_cutoff": "2015-10",
+      "first_forecast_month": "2015-11",
+      "average_MAPE": 14.573074680808318
+    },
+    {
+      "origin_index": 46,
+      "history_cutoff": "2018-10",
+      "first_forecast_month": "2018-11",
+      "average_MAPE": 13.17211282049574
+    }
+  ],
+  "selected_shanghai": [
+    {
+      "origin_index": 75,
+      "history_cutoff": "2021-03",
+      "first_forecast_month": "2021-04",
+      "average_MAPE": 30.278485432162427
+    },
+    {
+      "origin_index": 73,
+      "history_cutoff": "2021-01",
+      "first_forecast_month": "2021-02",
+      "average_MAPE": 19.04788107122434
+    },
+    {
+      "origin_index": 72,
+      "history_cutoff": "2020-12",
+      "first_forecast_month": "2021-01",
+      "average_MAPE": 17.9766662791537
+    },
+    {
+      "origin_index": 74,
+      "history_cutoff": "2021-02",
+      "first_forecast_month": "2021-03",
+      "average_MAPE": 15.899407294432793
+    },
+    {
+      "origin_index": 41,
+      "history_cutoff": "2018-05",
+      "first_forecast_month": "2018-06",
+      "average_MAPE": 13.401237190998865
+    }
+  ],
+  "selected_zhejiang": [
+    {
+      "origin_index": 86,
+      "history_cutoff": "2022-02",
+      "first_forecast_month": "2022-03",
+      "average_MAPE": 21.164225968720043
+    },
+    {
+      "origin_index": 87,
+      "history_cutoff": "2022-03",
+      "first_forecast_month": "2022-04",
+      "average_MAPE": 16.045738290485033
+    },
+    {
+      "origin_index": 14,
+      "history_cutoff": "2016-02",
+      "first_forecast_month": "2016-03",
+      "average_MAPE": 12.555216748447753
+    },
+    {
+      "origin_index": 116,
+      "history_cutoff": "2024-08",
+      "first_forecast_month": "2024-09",
+      "average_MAPE": 12.538384739418815
+    },
+    {
+      "origin_index": 85,
+      "history_cutoff": "2022-01",
+      "first_forecast_month": "2022-02",
+      "average_MAPE": 11.690175992974387
+    }
+  ],
+  "selected_jiangsu": [
+    {
+      "origin_index": 51,
+      "history_cutoff": "2019-03",
+      "first_forecast_month": "2019-04",
+      "average_MAPE": 17.03461924731643
+    },
+    {
+      "origin_index": 82,
+      "history_cutoff": "2021-10",
+      "first_forecast_month": "2021-11",
+      "average_MAPE": 16.828457115414658
+    },
+    {
+      "origin_index": 70,
+      "history_cutoff": "2020-10",
+      "first_forecast_month": "2020-11",
+      "average_MAPE": 15.025740199071814
+    },
+    {
+      "origin_index": 10,
+      "history_cutoff": "2015-10",
+      "first_forecast_month": "2015-11",
+      "average_MAPE": 14.573074658924687
+    },
+    {
+      "origin_index": 46,
+      "history_cutoff": "2018-10",
+      "first_forecast_month": "2018-11",
+      "average_MAPE": 13.172907897931273
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+INFO:     Started server process [31684]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:62316 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62324 - "GET /models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62326 - "GET /models HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62325 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /health HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /predictions/pred_b1633e00fede4f959c9db98f998e9d17/csv HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /predictions/pred_fc297c52b5e64d5198099df46f978be3/csv HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:62325 - "GET /predictions/pred_00000000000000000000000000000000 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62325 - "GET /templates/shanghai HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /templates/zhejiang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /templates/jiangsu HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /datasets HTTP/1.1" 201 Created
+INFO:     127.0.0.1:62325 - "POST /datasets HTTP/1.1" 201 Created
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /datasets/data_777988436e8349529f2e1547/activate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:62325 - "POST /datasets/data_c3c524c9ee651c29052eeb81/activate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /tuning-jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /tuning-jobs/tune_083d1a6e5cc74f39925a18a4c29c4f15/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /trainings HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /models/all-2a3a08b24aeae59a/activate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /models/all-f1add7685a763d0d/activate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3/csv HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62334 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62334 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62325 - "GET /models HTTP/1.1" 200 OK
+INFO:     Started server process [7316]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:62316 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62342 - "GET /models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "GET /predictions/pred_b1633e00fede4f959c9db98f998e9d17 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "GET /predictions/pred_fc297c52b5e64d5198099df46f978be3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "POST /predictions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "GET /trainings/train_9084d5fc844349129b7776a18a4772c3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62343 - "GET /models/all-2a3a08b24aeae59a HTTP/1.1" 200 OK

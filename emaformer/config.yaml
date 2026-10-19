@@ -1,0 +1,43 @@
+# 数据配置、权重和输出的相对路径，均相对于本YAML所在目录。
+# parameters为模型结构参数；输入维度、目标位置和窗口长度自动确定。
+# training保存新运行结果，不覆盖weights中的配套权重。
+# prediction.mode: test复现测试、val验证集、future未来3个月（未来不计算精度）。
+model: EMAformer
+data_config: ../config.yaml
+parameters:
+  d_model: 512
+  n_heads: 8
+  e_layers: 2
+  d_ff: 2048
+  dropout: 0.1
+  output_proj_dropout: 0.1
+  cycle: 24
+  factor: 1
+  activation: gelu
+  use_norm: true
+  output_attention: false
+training:
+  regions:
+  - shanghai
+  - zhejiang
+  - jiangsu
+  profiles:
+  - all
+  - selected
+  epochs: 100
+  batch_size: 16
+  lr: 0.001
+  patience: 10
+  output_dir: outputs/train
+prediction:
+  regions:
+  - shanghai
+  - zhejiang
+  - jiangsu
+  profiles:
+  - all
+  - selected
+  mode: test
+  checkpoint_dir: weights
+  batch_size: 16
+  output_dir: outputs/predict

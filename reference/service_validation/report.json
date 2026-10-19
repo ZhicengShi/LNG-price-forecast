@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "generated_at": "2026-10-18T11:45:35.762395+08:00",
+  "scope": "local_windows_cpu_technical_trial",
+  "environment": {
+    "os": "Windows-10-10.0.22631-SP0",
+    "python": "3.11.16",
+    "logical_cpus": 16,
+    "versions": {
+      "torch": "2.14.0+cu130",
+      "numpy": "2.4.6",
+      "pandas": "3.0.6",
+      "fastapi": "0.143.2",
+      "uvicorn": "0.54.0",
+      "pydantic": "2.14.1",
+      "starlette": "1.8.0",
+      "httpx": "0.28.1"
+    },
+    "inference_device": "cpu",
+    "threads": 4
+  },
+  "tests_passed": 27,
+  "profiles": [
+    "all",
+    "selected"
+  ],
+  "response_values": 18,
+  "prices_match_actual_cli": {
+    "all": {
+      "values": 9,
+      "max_absolute_price_difference": 4.440892098500626e-16,
+      "tolerance": 0.0001
+    },
+    "selected": {
+      "values": 9,
+      "max_absolute_price_difference": 4.440892098500626e-16,
+      "tolerance": 0.0001
+    }
+  },
+  "four_output_sections_verified": true,
+  "price_intervals_available": 18,
+  "interval_confidence": 0.95,
+  "interval_residual_window": 24,
+  "interval_basis": "same_parameters_features_rolling_refit_protocol",
+  "historical_training_time_not_fabricated": true,
+  "api_key_checked": true,
+  "configured_data_only": true,
+  "removed_data_routes_checked": true,
+  "invalid_requests": [
+    {
+      "case": "profile",
+      "status": 422
+    },
+    {
+      "case": "dataset_id",
+      "status": 422
+    },
+    {
+      "case": "model_version",
+      "status": 422
+    },
+    {
+      "case": "seed",
+      "status": 422
+    }
+  ],
+  "startup_seconds": 2.2846983000004,
+  "restart_seconds": 2.2462656999996398,
+  "repeated_calls": {
+    "requests": 8,
+    "p50_ms": 428.1358000000637,
+    "p95_ms": 469.8723299999073,
+    "maximum_ms": 490.37889999999607,
+    "mean_ms": 432.38308749994303
+  },
+  "concurrent_calls": {
+    "concurrency": 4,
+    "requests": 8,
+    "p50_ms": 1732.959499999879,
+    "p95_ms": 1854.3895850001718,
+    "maximum_ms": 1871.3474000001042,
+    "mean_ms": 1468.1212500000242
+  },
+  "failed_benchmark_requests": 0,
+  "persisted_predictions_restored": true,
+  "all_owned_service_processes_stopped": true,
+  "protected_files_unchanged": 163,
+  "fresh_dependency_installation_verified": false,
+  "customer_machine_verified": false,
+  "real_monthly_business_trial_complete": false,
+  "runtime_artifacts": "outputs\\service_validation_work_20261018_114535_07ddf4",
+  "pending": [
+    "甲方目标机安装与内网联调",
+    "甲方实际并发和资源占用测量",
+    "更新到最新完整业务月份",
+    "按月保存预测，真实值成熟后评价",
+    "需要时训练并登记最新生产权重及配套证据"
+  ]
+}

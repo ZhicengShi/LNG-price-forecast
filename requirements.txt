@@ -1,0 +1,10 @@
+numpy==2.4.6
+pandas==3.0.6
+openpyxl==3.1.5
+PyYAML==6.0.3
+tqdm==4.70.1
+torch==2.14.0+cu130
+xgboost==3.2.0
+scipy==1.17.1
+# 统一接口与固定传递依赖；模型库版本与上面一致。
+-r deployment/requirements-common.txt

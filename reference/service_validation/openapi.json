@@ -1,0 +1,860 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "三地区天然气价格预测接口",
+    "version": "1.1.0"
+  },
+  "paths": {
+    "/models": {
+      "get": {
+        "summary": "模型状态、变量及版本",
+        "operationId": "models_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/templates/{region}": {
+      "get": {
+        "summary": "下载地区数据样例",
+        "operationId": "template_templates__region__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "shanghai",
+                "zhejiang",
+                "jiangsu"
+              ],
+              "type": "string",
+              "title": "Region"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predictions": {
+      "post": {
+        "summary": "返回价格、区间、精度和模型状态",
+        "operationId": "predict_predictions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/predictions/{prediction_id}": {
+      "get": {
+        "summary": "查询已保存预测",
+        "operationId": "prediction_predictions__prediction_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "prediction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Prediction Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predictions/{prediction_id}/csv": {
+      "get": {
+        "summary": "下载价格和区间明细",
+        "operationId": "download_predictions__prediction_id__csv_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "prediction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Prediction Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Evaluation": {
+        "properties": {
+          "recent_backtest": {
+            "$ref": "#/components/schemas/Evidence"
+          },
+          "registered_model_test": {
+            "$ref": "#/components/schemas/Evidence"
+          },
+          "interpretation": {
+            "type": "string",
+            "title": "Interpretation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "recent_backtest",
+          "registered_model_test",
+          "interpretation"
+        ],
+        "title": "Evaluation"
+      },
+      "Evidence": {
+        "properties": {
+          "available": {
+            "type": "boolean",
+            "title": "Available"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "basis": {
+            "type": "string",
+            "title": "Basis"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "first_forecast_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Forecast Month"
+          },
+          "last_forecast_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Forecast Month"
+          },
+          "last_target_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Target Month"
+          },
+          "regions": {
+            "items": {
+              "$ref": "#/components/schemas/RegionMetric"
+            },
+            "type": "array",
+            "title": "Regions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "available",
+          "reason",
+          "basis",
+          "version",
+          "first_forecast_month",
+          "last_forecast_month",
+          "last_target_month",
+          "regions"
+        ],
+        "title": "Evidence"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Intervals": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "calibration_basis": {
+            "type": "string",
+            "title": "Calibration Basis"
+          },
+          "calibration_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration Version"
+          },
+          "min_residuals": {
+            "type": "integer",
+            "title": "Min Residuals"
+          },
+          "residual_window": {
+            "type": "integer",
+            "title": "Residual Window"
+          },
+          "interpretation": {
+            "type": "string",
+            "title": "Interpretation"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PriceInterval"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "method",
+          "confidence",
+          "calibration_basis",
+          "calibration_version",
+          "min_residuals",
+          "residual_window",
+          "interpretation",
+          "items"
+        ],
+        "title": "Intervals"
+      },
+      "ModelStatus": {
+        "properties": {
+          "model_name": {
+            "type": "string",
+            "title": "Model Name"
+          },
+          "service_version": {
+            "type": "string",
+            "title": "Service Version"
+          },
+          "model_version": {
+            "type": "string",
+            "title": "Model Version"
+          },
+          "checkpoint_sha256": {
+            "type": "string",
+            "title": "Checkpoint Sha256"
+          },
+          "profile": {
+            "type": "string",
+            "enum": [
+              "all",
+              "selected"
+            ],
+            "title": "Profile"
+          },
+          "device": {
+            "type": "string",
+            "title": "Device"
+          },
+          "registered_at": {
+            "type": "string",
+            "title": "Registered At"
+          },
+          "loaded_at": {
+            "type": "string",
+            "title": "Loaded At"
+          },
+          "trained_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trained At"
+          },
+          "training_time_status": {
+            "type": "string",
+            "title": "Training Time Status"
+          },
+          "model_training_cutoff": {
+            "type": "string",
+            "title": "Model Training Cutoff"
+          },
+          "parameter_selection_cutoff": {
+            "type": "string",
+            "title": "Parameter Selection Cutoff"
+          },
+          "latest_observed_month": {
+            "type": "string",
+            "title": "Latest Observed Month"
+          },
+          "data_imported_at": {
+            "type": "string",
+            "title": "Data Imported At"
+          },
+          "data_version": {
+            "type": "string",
+            "title": "Data Version"
+          },
+          "data_sha256": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Data Sha256"
+          },
+          "historical_reference_matches": {
+            "type": "boolean",
+            "title": "Historical Reference Matches"
+          },
+          "seq_len": {
+            "type": "integer",
+            "title": "Seq Len"
+          },
+          "pred_len": {
+            "type": "integer",
+            "title": "Pred Len"
+          },
+          "input_features": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Input Features"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_name",
+          "service_version",
+          "model_version",
+          "checkpoint_sha256",
+          "profile",
+          "device",
+          "registered_at",
+          "loaded_at",
+          "trained_at",
+          "training_time_status",
+          "model_training_cutoff",
+          "parameter_selection_cutoff",
+          "latest_observed_month",
+          "data_imported_at",
+          "data_version",
+          "data_sha256",
+          "historical_reference_matches",
+          "seq_len",
+          "pred_len",
+          "input_features"
+        ],
+        "title": "ModelStatus"
+      },
+      "PredictRequest": {
+        "properties": {
+          "profile": {
+            "type": "string",
+            "enum": [
+              "all",
+              "selected"
+            ],
+            "title": "Profile",
+            "default": "selected"
+          },
+          "model_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Version"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PredictRequest"
+      },
+      "PredictionResponse": {
+        "properties": {
+          "prediction_id": {
+            "type": "string",
+            "title": "Prediction Id"
+          },
+          "generated_at": {
+            "type": "string",
+            "title": "Generated At"
+          },
+          "predictions": {
+            "items": {
+              "$ref": "#/components/schemas/Price"
+            },
+            "type": "array",
+            "title": "Predictions"
+          },
+          "prediction_intervals": {
+            "$ref": "#/components/schemas/Intervals"
+          },
+          "evaluation": {
+            "$ref": "#/components/schemas/Evaluation"
+          },
+          "model_status": {
+            "$ref": "#/components/schemas/ModelStatus"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "prediction_id",
+          "generated_at",
+          "predictions",
+          "prediction_intervals",
+          "evaluation",
+          "model_status"
+        ],
+        "title": "PredictionResponse"
+      },
+      "Price": {
+        "properties": {
+          "region": {
+            "type": "string",
+            "enum": [
+              "shanghai",
+              "zhejiang",
+              "jiangsu"
+            ],
+            "title": "Region"
+          },
+          "region_name": {
+            "type": "string",
+            "title": "Region Name"
+          },
+          "target_month": {
+            "type": "string",
+            "title": "Target Month"
+          },
+          "horizon": {
+            "type": "integer",
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Horizon"
+          },
+          "prediction": {
+            "type": "number",
+            "title": "Prediction"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "region",
+          "region_name",
+          "target_month",
+          "horizon",
+          "prediction",
+          "unit"
+        ],
+        "title": "Price"
+      },
+      "PriceInterval": {
+        "properties": {
+          "region": {
+            "type": "string",
+            "enum": [
+              "shanghai",
+              "zhejiang",
+              "jiangsu"
+            ],
+            "title": "Region"
+          },
+          "target_month": {
+            "type": "string",
+            "title": "Target Month"
+          },
+          "horizon": {
+            "type": "integer",
+            "title": "Horizon"
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available"
+          },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
+          },
+          "calibration_count": {
+            "type": "integer",
+            "title": "Calibration Count"
+          },
+          "latest_calibration_target_month": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Calibration Target Month"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "historical_coverage_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Historical Coverage Percent"
+          },
+          "historical_coverage_count": {
+            "type": "integer",
+            "title": "Historical Coverage Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "region",
+          "target_month",
+          "horizon",
+          "available",
+          "lower",
+          "upper",
+          "calibration_count",
+          "latest_calibration_target_month",
+          "reason",
+          "historical_coverage_percent",
+          "historical_coverage_count"
+        ],
+        "title": "PriceInterval"
+      },
+      "RegionMetric": {
+        "properties": {
+          "region": {
+            "type": "string",
+            "enum": [
+              "shanghai",
+              "zhejiang",
+              "jiangsu"
+            ],
+            "title": "Region"
+          },
+          "region_name": {
+            "type": "string",
+            "title": "Region Name"
+          },
+          "origins": {
+            "type": "integer",
+            "title": "Origins"
+          },
+          "by_horizon": {
+            "items": {
+              "$ref": "#/components/schemas/StepMetric"
+            },
+            "type": "array",
+            "title": "By Horizon"
+          },
+          "average_mape_percent": {
+            "type": "number",
+            "title": "Average Mape Percent"
+          },
+          "average_accuracy_score_percent": {
+            "type": "number",
+            "title": "Average Accuracy Score Percent"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "region",
+          "region_name",
+          "origins",
+          "by_horizon",
+          "average_mape_percent",
+          "average_accuracy_score_percent"
+        ],
+        "title": "RegionMetric"
+      },
+      "StepMetric": {
+        "properties": {
+          "horizon": {
+            "type": "integer",
+            "title": "Horizon"
+          },
+          "observations": {
+            "type": "integer",
+            "title": "Observations"
+          },
+          "mape_percent": {
+            "type": "number",
+            "title": "Mape Percent"
+          },
+          "accuracy_score_percent": {
+            "type": "number",
+            "title": "Accuracy Score Percent"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "horizon",
+          "observations",
+          "mape_percent",
+          "accuracy_score_percent"
+        ],
+        "title": "StepMetric"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  }
+}

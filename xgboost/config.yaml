@@ -1,0 +1,43 @@
+# 相对路径相对于本YAML；数据路径、时间边界、历史窗口和缺失策略读取公共配置。
+data_config: ../config.yaml
+regions: [shanghai, zhejiang, jiangsu]
+output_dir: outputs
+
+# all使用各地区有效字段；也可改为完整列名列表，或按地区分别给出列表。
+# 可用列名见公共config.yaml。地区停用字段及训练期全空字段不进入候选。
+# 历史目标价格始终保留；公共配置features.selected不参与本次搜索。
+candidate_features: all
+
+# 每个预测月独立拟合一个XGBoost，三个种子的预测先平均再评价。
+seeds: [42, 7, 2026]
+ranking:
+  folds: 3
+  fold_months: 15
+  model: depth2
+  permutation_repeats: 20
+  permutation_block_months: 3
+  permutation_seed: 42000
+combination:
+  # 同时比较置换排序、增益排序的全部Top-K；含仅历史价格及全部变量。
+  # 前向选择只在置换排序前greedy_pool个外生变量中进行。
+  greedy_pool: 8
+  greedy_max: 5
+parameters:
+  base:
+    objective: reg:squarederror
+    tree_method: hist
+    min_child_weight: 5
+    reg_lambda: 5
+    subsample: 0.9
+    colsample_bytree: 0.9
+    n_jobs: 1
+    verbosity: 0
+  variants:
+    depth2:
+      n_estimators: 200
+      max_depth: 2
+      learning_rate: 0.03
+    depth3:
+      n_estimators: 200
+      max_depth: 3
+      learning_rate: 0.03

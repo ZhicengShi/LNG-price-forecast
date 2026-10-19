@@ -1,0 +1,363 @@
+# 数据、时间边界和变量读取公共配置；候选起始点和搜索范围全部在此设置。
+search_trials: 64
+finalists: 4
+validation_folds: 3
+fold_months: 20
+search_seed: 42
+training_seeds:
+- 42
+- 7
+- 2026
+primary_seed: 42
+data_config: ../../config.yaml
+profiles:
+- all
+- selected
+output_dir: ../outputs/search
+initial_candidates:
+- seq_len: 12
+  d_model: 256
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 8
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 24
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 3
+  head_multiplier: 2
+  output_mode: level
+  residual_scale: 1.0
+  missing: linear_history
+  loss: mse
+  optimizer: Adam
+  batch_size: 16
+  lr: 0.0003
+  weight_decay: 0.0
+  grad_clip: 0.0
+  scheduler: none
+  max_epochs: 4
+  patience: 4
+- seq_len: 12
+  d_model: 64
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 0
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 1
+  head_multiplier: 1
+  output_mode: delta
+  residual_scale: 0.1
+  missing: linear_history
+  loss: mse
+  optimizer: AdamW
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 64
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 0
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 1
+  head_multiplier: 1
+  output_mode: delta
+  residual_scale: 0.25
+  missing: linear_history
+  loss: mse
+  optimizer: AdamW
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 64
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 0
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 1
+  head_multiplier: 1
+  output_mode: delta
+  residual_scale: 0.5
+  missing: linear_history
+  loss: mse
+  optimizer: AdamW
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 64
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 0
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 1
+  head_multiplier: 1
+  output_mode: delta
+  residual_scale: 1.0
+  missing: linear_history
+  loss: mse
+  optimizer: AdamW
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 64
+  n_heads: 2
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: true
+  channel_embedding: true
+  cycle: 24
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 2
+  head_multiplier: 2
+  output_mode: level
+  residual_scale: 1.0
+  missing: linear_history
+  loss: mse
+  optimizer: Adam
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0
+  grad_clip: 0.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 128
+  n_heads: 4
+  e_layers: 2
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: true
+  window_norm: true
+  channel_embedding: true
+  cycle: 24
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 3
+  head_multiplier: 2
+  output_mode: delta
+  residual_scale: 0.25
+  missing: linear_history
+  loss: mse
+  optimizer: Adam
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0
+  grad_clip: 0.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+- seq_len: 12
+  d_model: 128
+  n_heads: 4
+  e_layers: 1
+  ff_multiplier: 4
+  activation: gelu
+  norm_first: false
+  window_norm: false
+  channel_embedding: true
+  cycle: 0
+  dropout: 0.1
+  embedding_dropout: 0.1
+  attention_dropout: 0.1
+  head_dropout: 0.1
+  head_layers: 1
+  head_multiplier: 1
+  output_mode: level
+  residual_scale: 1.0
+  missing: linear_history
+  loss: mse
+  optimizer: Adam
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0
+  grad_clip: 0.0
+  scheduler: none
+  max_epochs: 48
+  patience: 10
+search_space:
+  seq_len:
+  - 6
+  - 12
+  - 18
+  - 24
+  - 36
+  d_model:
+  - 32
+  - 64
+  - 128
+  - 256
+  - 512
+  n_heads:
+  - 1
+  - 2
+  - 4
+  - 8
+  e_layers:
+  - 1
+  - 2
+  - 3
+  - 4
+  ff_multiplier:
+  - 2
+  - 4
+  - 8
+  activation:
+  - gelu
+  - relu
+  norm_first:
+  - false
+  - true
+  window_norm:
+  - true
+  - false
+  channel_embedding:
+  - true
+  - false
+  cycle:
+  - 0
+  - 12
+  - 24
+  - 48
+  dropout:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  embedding_dropout:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  attention_dropout:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  head_dropout:
+  - 0.0
+  - 0.05
+  - 0.1
+  - 0.2
+  head_layers:
+  - 1
+  - 2
+  - 3
+  head_multiplier:
+  - 1
+  - 2
+  output_mode:
+  - level
+  - delta
+  residual_scale:
+  - 0.1
+  - 0.25
+  - 0.5
+  - 1.0
+  missing:
+  - linear_history
+  - ffill
+  loss:
+  - mse
+  - smooth_l1
+  - mae
+  - mape
+  optimizer:
+  - Adam
+  - AdamW
+  batch_size:
+  - 8
+  - 16
+  - 32
+  - 64
+  lr_log10:
+  - -5.0
+  - -2.5
+  weight_decay:
+  - 0.0
+  - 1.0e-06
+  - 1.0e-05
+  - 0.0001
+  - 0.001
+  - 0.01
+  grad_clip:
+  - 0.0
+  - 0.5
+  - 1.0
+  - 5.0
+  scheduler:
+  - none
+  - cosine
+  - plateau
+  max_epochs:
+  - 24
+  - 48
+  - 96
+  patience:
+  - 6
+  - 10
+  - 15
