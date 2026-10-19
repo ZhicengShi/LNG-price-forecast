@@ -12,7 +12,7 @@ from uuid import uuid4
 
 from .errors import APIError, issue
 from .planning import training_config, tuning_config
-from .storage import now, save_json, sha
+from .storage import now, save_json
 
 TERMINAL = {'succeeded','failed','cancelled','interrupted'}
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,7 +54,7 @@ def submit(engine,request,kind):
             progress=dict(unit='epoch' if kind=='training' else 'fit',completed_units=0,total_units=len(config['schedule']) if kind=='training' else None,
                           phase_percent=0.,current_epoch=None,max_epochs=None),warnings=warnings,error=None,status_url=path+task_id,
             request=request.model_dump(exclude_unset=True),resolved_split=config['split'],
-            _internal=dict(pid=None,nonce=uuid4().hex,config_sha256=sha((folder/'effective_config.json').read_bytes())))
+            _internal=dict(pid=None,nonce=uuid4().hex,config_snapshot=deepcopy(config)))
         task[kind+'_id'] = task_id
         if kind=='training':
             task.update(parameters=config['parameters'],training_plan=dict(epochs=len(config['schedule']),lr_schedule=config['schedule']),

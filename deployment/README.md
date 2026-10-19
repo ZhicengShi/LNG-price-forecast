@@ -29,16 +29,16 @@ start.cmd从脚本所在位置定位包根目录，可从其他工作目录启�
 powershell -NoProfile -File deployment/start.ps1 -Python ".venv/Scripts/python.exe" -Device cpu
 ```
 
-PowerShell入口的-Python和-Config可用绝对路径，-BindAddress和-Port设置监听地址及端口。当前验证机器禁止执行.ps1，未改变其策略，使用直接Python命令及start.cmd验证。运行后访问http://127.0.0.1:8000/docs或/openapi.json，调用/models查询模型及数据状态。/docs默认依赖公共CDN脚本，完全离线的内网使用接口命令或甲方系统；接口计算、/openapi.json、数据和权重不依赖外网。
+PowerShell入口的-Python和-Config可用绝对路径，-BindAddress和-Port设置监听地址及端口。当前验证机器禁止执行.ps1，未改变其策略，使用直接Python命令及start.cmd验证。运行后访问http://127.0.0.1:8000/docs或/openapi.json，调用/models查询模型及数据状态。/docs默认依赖公共CDN脚本，完全离线的内网使用接口命令或系统；接口计算、/openapi.json、数据和权重不依赖外网。
 
 向内网其他机器提供访问时，设置API密钥并绑定内网地址，例如：
 
 ```powershell
-$env:LNG_API_KEY = '替换为甲方配置的密钥'
+$env:LNG_API_KEY = '替换为配置的密钥'
 python -B -m service.app --host 0.0.0.0 --port 8000 --device cpu
 ```
 
-业务接口请求需携带X-API-Key请求头，文档入口无需密钥；不设置密钥时默认不启用该校验。按甲方内网策略放行指定端口及访问范围。启动参数单进程、不启用reload；服务进程常驻，按Ctrl+C停止。可由甲方既有进程管理工具启动，并调用/models检查模型及数据是否可读取；启用密钥时检查请求也须携带密钥。重启时使用同一配置和存储目录，已有数据、首次登记时间及预测记录可恢复。接口说明见[service/README.md](../service/README.md)。
+业务接口请求需携带X-API-Key请求头，文档入口无需密钥；不设置密钥时默认不启用该校验。按内网策略放行指定端口及访问范围。启动参数单进程、不启用reload；服务进程常驻，按Ctrl+C停止。可由既有进程管理工具启动，并调用/models检查模型及数据是否可读取；启用密钥时检查请求也须携带密钥。重启时使用同一配置和存储目录，已有数据、首次登记时间及预测记录可恢复。接口说明见[service/README.md](../service/README.md)。
 
 ## Linux部署（CUDA）
 
@@ -99,7 +99,7 @@ python -B -m service.app --config service/config.yaml --device cuda --host 127.0
 
 前台运行时按Ctrl+C停止。--device cuda显式要求使用GPU；CUDA不可用会启动失败。多个GPU时可在启动前用CUDA_VISIBLE_DEVICES选择设备，例如0表示第1张GPU。使用现有Python模块入口即可启动，不需要Windows的start.cmd或start.ps1。
 
-供内网其他机器访问时，在启动服务的终端执行以下命令；密钥替换为甲方实际配置值：
+供内网其他机器访问时，在启动服务的终端执行以下命令；密钥替换为实际配置值：
 
 ```bash
 export LNG_API_KEY='replace-with-your-api-key'
@@ -123,7 +123,7 @@ curl -fsS -X POST http://127.0.0.1:8000/predictions \
 
 ### 后台运行与停止
 
-需要退出终端后继续运行时，可使用甲方已有进程管理工具；短期试运行也可使用下面的nohup方式。先停止前台服务，在包根目录、已激活虚拟环境的终端执行：
+需要退出终端后继续运行时，可使用已有进程管理工具；短期试运行也可使用下面的nohup方式。先停止前台服务，在包根目录、已激活虚拟环境的终端执行：
 
 ```bash
 export LNG_API_KEY='replace-with-your-api-key'
@@ -168,7 +168,7 @@ python -B joint_emaformer/predict.py --mode future --device cuda \
 
 该命令默认输出两方案，结果位于outputs/linux_cuda_cli/future_时间目录/all和selected。使用相同数据、权重及设备时，每个方案逐条核对9个价格，以0.0001元/立方米绝对差作为本次接口与CLI的一致性核对容差，同时保留模型状态查询结果、预测响应及GPU信息。
 
-Linux GPU目标机仍需按本节命令实测。随包reference/service_v2_validation为本机CPU技术试运行证据；甲方Linux服务器完成安装、GPU调用、重启和内网联调后，另存实际环境与验收记录，再按后文开展逐月业务试运行。
+Linux GPU目标机仍需按本节命令实测。随包reference/service_v3_validation为本机CPU技术试运行证据；Linux服务器完成安装、GPU调用、重启和内网联调后，另存实际环境与验收记录，再按后文开展逐月业务试运行。
 
 ## 验证命令
 
@@ -177,14 +177,6 @@ python -B -m unittest discover -s tests -p "test_*.py" -v
 python -B deployment/validate.py
 ```
 
-validate.py在本机空闲端口启动并关闭自己创建的服务，核对两方案HTTP与CLI预测，并实际执行上传→自动调参→按方案训练→新模型预测→热切换和回退。流程验证使用独立配置中的1个候选、1轮、1折和3次复核，不改变生产搜索YAML，也不作为正式最优参数结论。结果默认位于outputs/service_validation/时间目录；临时数据、权重和CLI输出在验证结束后自动清理，保留报告、响应样例和必要日志。--output-dir指定报告目录，--requests和--concurrency设置调用次数与并发数；这些观测不是甲方负载指标承诺。
+validate.py在本机空闲端口启动并关闭自己创建的服务，核对两方案HTTP与CLI预测，并实际执行上传→自动调参→按方案训练→新模型预测→热切换和回退。流程验证使用独立配置中的1个候选、1轮、1折和3次复核，不改变生产搜索YAML，也不作为正式最优参数结论。结果默认位于outputs/service_validation/时间目录；临时数据、权重和CLI输出在验证结束后自动清理，保留报告、响应样例和必要日志。--output-dir指定报告目录，--requests和--concurrency设置调用次数与并发数；
 
-本次随包结果位于[reference/service_v2_validation](../reference/service_v2_validation/report.md)。报告包含环境、测试数量、HTTP调用耗时、数值差、样例响应和待完成事项，workflow.json保存小预算调参和训练流程的实际响应。CPU价格一致性使用0.0001元/立方米绝对容差。
-
-## 甲方试运行安排
-
-先在指定机器记录OS、Python、依赖、设备、代码和权重版本，完成安装、启动、重启及相同数据的接口/CLI核对。随后按最近3个月留出测试或既定滚动回测检查各地区、各预测步的MAPE和精度得分。新数据版本或新模型版本分别登记，不将不同协议、数据和权重的指标混成一个分数。
-
-每个业务月导入最新完整观测、生成并保存当时预测，真实价格成熟后按预测编号核对第1、2、3个月误差。至少等待相应目标月份真实价格齐全，才能评价未来业务表现。本机技术试运行不替代甲方机器安装、内网联调或连续业务月的实际精度验收。
-
-新生产权重可通过API选择成功调参方案并提交mode=full_history训练，或按融合README的latest命令行流程训练。API自动登记模型和审计记录；通过POST /models/{model_version}/activate热切换，加载和试算失败时保留原默认关系。新结构没有匹配回测时区间不可用，完整回测仍使用CLI单独生成。当前随包默认权重训练截至2024-07、样例数据截至2026-05，上线时选择甲方认可的数据和模型版本。
+本次随包结果位于[reference/service_v3_validation](../reference/service_v3_validation/report.md)。报告包含环境、测试数量、HTTP调用耗时、数值差、样例响应和待完成事项，workflow.json保存小预算调参和训练流程的实际响应。CPU价格一致性使用0.0001元/立方米绝对容差。

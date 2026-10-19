@@ -31,7 +31,8 @@ class JointEMAformerTests(unittest.TestCase):
             cfg, shared, _, _ = read_config(ROOT/f'joint_emaformer/configs/{entry["profile"]}.yaml')
             frame, layout, versions = frame_for(shared, cfg['profile'], shared['period']['test_end'])
             self.assertEqual(layout, entry['input_layout'])
-            self.assertEqual(versions, entry['data_sha256'])
+            self.assertEqual(set(versions), set(REGIONS))
+            self.assertTrue(all(item['filename'].endswith('.xlsx') for item in versions.values()))
             self.assertEqual(frame.shape[0], 137)
             if cfg['profile'] == 'selected':
                 self.assertEqual([len(c) for c in layout['branch_indices']], [4, 3, 5])

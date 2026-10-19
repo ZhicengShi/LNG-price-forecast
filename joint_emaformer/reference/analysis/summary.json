@@ -7118,11 +7118,6 @@
         }
       }
     },
-    "data_sha256": {
-      "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
-      "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
-      "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
-    },
     "first_month": "2015-01",
     "initial_train_months": 9,
     "origins": 126,
@@ -7260,16 +7255,7 @@
     "selection_cutoff_month": "2024-07",
     "retrospective_earlier_origins": true,
     "device": "cuda",
-    "torch_version": "2.14.0+cu130",
-    "code_sha256": {
-      "model.py": "8e623d473804b79274bd4dae8a77158f039e6f000beb31fb25d1f1398876cd47",
-      "_emaformer.py": "d7276e077b05929b6554058a6d317b6a4a4ce0788d25e37f6260b8f19558b95d",
-      "_emaformer_layers.py": "e8fc892e308226d25feacfca02d70cad13d20ae61cf410b0450087efd3a11dd3",
-      "data.py": "a5eb15f37552f4e5bbf01824801ebccb4dd5c4740bc602f3a8005d747090cda9",
-      "_training.py": "29faa302f615cfd11a5384ff3674ff32a6af40ee1df79bbe4952a17e5b58ca91",
-      "_runtime.py": "0dd08d284f697c9b4174d8a850f2b94e8246498a0a9f3cc4038d2af6a637b86b",
-      "backtest.py": "108219ac95f807b623d1918fb7f0d0aa1ef91a7850b5d57756612bfd506e8e92"
-    }
+    "torch_version": "2.14.0+cu130"
   },
   "year_definition": "year of first forecast month",
   "confidence_interpretation": "pointwise moving-block-bootstrap intervals conditional on fixed features and parameters; no retraining within resamples",

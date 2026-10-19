@@ -2,8 +2,6 @@
   {
     "region": "shanghai",
     "source_artifact": "joint_region_forcast\\runs\\xgboost_selection_20261012_1717\\上海_XGBoost变量排序与组合.xlsx",
-    "source_sha256": "7b2aa03eb66817a5b559ca2fe1fce5dec26aa9ec0fd3388f7c3fe51a55d70cfe",
-    "data_sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
     "features": [
       "管道气进口价格",
       "管道气进口量（全国）",
@@ -2145,8 +2143,6 @@
   {
     "region": "zhejiang",
     "source_artifact": "joint_region_forcast\\runs\\xgboost_selection_20261014_1601\\selection.json",
-    "source_sha256": "b7ab665c67775cb593401167d395ea3e88ee2aada03c901acfc3f309b2a28d2c",
-    "data_sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
     "features": [
       "TTF期货价格",
       "制造业PMI增速（全国）",
@@ -3895,8 +3891,6 @@
   {
     "region": "jiangsu",
     "source_artifact": "joint_region_forecast\\runs\\jiangsu_20261015_01\\selection.json",
-    "source_sha256": "96362227ef079bb059173f63b1d5fc0e2838fa3a04b4366c665ecb84ab88da48",
-    "data_sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52",
     "features": [
       "天然气产量（全国总量）",
       "LNG产量（全国）",

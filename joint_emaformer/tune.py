@@ -14,8 +14,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from joint_emaformer.data import PreparedData
 from joint_emaformer._training import train
 from joint_emaformer._search import candidates
-from joint_emaformer._runtime import (HERE, common_arguments, load, save, digest, configure,
-    frame_for, cutoff_index, run_directory, resolve_path, assert_versions, validate_parameters)
+from joint_emaformer._runtime import (HERE, common_arguments, load, save, configure,
+    frame_for, cutoff_index, run_directory, resolve_path, validate_parameters)
 from datasets import load_global
 
 
@@ -116,17 +116,14 @@ def main(argv=None):
     minimum = settings['development_end']-settings['fold_months']*settings['validation_folds']
     if min(minimum, settings['train_end']) < max(p['seq_len'] for p in plan)+3:
         raise ValueError('历史不足以构造参数搜索的完整训练窗口')
-    identity = dict(settings=settings, profiles=profiles, data_sha256=frames[profiles[0]][2],
-                    device=str(device), torch_version=str(torch.__version__),
-                    code_sha256={name: digest(HERE/name) for name in
-                        ('model.py', '_emaformer.py', '_emaformer_layers.py', 'data.py', '_training.py',
-                         '_search.py', '_runtime.py', 'tune.py')})
+    identity = dict(settings=settings, profiles=profiles, data_sources=frames[profiles[0]][2],
+                    protocol_version=2, device=str(device), torch_version=str(torch.__version__))
     base = cli.output_dir.resolve() if cli.output_dir else resolve_path(settings['output_dir'], config_path)
     folder = cli.run_dir.resolve() if cli.run_dir else run_directory(base, 'search')
     folder.mkdir(parents=True, exist_ok=True)
     if (folder/'protocol.json').exists():
         if load(folder/'protocol.json') != identity:
-            raise ValueError('恢复搜索时配置、代码、设备或数据版本发生变化')
+            raise ValueError('恢复搜索时配置、协议、设备或源文件信息发生变化，请新建运行目录')
     else:
         save(folder/'protocol.json', identity)
         save(folder/'search_plan.json', plan)
@@ -145,7 +142,6 @@ def main(argv=None):
                                  output_dir='training_outputs')
         final['prediction'].update(checkpoint='training_outputs/请填写实际运行目录/best.pt', output_dir='prediction_outputs')
         (folder/profile/'final_config.yaml').write_text(yaml.safe_dump(final, allow_unicode=True, sort_keys=False), encoding='utf-8')
-        assert_versions(shared, versions)
     print(f'SEARCH_COMPLETE output={folder}', flush=True)
 
 

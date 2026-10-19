@@ -22,7 +22,7 @@ tests/                      时间隔离、周期位置和指标口径检查
 xgboost/                    变量排序、组合筛选、YAML及三地区参考结果
 ```
 
-每个模型的weights/shanghai、weights/zhejiang、weights/jiangsu中分别保存all.pt和selected.pt。权重包含模型参数、变量顺序、中位数、标准化参数和时间边界。原参数张量保留，元数据整理成统一格式；来源和哈希在reference/weight_index.json中，仅供追溯，程序不读取原项目或临时实验目录。
+每个模型的weights/shanghai、weights/zhejiang、weights/jiangsu中分别保存all.pt和selected.pt。权重包含模型参数、变量顺序、中位数、标准化参数和时间边界。原参数张量保留，元数据整理成统一格式；来源和训练范围在reference/weight_index.json中，仅供追溯，程序不读取原项目或临时实验目录。
 
 ## 安装和快速核验
 
@@ -60,7 +60,7 @@ verify检查数据版本、变量顺序、预处理和1440个主种子测试预�
 python -B -m service.app --device cpu
 ```
 
-默认地址为http://127.0.0.1:8000，当前服务版本为2.0.0。GET /models查询全部模型版本及数据兼容性，POST /predictions提交{"profile":"selected"}或{"profile":"all"}，一次返回三地区未来3个月价格、经验区间、历史MAPE与精度得分，以及模型/数据版本和时间信息。支持三表上传、显式选择数据版本、自动调参、按tuning_id训练及模型热切换，无需为这些操作重启服务；已有持久化默认关系不会因新上传或配置表变更自动改变。随包旧权重的训练执行时间未记录，返回null；API新训练权重会记录实际完成时间。全部22项业务操作见[完整接口说明](service/API_DESIGN_README.md)。
+默认地址为http://127.0.0.1:8000，当前服务版本为3.0.0。GET /models查询全部模型版本及数据兼容性，POST /predictions提交{"profile":"selected"}或{"profile":"all"}，一次返回三地区未来3个月价格、经验区间、历史MAPE与精度得分，以及模型/数据版本和时间信息。支持三表上传、显式选择数据版本、自动调参、按tuning_id训练及模型热切换，无需为这些操作重启服务；已有持久化默认关系不会因新上传或配置表变更自动改变。随包旧权重的训练执行时间未记录，返回null；API新训练权重会记录实际完成时间。全部22项业务操作见[完整接口说明](service/API_DESIGN_README.md)。
 
 接口复用现有模型计算；区间使用相同参数和变量方案最近24条已成熟滚动回测残差，名义水平95%，并返回校准样本数和历史覆盖率。默认登记权重训练截至2024-07，数据截至2026-05；未来预测月份始终相对于数据末月。甲方实际使用前需更新数据、选择并登记模型版本。完整字段和调用方式见[接口说明](service/README.md)，安装与维护见[部署说明](deployment/README.md)。
 
@@ -68,7 +68,7 @@ python -B -m service.app --device cpu
 python -B deployment/validate.py
 ```
 
-该命令启动实际HTTP服务，完成测试、接口与CLI数值核对、上传、自动调参到训练的小预算流程、热切换、并发调用及重启恢复，并停止自己创建的进程、清理临时工作目录。随包2.0.0本机技术验证结果见[验证记录](reference/service_v2_validation/report.md)；甲方机器部署、隔离环境安装和真实业务月精度试运行需在对应环境与月份完成。
+该命令启动实际HTTP服务，完成测试、接口与CLI数值核对、上传、自动调参到训练的小预算流程、热切换、并发调用及重启恢复，并停止自己创建的进程、清理临时工作目录。当前3.0.0本机技术验证结果见[验证记录](reference/service_v3_validation/report.md)，20份权重元数据迁移及参数保留检查见[迁移核验](reference/version_migration_verification.json)，全部权重预测复现见[数值核验](reference/reproduction_v3_verification.json)，命令行小预算运行和恢复检查见[命令行核验](reference/cli_v3_verification.json)；甲方机器部署、隔离环境安装和真实业务月精度试运行需在对应环境与月份完成。
 
 ## XGBoost变量筛选
 
@@ -86,7 +86,7 @@ python -B xgboost/run.py --check-reference
 
 每个预测月独立拟合XGBoost，使用原始数值。输入前向填充、起始缺失使用对应训练历史中位数；早期排序折中训练期全空的列保留NaN由XGBoost处理。中位数不借用验证期或测试期。重要性可以为负，相关变量可能互相替代；其含义是当前XGBoost的预测贡献，不是因果效应或神经网络重要性。跨折标准差描述历史折的变化，不是置信区间。最终组合经过验证集比较，因此不一定等于重要性前几名；只保证在本次搜索候选中最优。
 
-运行结果保存在xgboost/outputs/selection_年月日_时分，包含三地区各一份XLSX，每份有“变量重要性”“组合比较”“最终变量”三个工作表。组合比较按第1、2、3个月分别列MAPE和精度得分，并给出平均MAPE与平均精度得分，全部属于XGBoost验证指标；得分=100-MAPE。种子保存在运行元数据，表格不显示种子列。selection.json保留完整排序、逐折结果、全部组合、参数、数据哈希和运行时间；run.json保存配置快照。
+运行结果保存在xgboost/outputs/selection_年月日_时分，包含三地区各一份XLSX，每份有“变量重要性”“组合比较”“最终变量”三个工作表。组合比较按第1、2、3个月分别列MAPE和精度得分，并给出平均MAPE与平均精度得分，全部属于XGBoost验证指标；得分=100-MAPE。种子保存在运行元数据，表格不显示种子列。selection.json保留完整排序、逐折结果、全部组合、参数、来源文件信息和运行时间；run.json保存配置快照。
 
 selected_features.yaml以features.selected格式输出变量清单，历史目标放在首列，其余按处理表顺序排列。核对后将对应地区清单写入公共config.yaml的features.selected，再训练配套模型；筛选程序不会自动改写公共配置或已有权重。只运行一个地区时，输出清单仅包含该地区，更新时保留其余地区配置。
 
@@ -111,7 +111,7 @@ python -B emaformer/train.py --region jiangsu --profile all --device cuda
 
 模型YAML的parameters设置结构，training设置regions、profiles、epochs、batch_size、lr、patience和output_dir。--epochs可用于短流程检查，--config指定其他模型配置，--data-config指定其他公共配置。直接在IDE运行也会读取默认配置。命令行显式路径按启动目录解释；YAML内部相对路径按对应YAML目录解释。
 
-训练使用Adam、MSE、验证MAPE早停，不合并验证集拟合权重。缺失处理和标准化仅拟合训练历史。原单区域脚本的DataLoader及tqdm.auto包装保留，更换依赖或迭代包装可能改变随机序列。新训练记录实际开始/结束时间、耗时、参数和数据哈希；原权重未补造历史训练时间。
+训练使用Adam、MSE、验证MAPE早停，不合并验证集拟合权重。缺失处理和标准化仅拟合训练历史。原单区域脚本的DataLoader及tqdm.auto包装保留，更换依赖或迭代包装可能改变随机序列。新训练记录实际开始/结束时间、耗时、参数和来源文件信息；原权重未补造历史训练时间。
 
 ## 历史测试与未来预测
 
@@ -152,7 +152,7 @@ checkpoint指定后，地区和方案从权重读取，无需再指定region/pro
 
 本次18组实验均按原配置从头重训，最佳轮数、验证MAPE及最佳权重参数张量逐项一致；580行训练历史的最大数值差为8.89×10⁻¹⁶。记录见reference/reproduction_audit.json，原历史与本次重训历史分别保存于training_history.csv和retrained_history.csv。这是当前CUDA环境下的核对，CPU训练的dropout随机实现不同，不保证重训得到相同权重。
 
-manifest.json用于校验代码、配套数据、权重及参考结果。模型和服务运行配置YAML可编辑，清单见manifest的editable_configs，不纳入不可变文件哈希；如果改变实验区间或变量组合，应训练配套新权重，原参考指标仅对应原实验。单区域模块迁移至含空格的独立目录后，从其他工作目录重载18份权重并进行未来预测已通过，见reference/relocation_verification.json。融合模块核验记录见joint_emaformer/reference/reproduction_check.json。
+manifest.json记录代码、配套数据、权重及参考结果的文件清单，不进行文件摘要校验。模型和服务运行配置YAML可编辑，清单见manifest的editable_configs；如果改变实验区间或变量组合，应训练配套新权重，原参考指标仅对应原实验。单区域模块迁移至含空格的独立目录后，从其他工作目录重载18份权重并进行未来预测已通过，见reference/relocation_verification.json。融合模块核验记录见joint_emaformer/reference/reproduction_check.json。
 
 ## 数据与时间口径
 
@@ -160,7 +160,7 @@ manifest.json用于校验代码、配套数据、权重及参考结果。模型�
 
 训练2015-01至2022-11共95个月，验证2022-12至2024-07共20个月，测试2024-08至2026-05共22个月。输入12个月、直接输出3个月，标签不跨分区；评价窗口可以读取届时已观测的前期历史。测试有20个起点，各步20组配对、三步60组，属于固定权重逐月测试，不是逐月重训回测。
 
-历史复现要求数据SHA256与权重一致。future允许追加完整已观测历史，至少覆盖权重验证选模截止月；程序按权重首月截取，保持前向填充及周期行号一致。不要只提供最后12行，也不需要未来解释变量。不会在预测时重新拟合预处理。
+复现原指标请使用随包处理后数据表及配套权重；历史测试仍检查时间范围、字段与预处理，预测数值由verify.py与参考结果核对。future允许追加完整已观测历史，至少覆盖权重验证选模截止月；程序按权重首月截取，保持前向填充及周期行号一致。不要只提供最后12行，也不需要未来解释变量。不会在预测时重新拟合预处理。
 
 features.selected列出组合变量；features.all默认按表格顺序选择有效候选，排除停用及训练期全空列。全变量输入数为上海23、浙江20、江苏21，组合变量为4、3、5。浙江停用区域LNG进口量、区域天然气产量；江苏停用工业增加值、GDP、非居民消费量。
 

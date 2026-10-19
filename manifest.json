@@ -1,6 +1,5 @@
 {
-  "version": "lng_experiment_reproduction_20261018_service_v2_0",
-  "hash_algorithm": "SHA256",
+  "version": "lng_experiment_reproduction_20261019_service_v3_0",
   "editable_configs": [
     "config.yaml",
     "emaformer/config.yaml",
@@ -23,764 +22,624 @@
     "manifest.json",
     "~$*",
     "**/~$*",
-    "*.tmp"
+    "*.tmp",
+    ".git/**"
   ],
   "files": {
     "reference/service_v2_validation/workflow.json": {
-      "sha256": "c8a22035f1c72e2c5e19e9c45286c44a078fcbf464e6e28c1f51bef8903fed0c",
-      "bytes": 41302
+      "bytes": 40885
     },
     "reference/service_v2_validation/tests.log": {
-      "sha256": "40a3924ce10f0b918a790c8de37903fe104de9c7f2f885e941c6d1d3e461496d",
       "bytes": 6064
     },
     "reference/service_v2_validation/server.log": {
-      "sha256": "81556e5d1e43f8d57818f87a09d54121a6c0951c8034aae1f1d64858b34103af",
       "bytes": 8249
     },
     "reference/service_v2_validation/selected_response.json": {
-      "sha256": "89db621d0ecefa7a0097c830e94c4213e7be2554e2045e0a656ab5c2db3d8a96",
-      "bytes": 14310
+      "bytes": 13880
     },
     "reference/service_v2_validation/selected_predictions.csv": {
-      "sha256": "7ff4237fa921e6580bc5bd89778a0c8eeafba16bb74fac0652ae6974bea04603",
       "bytes": 1429
     },
     "reference/service_v2_validation/report.md": {
-      "sha256": "67de7a3b71c51bb5eacb7c3882677a2577fd7a0679df1573c4baffd138a2af05",
       "bytes": 2308
     },
     "reference/service_v2_validation/report.json": {
-      "sha256": "a2c54f6b0ebe682ad79dcaa7095016e659f10e934c3f5e0dc52a4c96da5c7740",
       "bytes": 3314
     },
     "reference/service_v2_validation/openapi.json": {
-      "sha256": "1495b8e142f02176b679a8b02d54a25cde78ffea75316b69099ca376f73f360b",
-      "bytes": 167138
+      "bytes": 166388
     },
     "reference/service_v2_validation/all_response.json": {
-      "sha256": "2676738fa075a9833e7c35a42d82c5bcb7593bb4f17db29295b91c77ac749386",
-      "bytes": 16228
+      "bytes": 15783
     },
     "reference/service_v2_validation/all_predictions.csv": {
-      "sha256": "f854cfb514f9245148dd1bd7f7b16746f0be71b4264eef6c4534c07e327be5cb",
       "bytes": 1389
     },
     "tests/test_service_workflows.py": {
-      "sha256": "7a6b9c23d86b8f608552a1b4e12d7be85248465e76da0175b51ec2249e82b1f7",
-      "bytes": 17297
+      "bytes": 21714
     },
     "service/worker.py": {
-      "sha256": "36aa92baad4fa1ae65ce080dbf1c7815e894b17f6c7b5920e0ad2a724c659dbd",
-      "bytes": 19518
+      "bytes": 19501
     },
     "service/tasks.py": {
-      "sha256": "37c03df9706bceb04411efd9d782d8d641f7e713249e1274dbd91be2bdff574d",
-      "bytes": 12351
+      "bytes": 12314
     },
     "service/planning.py": {
-      "sha256": "4fd18f36fe49cb2b5210013054733db8e111bad2c9fa43f22d3a871c423db17b",
-      "bytes": 13180
+      "bytes": 12796
     },
     "service/uploads.py": {
-      "sha256": "7f978e90f337d300f433b4095809c4a778fde6d256da0ee26d633242bc67f3f7",
       "bytes": 5936
     },
     "service/catalog.py": {
-      "sha256": "d0d53e7aa2d9ca06ed32217955553643bb7a8207539db673c3aa2294c025072b",
       "bytes": 5182
     },
     "service/errors.py": {
-      "sha256": "af97e56cbc23f092e1e739f71d3bee261eb4deaff67bf31c4bcb7c8b5939d91e",
       "bytes": 504
     },
     ".gitignore": {
-      "sha256": "d49130ac4ae79468d0170037bbfb6b1d4234cf143ce94522cbf71060b1dd2630",
       "bytes": 46
     },
     "data/上海_处理后数据表.xlsx": {
-      "sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
       "bytes": 27386
     },
     "data/江苏_处理后数据表.xlsx": {
-      "sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52",
       "bytes": 28141
     },
     "data/浙江_处理后数据表.xlsx": {
-      "sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
       "bytes": 27909
     },
     "datasets.py": {
-      "sha256": "3a9f0425c7b5252c74a755845b777b291f0a050f6890fe5c2eef915f218ba948",
-      "bytes": 11740
+      "bytes": 11568
     },
     "deployment/README.md": {
-      "sha256": "9cc3a313d98655c0f52637b022a9a4d4ac4b23a562739d7260e4ec4b5833ef92",
-      "bytes": 12339
+      "bytes": 11294
     },
     "deployment/requirements-common.txt": {
-      "sha256": "161f3a64ad3985e74780b164addcf8d90537677e2de1689358e849f8fe70acf7",
       "bytes": 741
     },
     "deployment/requirements-cpu.txt": {
-      "sha256": "939af2353f320f1a3aae459f519c00dcde9c5d4b6009cde932ca9e13aea8c73b",
       "bytes": 292
     },
     "deployment/requirements-cuda.txt": {
-      "sha256": "333efcb7e7f7e19a8fd36381c07326a05c339704b1ae24866c5cf58a72770f51",
       "bytes": 104
     },
     "deployment/start.cmd": {
-      "sha256": "caa1badbae699f44143241981da49de836b7baae27e3d3b79ff60fbca2ceb206",
       "bytes": 248
     },
     "deployment/start.ps1": {
-      "sha256": "e053bc008e086845a98ee22e80e8739a6af2a5390c133dc9b93b86c8b75e5378",
       "bytes": 641
     },
     "deployment/validate.py": {
-      "sha256": "dfedb0f2bf9bab0d15895a10fb4c6f25d79e70c55118f1cb42a55c3ca5b96863",
-      "bytes": 20511
+      "bytes": 20446
     },
     "emaformer/__init__.py": {
-      "sha256": "fc21cbe72e0273d4cf51b4403f590f3d4b152edd9735659299f452845220753d",
       "bytes": 35
     },
     "emaformer/_emaformer_layers.py": {
-      "sha256": "8cf9f1d239258532433542a6a3e2dcb7718cd61622ca89a1546dca1efe538e22",
       "bytes": 5578
     },
     "emaformer/model.py": {
-      "sha256": "920743108aae36fb18dddb1409400255b36367e46037a1350ff384c117e08084",
       "bytes": 9785
     },
     "emaformer/predict.py": {
-      "sha256": "03bbeeb0e35acf4963275c20f59142bbd5d0d8fe2a3242d115ac3b81872202aa",
       "bytes": 275
     },
     "emaformer/train.py": {
-      "sha256": "8058a8a048d14b5295891ffc788daade00bd86591c0a6b6e4481481dd6e14b3d",
       "bytes": 272
     },
     "emaformer/weights/jiangsu/all.pt": {
-      "sha256": "f7502ded1e1116aba75b5ef982c157d5c0ca3c4008924d6534058fabd940e829",
-      "bytes": 36911760
+      "bytes": 36911913
     },
     "emaformer/weights/jiangsu/selected.pt": {
-      "sha256": "b36cd2b061644c7e3f7b3134787e2fd905ce83308869107c7eeaa67b888d37ae",
-      "bytes": 36094159
+      "bytes": 36094248
     },
     "emaformer/weights/shanghai/all.pt": {
-      "sha256": "cbbb8133504a906cd7e847edc4a3b0ab27921447b41230bb6342b90d45662380",
-      "bytes": 37014416
+      "bytes": 37014505
     },
     "emaformer/weights/shanghai/selected.pt": {
-      "sha256": "3aacd0aae8542ca3b9992faa3624290ed504795c8fc5b563584fdd76adbf53d5",
-      "bytes": 36042831
+      "bytes": 36042984
     },
     "emaformer/weights/zhejiang/all.pt": {
-      "sha256": "719baa3dc735fa81da93769242d696d000399fb4665143ada90a830d94cb594d",
-      "bytes": 36860560
+      "bytes": 36860649
     },
     "emaformer/weights/zhejiang/selected.pt": {
-      "sha256": "0be4648a27c0fb406e2f7cf296f471e1b8067c2706ea3ca993e8c789eaf77eba",
-      "bytes": 35991503
+      "bytes": 35991656
     },
     "joint_emaformer/__init__.py": {
-      "sha256": "4f077f516b355852a0a820c11ef3f4afce78d4eb755c4debcdd07e0e292c64b3",
       "bytes": 47
     },
     "joint_emaformer/_emaformer.py": {
-      "sha256": "d7276e077b05929b6554058a6d317b6a4a4ce0788d25e37f6260b8f19558b95d",
       "bytes": 9590
     },
     "joint_emaformer/_emaformer_layers.py": {
-      "sha256": "e8fc892e308226d25feacfca02d70cad13d20ae61cf410b0450087efd3a11dd3",
       "bytes": 6076
     },
     "joint_emaformer/_runtime.py": {
-      "sha256": "0dd08d284f697c9b4174d8a850f2b94e8246498a0a9f3cc4038d2af6a637b86b",
-      "bytes": 10919
+      "bytes": 10698
     },
     "joint_emaformer/_search.py": {
-      "sha256": "1c0a9b0c40058685861ba891bd894c4864a5a7e011d1f753ad0796a38542523c",
       "bytes": 1684
     },
     "joint_emaformer/_training.py": {
-      "sha256": "6ba080b3f4b45670f00ef868c7422d787e06d1a45cb4bd06adf4aa1f79170c6f",
       "bytes": 6042
     },
     "joint_emaformer/analysis.py": {
-      "sha256": "7e4a8f5c50b1b81d7d639bd02ed6bbd62a6f8a5e52ef6fafd55280bf4fe13ea1",
       "bytes": 12147
     },
     "joint_emaformer/backtest.py": {
-      "sha256": "108219ac95f807b623d1918fb7f0d0aa1ef91a7850b5d57756612bfd506e8e92",
-      "bytes": 8411
+      "bytes": 8206
     },
     "joint_emaformer/data.py": {
-      "sha256": "a5eb15f37552f4e5bbf01824801ebccb4dd5c4740bc602f3a8005d747090cda9",
       "bytes": 6416
     },
     "joint_emaformer/model.py": {
-      "sha256": "8e623d473804b79274bd4dae8a77158f039e6f000beb31fb25d1f1398876cd47",
       "bytes": 4889
     },
     "joint_emaformer/predict.py": {
-      "sha256": "08347437ee158285c765ff106ddd905004ead2dbf28cc429723f1eee7988fa6f",
-      "bytes": 5168
+      "bytes": 4949
     },
     "joint_emaformer/README.md": {
-      "sha256": "1eed1b5382fefa627790d916576a073a0543b0d5b76705748b042670fc82d8b1",
-      "bytes": 17380
+      "bytes": 17742
     },
     "joint_emaformer/reference/analysis/all_prediction_intervals.csv": {
-      "sha256": "c7b89e1a26a3906ecb598e5b45d21390fc4e6a0d6f0de99bb17734065bea5fc6",
       "bytes": 114655
     },
     "joint_emaformer/reference/analysis/annual_metrics.csv": {
-      "sha256": "b53d54a5f9037ca8c155a0f5c0aaa6f0be55df124cad4196fa17cd45ae043aac",
       "bytes": 14029
     },
     "joint_emaformer/reference/analysis/confidence_intervals.csv": {
-      "sha256": "319bbfcfa6501bb3bbe6cf3a3e6b16396d4d26550db32fc01926ddf2d5162db3",
       "bytes": 41601
     },
     "joint_emaformer/reference/analysis/metrics.csv": {
-      "sha256": "1881ea2df9c6241fba6b5e6c984e11a1370ed784d8c67f6107e33492abe6a97a",
       "bytes": 2662
     },
     "joint_emaformer/reference/analysis/paired_profile_differences.csv": {
-      "sha256": "0582fc491da68bd24750803637331c5362af6c8672ed5b7fe9bd4ae09be735e8",
       "bytes": 1497
     },
     "joint_emaformer/reference/analysis/prediction_interval_coverage.csv": {
-      "sha256": "bbd3a0ec4fef429f4ea3a392241e1f78a197040c7d093b18cb9d91cc81bb3da9",
       "bytes": 1422
     },
     "joint_emaformer/reference/analysis/selected_prediction_intervals.csv": {
-      "sha256": "07ea16e0d27921eece2b843c25df931b143538587f1d14f84da552ae74a3cd48",
       "bytes": 120352
     },
     "joint_emaformer/reference/analysis/summary.json": {
-      "sha256": "fd3c6d7029599edd6f7916acef872f1c84968b728e6397a019a3560440eeeaa1",
-      "bytes": 205696
+      "bytes": 204743
     },
     "joint_emaformer/reference/analysis/worst_origins.json": {
-      "sha256": "be23067915b660a28d97cfc0cebb4c179f1ff6b63c4f8695c51432f00e5a45c7",
       "bytes": 5027
     },
     "joint_emaformer/reference/backtest/all/model_config.json": {
-      "sha256": "22821f4b076c40260a10ca3a3fa2cd50dacdc302e957c5523d1ce3346ec64a31",
       "bytes": 1853
     },
     "joint_emaformer/reference/backtest/all/seed_2026/predictions.csv": {
-      "sha256": "489de17a43ae04a52d57d36786360a3941548a5471f4452145f8e172098dbcb8",
       "bytes": 85037
     },
     "joint_emaformer/reference/backtest/all/seed_2026/training_audit.json": {
-      "sha256": "c80e3f1a909736de2fc95113f8b60b4fe4f674aca91b91693c28b8f42be2f125",
       "bytes": 223987
     },
     "joint_emaformer/reference/backtest/all/seed_42/predictions.csv": {
-      "sha256": "17f5f83c365513f0e96ccc5c3aee94f76a8204b97571018f36cfe41c28ae9468",
       "bytes": 85015
     },
     "joint_emaformer/reference/backtest/all/seed_42/training_audit.json": {
-      "sha256": "ed6cb6c093eccd82a895612279533c196ce737d86b654291d3d0ac173828f019",
       "bytes": 224027
     },
     "joint_emaformer/reference/backtest/all/seed_7/predictions.csv": {
-      "sha256": "83e68d64a647961d06b23f62ba951176fcd82491ec29a5e185e807f164bf86cb",
       "bytes": 85009
     },
     "joint_emaformer/reference/backtest/all/seed_7/training_audit.json": {
-      "sha256": "4498e407f09286cb915d584e5376bedc5a6222cc688bebba1ff9e8050f7697b7",
       "bytes": 223990
     },
     "joint_emaformer/reference/backtest/protocol.json": {
-      "sha256": "d48e138d0a6cdcc31efac0a87c98d77cb69347b3ea60e5d058e0a4f99a0facb8",
-      "bytes": 737
+      "bytes": 458
     },
     "joint_emaformer/reference/backtest/selected/model_config.json": {
-      "sha256": "183ed14431694171678f78ad2817b6380e5079371e15bb3fb2a32d0fe81306a0",
       "bytes": 1863
     },
     "joint_emaformer/reference/backtest/selected/seed_2026/predictions.csv": {
-      "sha256": "fa006fe3fc981f89432cf37a9706ba40477a5bc1ce6fa50ce10f416eb4679ea7",
       "bytes": 90705
     },
     "joint_emaformer/reference/backtest/selected/seed_2026/training_audit.json": {
-      "sha256": "dedffaa49183db05c339d90365203720d4a1ef46e139718b0ecd7eab803bf291",
       "bytes": 224024
     },
     "joint_emaformer/reference/backtest/selected/seed_42/predictions.csv": {
-      "sha256": "6c5f8f83d25e75edcf6ab2a4980f66b41f6aff6348f4864c687162b13c6070dc",
       "bytes": 90694
     },
     "joint_emaformer/reference/backtest/selected/seed_42/training_audit.json": {
-      "sha256": "0a004b5e0e2721aa84942abd88aa5103c5e40765b266fc06107a16874b34b0f6",
       "bytes": 223983
     },
     "joint_emaformer/reference/backtest/selected/seed_7/predictions.csv": {
-      "sha256": "75282dbb9d7926a0b7154300cdf788d41babfedb07c486ff1610f67c786a2417",
       "bytes": 90665
     },
     "joint_emaformer/reference/backtest/selected/seed_7/training_audit.json": {
-      "sha256": "287771a2542f9141a6643d1d69051f12ae85e7db39e8df1a6528e890b01aa3f8",
       "bytes": 223983
     },
     "joint_emaformer/reference/fixed_test/all/seed_2026/history.json": {
-      "sha256": "14a841c68b5807b9dd2666bec85ceb3e0bb0b708b865b96c39d1d50102b72d42",
       "bytes": 2557
     },
     "joint_emaformer/reference/fixed_test/all/seed_2026/metrics.csv": {
-      "sha256": "1a4087ed7baf349355725a77e1160a857a9d7407ca77ad195b0b3e523085311e",
       "bytes": 802
     },
     "joint_emaformer/reference/fixed_test/all/seed_2026/predictions.csv": {
-      "sha256": "f3aa87f320d75d9b9306cbd7cbeaf2d87995cb2747ff782eda911169b0339f46",
       "bytes": 13788
     },
     "joint_emaformer/reference/fixed_test/all/seed_42/history.json": {
-      "sha256": "481a52e11e175c551704fd3d92e62224ad6c02c4d6cac1c86c9edbef48a8c55b",
       "bytes": 2559
     },
     "joint_emaformer/reference/fixed_test/all/seed_42/metrics.csv": {
-      "sha256": "45dcbdd52dd5d672433f77d88c83f27b6c498fcd970e02ea669dbcb519f57013",
       "bytes": 802
     },
     "joint_emaformer/reference/fixed_test/all/seed_42/predictions.csv": {
-      "sha256": "9c638c66b5f9b633ff833c99ce69b4c4b75e9e9bb558250d7eb1ad4d6ead8a65",
       "bytes": 13786
     },
     "joint_emaformer/reference/fixed_test/all/seed_7/history.json": {
-      "sha256": "c3f3730ce561a610fe5a9c0714211afc47885bcacac28384ce9e9a49433b95a0",
       "bytes": 2556
     },
     "joint_emaformer/reference/fixed_test/all/seed_7/metrics.csv": {
-      "sha256": "75bef434a61dcfdd478ebec1d5ce08564a2fba4a61678f169b5c3f1fb02e31d8",
       "bytes": 803
     },
     "joint_emaformer/reference/fixed_test/all/seed_7/predictions.csv": {
-      "sha256": "c624fcf82f6607b525a9b88f27488ecc2145f44b1102ec769d03af934472e878",
       "bytes": 13775
     },
     "joint_emaformer/reference/fixed_test/selected/seed_2026/history.json": {
-      "sha256": "abe50e2cfd09021f469784c2ad60852d46afdc5647df612f4f9eef5ca5af4a25",
       "bytes": 2561
     },
     "joint_emaformer/reference/fixed_test/selected/seed_2026/metrics.csv": {
-      "sha256": "cb3937705bf428cd1eb0dcc5ad88b2f4d410ede327da31106814dda93462f84f",
       "bytes": 817
     },
     "joint_emaformer/reference/fixed_test/selected/seed_2026/predictions.csv": {
-      "sha256": "bafc3cbe1494d4dd55909ca0ae3da8316a02d8d32f5348004795ab0fd5dcf544",
       "bytes": 14676
     },
     "joint_emaformer/reference/fixed_test/selected/seed_42/history.json": {
-      "sha256": "17b69e87feef95133a4049238d1c59f6edd675ff34d3dd1102e045990854ca9d",
       "bytes": 2554
     },
     "joint_emaformer/reference/fixed_test/selected/seed_42/metrics.csv": {
-      "sha256": "baa263504c8f830c45277142a8521cee21ca109f2d8351270c206117c112ead3",
       "bytes": 821
     },
     "joint_emaformer/reference/fixed_test/selected/seed_42/predictions.csv": {
-      "sha256": "59c1b0151f706e7175152a47f1526823470d5df3dc6bdbbb1f78de74d00b7ac4",
       "bytes": 14688
     },
     "joint_emaformer/reference/fixed_test/selected/seed_7/history.json": {
-      "sha256": "e8bc094d324b416c6bdadd181e8b16a953ccf895fb7a2a89fe1db72e3c73ea86",
       "bytes": 2551
     },
     "joint_emaformer/reference/fixed_test/selected/seed_7/metrics.csv": {
-      "sha256": "4c264cad532d9b74cc9255a070dfc454a06b183cfdd45d02155964675040870b",
       "bytes": 815
     },
     "joint_emaformer/reference/fixed_test/selected/seed_7/predictions.csv": {
-      "sha256": "e45fa2a3667fc10dc8fc259446247821f11f0ad3d012c93f3b5f850ccbad87d1",
       "bytes": 14705
     },
     "joint_emaformer/reference/reproduction_check.json": {
-      "sha256": "167769062bd9cbbab5cf52fe49d865cee810fcfa7be4bbf3ad97b24f073d69dc",
       "bytes": 1468
     },
     "joint_emaformer/reference/search/all/confirm_trial_13.json": {
-      "sha256": "de87ca049ebd0664adaf1a4244d9b83ff1fd162d4cd0f89c11b3154b39a1ebdd",
       "bytes": 43642
     },
     "joint_emaformer/reference/search/all/confirm_trial_24.json": {
-      "sha256": "7af8c657170b899e563757ce6d4401e739992687b559c7b5bca46b0d046d5ba1",
       "bytes": 134848
     },
     "joint_emaformer/reference/search/all/confirm_trial_29.json": {
-      "sha256": "1fabcc529a332145c0228ededf300479457b788166c77c84cf773b9d51b6444e",
       "bytes": 39734
     },
     "joint_emaformer/reference/search/all/confirm_trial_62.json": {
-      "sha256": "e67a90aec576d32e849e78773d1f5eaa900a67f1ff9d6e89fd26c5987a9871c1",
       "bytes": 59466
     },
     "joint_emaformer/reference/search/all/confirmed_candidates.json": {
-      "sha256": "4bc398e236c8829e7f1afbb22564ce8f35e6e12537242022d274601191e8948b",
       "bytes": 325234
     },
     "joint_emaformer/reference/search/all/screening_trials.json": {
-      "sha256": "18fd29cb02078d6da678ebdf37d48dee17f48b8d50192adcc00bef53d5d8df22",
       "bytes": 502036
     },
     "joint_emaformer/reference/search/all/selected_parameters.json": {
-      "sha256": "5f7207aaef18f5ac66b2125e3d1e9326295ec3870bd2fe1ac2b0e4632d5e3719",
       "bytes": 65960
     },
     "joint_emaformer/reference/search/search_plan.json": {
-      "sha256": "21502b2900dd91d28b4e21616511a75a5efeddcc16706e5c1e34d002cbd71bad",
       "bytes": 45853
     },
     "joint_emaformer/reference/search/selected/confirm_trial_13.json": {
-      "sha256": "965c7749b4c318c85170089d64ead68a67d5fa2d260000aaf5ddc89f6cdad4a0",
       "bytes": 42196
     },
     "joint_emaformer/reference/search/selected/confirm_trial_29.json": {
-      "sha256": "095a6ed20b53c3ea9c985ca3df8049c5df7dc9a1f7ee055957c803af8c931e52",
       "bytes": 41170
     },
     "joint_emaformer/reference/search/selected/confirm_trial_35.json": {
-      "sha256": "ebf536c356585df2c60890f0496c001ff7f8552904ef7bb9510666b67eb89a64",
       "bytes": 134537
     },
     "joint_emaformer/reference/search/selected/confirm_trial_62.json": {
-      "sha256": "004083bface2c9f2ade2f673513ce901845cb7162ecc241bc9d0a53f85044574",
       "bytes": 59733
     },
     "joint_emaformer/reference/search/selected/confirmed_candidates.json": {
-      "sha256": "3d3f3ff86c7e84c78e6a3608b8941cc16c6e7a3fc72106eb15bf446022bd463c",
       "bytes": 325182
     },
     "joint_emaformer/reference/search/selected/screening_trials.json": {
-      "sha256": "ae612b92d7196ea48b7161384c1bc31c42b2e87517e54c8b06bf7714bcb4e7bf",
       "bytes": 483088
     },
     "joint_emaformer/reference/search/selected/selected_parameters.json": {
-      "sha256": "a79ff9391ab53b8dc8fecb0b7c2d825c3056936a70ffe6d5c3ec50131be4ef94",
       "bytes": 66249
     },
     "joint_emaformer/reference/weights_index.json": {
-      "sha256": "7e7538857972efb31b8a52ef6f2ec794a58afe3e1573d68545c3f21b2ff61981",
-      "bytes": 13909
+      "bytes": 12985
     },
     "joint_emaformer/train.py": {
-      "sha256": "dcf91b35b42902c557f036d6b119d38b3c2b80648fa747ec02eb35f458203de2",
-      "bytes": 4456
+      "bytes": 4326
     },
     "joint_emaformer/tune.py": {
-      "sha256": "a99e6d812c9e714d3dce1cea5cdbf3e67a7a76639e4e1c3fa5662ae6c1b117a8",
-      "bytes": 9156
+      "bytes": 8892
     },
     "joint_emaformer/verify.py": {
-      "sha256": "9e1e9f0384ae394cf48306471f94b1112b06bd04f7a605755363ef953d7b3c19",
-      "bytes": 3032
+      "bytes": 2941
     },
     "joint_emaformer/weights/all.pt": {
-      "sha256": "f1add7685a763d0da6b8c722371f5892d5817bb4f5ba33f1328cda0b4be11be3",
-      "bytes": 13829213
+      "bytes": 13828957
     },
     "joint_emaformer/weights/selected.pt": {
-      "sha256": "a03df2b66e12a63a3e85b6a1134834bedb981b3eff52cbbc3056becc330139e1",
-      "bytes": 12553147
+      "bytes": 12552891
     },
     "lstm/__init__.py": {
-      "sha256": "0b7d5f553f474a09c875cf1f50a88d368c12fd1f45cf9a320112bf378d343d84",
       "bytes": 30
     },
     "lstm/model.py": {
-      "sha256": "45d970dd8fb4afb69aa4b3f600edc049e1bb9c9b207e6461adf7be8517d2c040",
       "bytes": 2381
     },
     "lstm/predict.py": {
-      "sha256": "f35b092e701d92696941c261e074d187422b9211e10d46fc309842faff741fb3",
       "bytes": 265
     },
     "lstm/train.py": {
-      "sha256": "ea79355b8679556efddec30492e634620d6b7742b280ef36bdccacaf767b8867",
       "bytes": 262
     },
     "lstm/weights/jiangsu/all.pt": {
-      "sha256": "8d7f5a984da23e6e5ab93ba05d037eb70350402c38f4ddcaab2229d1c17a3ebe",
-      "bytes": 33957
+      "bytes": 33929
     },
     "lstm/weights/jiangsu/selected.pt": {
-      "sha256": "eba5f631c2eb1cc08ab15bb634a165e8768a8e749ea4ddb483b5fbf82d6614dd",
-      "bytes": 24737
+      "bytes": 24773
     },
     "lstm/weights/shanghai/all.pt": {
-      "sha256": "bdcebd6f1bab849bca1b76827516b8ef1bb1d2a179ca16a5efd300b4ba3b3cc0",
-      "bytes": 35173
+      "bytes": 35209
     },
     "lstm/weights/shanghai/selected.pt": {
-      "sha256": "7788f50e5f86d7d5edba4939737a8e08ceacb3ffa818074723b2073bffbe7dc5",
-      "bytes": 24097
+      "bytes": 24133
     },
     "lstm/weights/zhejiang/all.pt": {
-      "sha256": "bb8d0636f9179eeff5712a4279ee73ff241d256f7ead03b3cdcdbb4b00367707",
-      "bytes": 33445
+      "bytes": 33417
     },
     "lstm/weights/zhejiang/selected.pt": {
-      "sha256": "2672245f3f4aa0327c13c1eb4f693feb67e20ced327cb9bf44e4f9d8ae6bcc4e",
-      "bytes": 23521
+      "bytes": 23493
     },
     "metrics.py": {
-      "sha256": "daac33239399a5ccea639a6e26e07718fde85bf8659bc9f97ab9299cd9bb223a",
       "bytes": 1916
     },
     "mofo/__init__.py": {
-      "sha256": "30fbaddbc6b648fc47ff49b039def64c8879e9c627a8d22789980b4358f1c897",
       "bytes": 30
     },
     "mofo/_mofo_core.py": {
-      "sha256": "f4b5957116d16cf69ef54eedad9aab82fec2db2311e1d7b62f95bfa2361f9d9a",
       "bytes": 8660
     },
     "mofo/model.py": {
-      "sha256": "ac94ed92bbcea434b943ba077858b287161e591ec0dc4b4f2cdbe5201b908e66",
       "bytes": 5565
     },
     "mofo/predict.py": {
-      "sha256": "7a404789e59b6417b3ac285266579c3365a07451cf7d947af1ff343686314314",
       "bytes": 265
     },
     "mofo/train.py": {
-      "sha256": "98a2909f6df8ff6e3ed8818b64d58ffd2af9f55ffa726fb40ca83607a344b663",
       "bytes": 262
     },
     "mofo/weights/jiangsu/all.pt": {
-      "sha256": "07d9be061bb872928f24dccebc9bbb9a74a395ea3f9b2f5abcaa711258918b19",
-      "bytes": 57785
+      "bytes": 57829
     },
     "mofo/weights/jiangsu/selected.pt": {
-      "sha256": "caf29edca410c9e42ab03352e79d2e2787ea803c06e5fb43e2c434be7a20ab8b",
-      "bytes": 55405
+      "bytes": 55449
     },
     "mofo/weights/shanghai/all.pt": {
-      "sha256": "66cc8ec67ea47b46f282d46284f2d79015abb2058a12dd44b6abd71a91e3bc73",
-      "bytes": 58233
+      "bytes": 58277
     },
     "mofo/weights/shanghai/selected.pt": {
-      "sha256": "96479759807fe9633c619ce294840ea25ced53fb593ba1070ddb800b7dfc675b",
-      "bytes": 55213
+      "bytes": 55257
     },
     "mofo/weights/zhejiang/all.pt": {
-      "sha256": "39139d2b10918777ca9ba6bdd14bb10a15396d2b9380d5bbd2d15b39245d272d",
-      "bytes": 57657
+      "bytes": 57701
     },
     "mofo/weights/zhejiang/selected.pt": {
-      "sha256": "21c352f4685abcc1ab401d52f090e0d2db29e2d5efa95977184728f871c86932",
-      "bytes": 54957
+      "bytes": 55065
     },
     "README.md": {
-      "sha256": "dfef5cd5ca77ef6eca49acb6b95a5e0443ecbc49819fb46aeeb1a187d02f5b6c",
-      "bytes": 16153
+      "bytes": 16768
     },
     "reference/environment.json": {
-      "sha256": "956f1bb9166f00b3718dc4649291ca77006e12f29478fbdaa543833dfb580fd9",
       "bytes": 468
     },
     "reference/jiangsu_all_metrics.csv": {
-      "sha256": "bd0411ef269f58f9588175a1c4c39245a5fc1692f0ae4e8a849217852497f21a",
       "bytes": 564
     },
     "reference/jiangsu_selected_metrics.csv": {
-      "sha256": "ddbe23478941f5fa76d669480628a24816b506393ea1bbcb577bbdc47b8fad4e",
       "bytes": 564
     },
     "reference/relocation_verification.json": {
-      "sha256": "c09a124f9f61dc8d280d01424c3fc67f1efa5cf3abf0273a38be92ad7cae232e",
       "bytes": 344
     },
     "reference/reproduction_audit.json": {
-      "sha256": "84ddce6298f7ca858195ac3064d21d18021c4c86cfbc3d9188d50751bf5902d1",
       "bytes": 30442
     },
     "reference/retrained_history.csv": {
-      "sha256": "20c26f5bf2c7bb17054f5cf31a4509588a76ee399ad198981da464c5f5606ef5",
       "bytes": 46569
     },
     "reference/service_validation/all_predictions.csv": {
-      "sha256": "f854cfb514f9245148dd1bd7f7b16746f0be71b4264eef6c4534c07e327be5cb",
       "bytes": 1389
     },
     "reference/service_validation/all_response.json": {
-      "sha256": "56d76ebfc2897cdc8d5441baa3d540b9eb3c88ea089477078811a084b451e16a",
-      "bytes": 16228
+      "bytes": 15783
     },
     "reference/service_validation/openapi.json": {
-      "sha256": "004f75bd0ea1490b5546d46f9523cab5a4893fd0868f71c56cff272c50bd18d4",
-      "bytes": 22176
+      "bytes": 21801
     },
     "reference/service_validation/relocation.json": {
-      "sha256": "2e459ac050802acd1b0bdcedacf21c6f6ddc5859691771393fe51fa0ef367601",
       "bytes": 441
     },
     "reference/service_validation/report.json": {
-      "sha256": "77bbc6532e228a59af8e265ff023abdd65e99496efb74994c7615a30ab67b416",
       "bytes": 2757
     },
     "reference/service_validation/report.md": {
-      "sha256": "ebbf7d247a7a909a2f278316103f667afed14e930fe091fcd64bb607fd2e78f0",
-      "bytes": 2022
+      "bytes": 1461
     },
     "reference/service_validation/selected_predictions.csv": {
-      "sha256": "7ff4237fa921e6580bc5bd89778a0c8eeafba16bb74fac0652ae6974bea04603",
       "bytes": 1429
     },
     "reference/service_validation/selected_response.json": {
-      "sha256": "e3bb6602b081b7100e070f4d5db80bc4ff99cd37deca8d11eab040d23f13c3a4",
-      "bytes": 14310
+      "bytes": 13880
     },
     "reference/shanghai_all_metrics.csv": {
-      "sha256": "f7eb2757080dd48ec94b196413dd18657dc0596d98e136c07ae75e0f5457463f",
       "bytes": 564
     },
     "reference/shanghai_selected_metrics.csv": {
-      "sha256": "fb0ebd003d301526ed21161c14fea02285e2591d4e63e886d7535c5e269c76f6",
       "bytes": 564
     },
     "reference/source_integrity.json": {
-      "sha256": "36360daa0e82150b0470086e0c7721eaf77a713974b129481523a9cc5bf660de",
       "bytes": 1154
     },
     "reference/test_predictions.csv": {
-      "sha256": "7d752a135547c25560552098bc5c26b7c9e407d0f8ef31a4d46d0249710dfe08",
       "bytes": 103190
     },
     "reference/training_history.csv": {
-      "sha256": "06723a264f829af28e8aa0bfeec8d17057e7fb8b852dade4e50b51f677df3ebf",
       "bytes": 46569
     },
     "reference/verification.json": {
-      "sha256": "135b80c41eeeb61d0fe65838a0f4cc32334758b46d831dc5d008746b090eaba1",
-      "bytes": 9744
+      "bytes": 9146
     },
     "reference/weight_index.json": {
-      "sha256": "98d7aa424312b21498b7e85b053c96d6caeae3c50bc7aa67a411125255826c79",
-      "bytes": 26640
+      "bytes": 21942
     },
     "reference/zhejiang_all_metrics.csv": {
-      "sha256": "03063a0ad8b47be53425808bbc23fb3f2d731b3eb4832516fd9c26db1c930828",
       "bytes": 564
     },
     "reference/zhejiang_selected_metrics.csv": {
-      "sha256": "0bafe76b3783c0b2512a1db92c2322545a3f4cf1a6e839f2d52c3c533be6f789",
       "bytes": 564
     },
     "requirements.txt": {
-      "sha256": "fe6459676424d6fa31bde31b04077325833c7ef8d41c14662c0cac5f3029df20",
       "bytes": 239
     },
     "runtime.py": {
-      "sha256": "9f71e6871a173bfa60054dc7bd65f3e98c8548cd1f6427f9f2f52ad6fb49dcb8",
-      "bytes": 12374
+      "bytes": 12070
     },
     "service/__init__.py": {
-      "sha256": "93e0e23d1d5bd100ffc0ccf99beeff977122180b5d61a9da3994e5816f22d0c2",
       "bytes": 64
     },
     "service/app.py": {
-      "sha256": "367fd34e9eb81791a8e373a4ce1177ba9320f226582c4d39c6ee411366a8c7f1",
-      "bytes": 17965
+      "bytes": 18015
     },
     "service/engine.py": {
-      "sha256": "2d085027149b6a96b940252ab06b0db8f608623844bfa59496873e39b5dbcb44",
-      "bytes": 31367
+      "bytes": 31269
     },
     "service/intervals.py": {
-      "sha256": "3d2958cb9975536d1898f40ed2868287e56683ef1c11134204f9bf9905e9fecd",
       "bytes": 2832
     },
     "service/API_DESIGN_README.md": {
-      "sha256": "2488419afd423f5b9b11e7cd07240c461a4d62bf87769dc1dce20c8a0f0e2298",
-      "bytes": 80574
+      "bytes": 80621
     },
     "service/README.md": {
-      "sha256": "95e08f1260d6f5e5f601ec330364c962725eb2d0f71c5dacc913ed62e2d6886f",
-      "bytes": 29730
+      "bytes": 30282
     },
     "service/registry.py": {
-      "sha256": "6fb9c2a6227186d4d663c278b1159c1577930621421adc8dd0f8f98ed23e0e31",
-      "bytes": 4772
+      "bytes": 4866
     },
     "service/schemas.py": {
-      "sha256": "4896490f5d545709d2cee94b0dbe6efc23b23e017d6011c3c776351dbf3ea778",
-      "bytes": 11657
+      "bytes": 11649
     },
     "service/storage.py": {
-      "sha256": "266798626ea5ba0e758e953e26524388288d92d249db00deeaca7b9fb869ac01",
-      "bytes": 4907
+      "bytes": 5427
     },
     "tests/test_joint_emaformer.py": {
-      "sha256": "fc429ae9d558b5b07ad3dec216c914086fb872356b8c3bc00940501a3f734b12",
-      "bytes": 5926
+      "bytes": 6022
     },
     "tests/test_reproduction.py": {
-      "sha256": "c1e8fb37bc51edde97b9452585950c56b10819fde9be6f892e4a6589500f2513",
       "bytes": 4839
     },
     "tests/test_service.py": {
-      "sha256": "849028ae7272f183c19a9c7f511d33b5ee546b623e976cc07bd5393686c61ad1",
-      "bytes": 14205
+      "bytes": 14430
     },
     "tests/test_xgboost_selection.py": {
-      "sha256": "06b83442f47947a71030da94c3cf19a29dcd461766d31f3e7c5ed93763a20311",
-      "bytes": 4854
+      "bytes": 4860
     },
     "training.py": {
-      "sha256": "407e35b5a6229fb9df589bb9b6b9d321491352dd8232afd041988f285ae76715",
-      "bytes": 7634
+      "bytes": 7621
     },
     "verify.py": {
-      "sha256": "9bd66a1951198266d8b52cbe982881ea6c3c7afca98cecb0cc3d70aafac77ff8",
-      "bytes": 4624
+      "bytes": 4460
     },
     "xgboost/reference/original_selection.json": {
-      "sha256": "d4136fcf82484b25bf279e2b0b64c6e19e0efbf4458eddfd6e7f437d84e1a17e",
-      "bytes": 196792
+      "bytes": 196258
     },
     "xgboost/reference/reproduction_check.json": {
-      "sha256": "ee6852137876c5f8024da13212a8bd0979de78b2c5afa82abec6f565214d4153",
-      "bytes": 1645
+      "bytes": 1282
     },
     "xgboost/reference/run.json": {
-      "sha256": "4c65c657854a7791a8511607d574faee3df0729ad3bd785ef56d11d5f0362816",
-      "bytes": 3703
+      "bytes": 3252
     },
     "xgboost/reference/selected_features.yaml": {
-      "sha256": "391dc1486fc814d0d8231fe0c6e7650d53b2a60e84b6fd04521f279f7a553371",
       "bytes": 517
     },
     "xgboost/reference/selection.json": {
-      "sha256": "276becb5408ea1e664a8a88e3bdd0ceca173694dedb77675f42d60d70b216e85",
-      "bytes": 426711
+      "bytes": 426447
     },
     "xgboost/reference/上海_XGBoost变量筛选.xlsx": {
-      "sha256": "3066a3c0af7fc2f66c434be07b6106bdca2f2c741c2a60755ea9125d30a4b57a",
       "bytes": 28345
     },
     "xgboost/reference/江苏_XGBoost变量筛选.xlsx": {
-      "sha256": "437fdb5bbc16b1776adbc487d69873745cb7c42f4e5f89cb71ff5dc8f1436271",
       "bytes": 28858
     },
     "xgboost/reference/浙江_XGBoost变量筛选.xlsx": {
-      "sha256": "d87ee9cc28538a340264496a3464b46d94ba3c5c948cf293092677b05e862260",
       "bytes": 26496
     },
     "xgboost/run.py": {
-      "sha256": "81e4ec889ced5910c81d5b13583128d0c7818b4a7831c4b9d6f48d5c3ec9bb1b",
       "bytes": 340
     },
     "xgboost/selection.py": {
-      "sha256": "e6225eae38aba9fe20dfb21219876bd9c4a6e5e775395dcbabf483909537a3b1",
-      "bytes": 29117
+      "bytes": 28555
+    },
+    "provenance.py": {
+      "bytes": 1709
+    },
+    "service/migration.py": {
+      "bytes": 2505
+    },
+    "reference/version_migration_verification.json": {
+      "bytes": 1336
+    },
+    "reference/reproduction_v3_verification.json": {
+      "bytes": 10342
+    },
+    "reference/cli_v3_verification.json": {
+      "bytes": 2783
+    },
+    ".gitattributes": {
+      "bytes": 42
+    },
+    "reference/service_v3_validation/all_predictions.csv": {
+      "bytes": 1335
+    },
+    "reference/service_v3_validation/all_response.json": {
+      "bytes": 15702
+    },
+    "reference/service_v3_validation/openapi.json": {
+      "bytes": 166439
+    },
+    "reference/service_v3_validation/report.json": {
+      "bytes": 3620
+    },
+    "reference/service_v3_validation/report.md": {
+      "bytes": 2314
+    },
+    "reference/service_v3_validation/selected_predictions.csv": {
+      "bytes": 1375
+    },
+    "reference/service_v3_validation/selected_response.json": {
+      "bytes": 13799
+    },
+    "reference/service_v3_validation/server.log": {
+      "bytes": 8191
+    },
+    "reference/service_v3_validation/tests.log": {
+      "bytes": 6531
+    },
+    "reference/service_v3_validation/workflow.json": {
+      "bytes": 40946
     }
   }
 }

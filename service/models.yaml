@@ -1,6 +1,6 @@
-# 更换权重时登记新SHA256；固定权重测试证据必须属于同一权重。
+# 更换权重时登记独立的新model_version；固定权重测试证据须填写对应model_version。
 # backtest为相同结构、变量与训练计划的逐月重训协议参考，不是固定权重测试。
-registry_version: 1
+registry_version: 2
 reference_data:
   shanghai: ../data/上海_处理后数据表.xlsx
   zhejiang: ../data/浙江_处理后数据表.xlsx
@@ -9,25 +9,25 @@ reference_weights_index: ../joint_emaformer/reference/weights_index.json
 models:
   all:
     checkpoint: ../joint_emaformer/weights/all.pt
-    sha256: f1add7685a763d0da6b8c722371f5892d5817bb4f5ba33f1328cda0b4be11be3
+    model_version: all-bundled-v1
     fixed_test:
       predictions: ../joint_emaformer/reference/fixed_test/all/seed_42/predictions.csv
-      sha256: 9c638c66b5f9b633ff833c99ce69b4c4b75e9e9bb558250d7eb1ad4d6ead8a65
-      checkpoint_sha256: f1add7685a763d0da6b8c722371f5892d5817bb4f5ba33f1328cda0b4be11be3
+      version: all-fixed-test-v1
+      model_version: all-bundled-v1
     backtest:
       predictions: ../joint_emaformer/reference/backtest/all/seed_42/predictions.csv
-      sha256: 17f5f83c365513f0e96ccc5c3aee94f76a8204b97571018f36cfe41c28ae9468
+      version: all-backtest-v1
       protocol: ../joint_emaformer/reference/backtest/protocol.json
       model_config: ../joint_emaformer/reference/backtest/all/model_config.json
   selected:
     checkpoint: ../joint_emaformer/weights/selected.pt
-    sha256: a03df2b66e12a63a3e85b6a1134834bedb981b3eff52cbbc3056becc330139e1
+    model_version: selected-bundled-v1
     fixed_test:
       predictions: ../joint_emaformer/reference/fixed_test/selected/seed_42/predictions.csv
-      sha256: 59c1b0151f706e7175152a47f1526823470d5df3dc6bdbbb1f78de74d00b7ac4
-      checkpoint_sha256: a03df2b66e12a63a3e85b6a1134834bedb981b3eff52cbbc3056becc330139e1
+      version: selected-fixed-test-v1
+      model_version: selected-bundled-v1
     backtest:
       predictions: ../joint_emaformer/reference/backtest/selected/seed_42/predictions.csv
-      sha256: 6c5f8f83d25e75edcf6ab2a4980f66b41f6aff6348f4864c687162b13c6070dc
+      version: selected-backtest-v1
       protocol: ../joint_emaformer/reference/backtest/protocol.json
       model_config: ../joint_emaformer/reference/backtest/selected/model_config.json

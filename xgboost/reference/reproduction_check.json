@@ -8,8 +8,7 @@
       "candidates": 132,
       "features_match": true,
       "ranking_match": true,
-      "validation_metrics_match": true,
-      "data_sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329"
+      "validation_metrics_match": true
     },
     {
       "region": "zhejiang",
@@ -17,8 +16,7 @@
       "candidates": 116,
       "features_match": true,
       "ranking_match": true,
-      "validation_metrics_match": true,
-      "data_sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193"
+      "validation_metrics_match": true
     },
     {
       "region": "jiangsu",
@@ -26,8 +24,7 @@
       "candidates": 134,
       "features_match": true,
       "ranking_match": true,
-      "validation_metrics_match": true,
-      "data_sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+      "validation_metrics_match": true
     }
   ],
   "total_candidates": 382,
@@ -35,7 +32,6 @@
   "existing_neural_network_feature_order_match": true,
   "selection_uses_test": false,
   "tests_passed": 8,
-  "source_code_sha256": "e6225eae38aba9fe20dfb21219876bd9c4a6e5e775395dcbabf483909537a3b1",
   "data_versions": {
     "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
     "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",

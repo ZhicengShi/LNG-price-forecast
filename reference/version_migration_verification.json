@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "weights": 20,
+  "all_parameter_tensors_unchanged": true,
+  "preprocessing_unchanged": true,
+  "source_data_unchanged": true,
+  "reference_csv_values_unchanged": true,
+  "legacy_metadata_fields_removed": true,
+  "updated_json_files": [
+    "manifest.json",
+    "joint_emaformer\\reference\\weights_index.json",
+    "joint_emaformer\\reference\\analysis\\summary.json",
+    "joint_emaformer\\reference\\backtest\\protocol.json",
+    "reference\\verification.json",
+    "reference\\weight_index.json",
+    "reference\\service_v2_validation\\all_response.json",
+    "reference\\service_v2_validation\\openapi.json",
+    "reference\\service_v2_validation\\selected_response.json",
+    "reference\\service_v2_validation\\workflow.json",
+    "reference\\service_validation\\all_response.json",
+    "reference\\service_validation\\openapi.json",
+    "reference\\service_validation\\selected_response.json",
+    "xgboost\\reference\\original_selection.json",
+    "xgboost\\reference\\reproduction_check.json",
+    "xgboost\\reference\\run.json",
+    "xgboost\\reference\\selection.json"
+  ],
+  "final_source_checks": {
+    "passed": true,
+    "python_files": 56,
+    "file_list_entries": 205,
+    "json_examples": 14,
+    "api_operations": 22,
+    "active_digest_computations": 0
+  }
+}

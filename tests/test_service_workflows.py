@@ -18,10 +18,83 @@ from fastapi.testclient import TestClient
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from service.app import create_app
+from service.errors import APIError
+from service.storage import save_json
 from joint_emaformer.data import REGIONS
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_independent_ids_and_removed_public_file_checks(self):
+        self.assertRegex(self.original,r'^data_[a-f0-9]{32}$')
+        response = self.client.post('/predictions',json={})
+        self.assertEqual(response.status_code,200,response.text)
+        self.assertEqual(response.json()['model_status']['model_version'],'selected-bundled-v1')
+        for value in (response.json(),self.client.get('/models').json(),self.client.get('/openapi.json').json()):
+            self.assertNotIn('sha256',json.dumps(value).lower())
+
+    def test_frozen_config_uses_saved_configuration(self):
+        engine = self.client.app.state.engine
+        engine.jobs.close()
+        task = self.client.post('/trainings',json={'epochs':1}).json()
+        private = engine.task(task['training_id'],'training',public=False)
+        config = engine.task_config(private)
+        config['seed'] += 1
+        path = engine.store.root/'trainings'/task['training_id']/'effective_config.json'
+        save_json(path,config)
+        with self.assertRaises(APIError):
+            engine.task_config(private)
+
+    def test_upgrade_preserves_legacy_identifiers_defaults_and_predictions(self):
+        engine = self.client.app.state.engine
+        engine.jobs.close()
+        prediction = self.client.post('/predictions',json={}).json()
+        pending = self.client.post('/trainings',json={'epochs':1}).json()
+        legacy_model = 'selected-'+'a'*16
+        record = engine.catalog.get('model','selected-bundled-v1')
+        record.update(model_version=legacy_model,sha256='a'*64)
+        for spec in record['evidence_specs'].values():
+            if isinstance(spec,dict):
+                spec.pop('version',None)
+                spec['sha256'] = 'b'*64
+        engine.catalog.put('model',legacy_model,record)
+        legacy_data = 'data_'+'0'*24
+        metadata,paths = engine.store.data(self.original)
+        old_directory = engine.store.root/'data_versions'/legacy_data
+        old_directory.mkdir()
+        for region in REGIONS:
+            (old_directory/(region+'.xlsx')).write_bytes(paths[region].read_bytes())
+        old_metadata = dict(metadata,data_version=legacy_data,sha256={r:'b'*64 for r in REGIONS})
+        save_json(old_directory/'metadata.json',old_metadata)
+        engine.catalog.set_defaults({'model_selected':legacy_model,'data':legacy_data})
+        legacy = deepcopy(prediction)
+        legacy['model_status'].update(checkpoint_sha256='a'*64,data_sha256={r:'b'*64 for r in REGIONS},model_version=legacy_model,data_version=legacy_data)
+        legacy['prediction_intervals']['calibration_version'] = 'c'*64
+        save_json(engine.store.root/'predictions'/legacy['prediction_id']/'response.json',legacy)
+        metadata,paths = engine.store.data(self.original)
+        metadata['sha256'] = {r:'b'*64 for r in REGIONS}
+        save_json(paths['shanghai'].parent/'metadata.json',metadata)
+        private = engine.task(pending['training_id'],'training',public=False)
+        private['_internal'].pop('config_snapshot')
+        private['_internal']['config_sha256'] = 'c'*64
+        engine.catalog.put('job',pending['training_id'],private)
+        with engine.catalog.connect() as db:
+            db.execute("DELETE FROM records WHERE kind='migration'")
+        self.client.__exit__(None,None,None)
+        self.client = TestClient(create_app())
+        self.client.__enter__()
+        reply = self.client.get('/predictions/'+legacy['prediction_id'])
+        self.assertEqual(reply.status_code,200,reply.text)
+        restored = reply.json()
+        self.assertEqual(restored['predictions'],prediction['predictions'])
+        self.assertEqual(restored['model_status']['model_version'],legacy_model)
+        self.assertEqual(restored['model_status']['data_version'],legacy_data)
+        self.assertNotIn('sha256',json.dumps(restored).lower())
+        self.assertEqual(self.client.post('/predictions',json={}).json()['model_status']['model_version'],legacy_model)
+        self.assertEqual(self.client.get(pending['status_url']).json()['status'],'interrupted')
+        self.assertEqual(self.client.get('/datasets/'+self.original).status_code,200)
+        self.assertEqual(self.client.get('/datasets/'+legacy_data).status_code,200)
+        self.assertEqual(self.client.post('/predictions',json={'data_version':legacy_data}).status_code,200)
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix='lng_workflow_')
         self.workspace = Path(self.temporary.name)

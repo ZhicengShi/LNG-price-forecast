@@ -12,7 +12,7 @@ from joint_emaformer.data import REGIONS, windows
 from joint_emaformer._training import predict
 from joint_emaformer.analysis import as_arrays
 from joint_emaformer._runtime import (HERE, MODEL_NAME, read_config, configure, load_checkpoint, frame_for,
-    load, digest, csv, save, run_directory)
+    load, csv, save, run_directory)
 
 
 def verify(device='auto'):
@@ -23,10 +23,9 @@ def verify(device='auto'):
         cfg, shared, _, _ = read_config(HERE/f'configs/{profile}.yaml')
         actual_device = configure(shared, device)
         path = HERE/entry['path']
-        assert digest(path) == entry['sha256']
         model, saved = load_checkpoint(path, actual_device)
         frame, layout, versions = frame_for(shared, profile, shared['period']['test_end'], saved['layout'])
-        assert versions == saved['data_sha256'] and layout == entry['input_layout']
+        assert layout == entry['input_layout']
         assert saved['preprocessing'] == entry['preprocessing']
         data = windows(frame, layout, saved['preprocessing'], saved['fit_end'], len(frame), saved['parameters']['seq_len'])
         forecast = predict(model, data, saved['preprocessing'])
@@ -40,7 +39,7 @@ def verify(device='auto'):
             tables[(region, profile)] = metric_row(MODEL_NAME, report(data.actual[:, :, i:i+1], forecast[:, :, i:i+1]))
         records.append(dict(profile=profile, values=int(y.size), max_absolute_price_difference=float(abs(forecast-expected).max()),
                             price_tolerance=tolerance, training_cutoff=saved['training_cutoff_month'],
-                            latest_target_month=str(frame.index[-1]), data_sha256=versions))
+                            latest_target_month=str(frame.index[-1]), data_sources=versions))
     return records, tables
 
 

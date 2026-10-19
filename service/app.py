@@ -1,5 +1,6 @@
 """三地区统一HTTP接口；python -B -m service.app启动。"""
 import argparse
+import base64
 from contextlib import asynccontextmanager
 import csv
 import hmac
@@ -23,7 +24,6 @@ from .engine import Engine, load_settings
 from .schemas import (PredictRequest, PredictionResponse, Region, Profile, ActivateData, ActivateModel,
                       TrainingRequest, TuningRequest, EmptyRequest)
 from .errors import APIError, issue
-from .storage import sha
 from .uploads import inspect_xlsx
 from .tasks import submit, list_tasks, cancel, tuning_results
 from . import schemas as api
@@ -131,14 +131,15 @@ def create_app(config_path=None):
         return response
 
     def mutation(request,body,operation):
-        fingerprint = sha(json.dumps(dict(method=request.method,path=request.url.path,body=body),sort_keys=True,ensure_ascii=False).encode())
+        fingerprint = json.dumps(dict(method=request.method,path=request.url.path,body=body),
+                                 sort_keys=True,ensure_ascii=False,separators=(',',':'))
         response_model = getattr(request.scope.get('route'),'response_model',None)
         def checked():
             value,status = operation()
             if response_model is not None:
                 value = response_model.model_validate(value).model_dump(mode='json')
             return value,status
-        value,status = request.app.state.engine.idempotent(request.headers.get('Idempotency-Key'),fingerprint,sha(api_key.encode()),checked)
+        value,status = request.app.state.engine.idempotent(request.headers.get('Idempotency-Key'),fingerprint,'service-v3',checked)
         if isinstance(value,dict) and '_cached_error' in value:
             raise APIError(**value['_cached_error'])
         return JSONResponse(status_code=status,content=value)
@@ -210,7 +211,7 @@ def create_app(config_path=None):
             if total>settings['upload']['total_bytes']:
                 raise APIError(413,'FILE_TOO_LARGE','三份文件总大小超过限制')
             payloads[region],filenames[region] = payload,filename[:255]
-        fingerprint = dict(files={region:sha(payload) for region,payload in payloads.items()},name=name,note=note)
+        fingerprint = dict(files={region:base64.b64encode(payload).decode('ascii') for region,payload in payloads.items()},name=name,note=note)
         def operation():
             with engine.lock:
                 metadata = engine.store.capture_data(payloads,engine.validate_paths,source='upload')

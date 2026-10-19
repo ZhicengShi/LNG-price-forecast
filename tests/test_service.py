@@ -229,7 +229,10 @@ class ServiceTests(unittest.TestCase):
         reply = self.client.get('/predictions/'+value['prediction_id'])
         self.assertEqual(reply.status_code, 200, reply.text)
         self.assertEqual(reply.json(), value)
-        self.assertEqual(json.loads(path.read_text(encoding='utf-8')), legacy)
+        migrated = json.loads(path.read_text(encoding='utf-8'))
+        self.assertEqual(migrated['predictions'],legacy['predictions'])
+        self.assertNotIn('dataset_id',migrated['model_status'])
+        self.assertEqual(migrated['model_status']['data_version'],legacy['model_status']['dataset_id'])
 
     def test_configured_api_key_is_required(self):
         with patch.dict(os.environ, {'LNG_API_KEY': 'local-test-key'}):

@@ -3,16 +3,9 @@
     "profile": "all",
     "seed": 42,
     "path": "weights/all.pt",
-    "sha256": "f1add7685a763d0da6b8c722371f5892d5817bb4f5ba33f1328cda0b4be11be3",
     "source": "joint_region_forecast\\runs\\three_region_tuned_backtest_20261015_01\\all\\fixed_test\\seed_42.pt",
-    "source_sha256": "f8ced469bfccfe7113d5a96d14a2ba29391a16c27c1a3d9ff734f9ceca1f3810",
     "fit_end": 115,
     "training_cutoff_month": "2024-07",
-    "data_sha256": {
-      "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
-      "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
-      "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
-    },
     "input_layout": {
       "input_size": 34,
       "pred_len": 3,
@@ -307,16 +300,9 @@
     "profile": "selected",
     "seed": 42,
     "path": "weights/selected.pt",
-    "sha256": "a03df2b66e12a63a3e85b6a1134834bedb981b3eff52cbbc3056becc330139e1",
     "source": "joint_region_forecast\\runs\\three_region_tuned_backtest_20261015_01\\selected\\fixed_test\\seed_42.pt",
-    "source_sha256": "ce633e6cdf0d89a27c8a574f06efcfb624db28fc456567bcf49be8988ca08d18",
     "fit_end": 115,
     "training_cutoff_month": "2024-07",
-    "data_sha256": {
-      "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
-      "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
-      "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
-    },
     "input_layout": {
       "input_size": 12,
       "pred_len": 3,

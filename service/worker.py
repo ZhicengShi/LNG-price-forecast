@@ -16,10 +16,10 @@ import torch
 from datasets import read_frame
 from joint_emaformer.data import REGIONS, NAMES, PreparedData, build_frame, windows
 from joint_emaformer._training import train, checkpoint, predict
-from joint_emaformer._runtime import package_checkpoint, save_checkpoint, prediction_rows, digest, csv
+from joint_emaformer._runtime import package_checkpoint, save_checkpoint, prediction_rows, csv
 from .catalog import Catalog, encode
-from .storage import Store, now, save_json, sha
-from .planning import code_versions
+from .storage import Store, now, save_json
+from . import VERSION
 
 
 class Cancelled(Exception):
@@ -58,11 +58,11 @@ class Worker:
         self.task = self.catalog.get('job',task_id)
         self.folder = self.store.root/('trainings' if self.task['kind']=='training' else 'tuning_jobs')/task_id
         path = self.folder/'effective_config.json'
-        if sha(path.read_bytes()) != self.task['_internal']['config_sha256']:
-            raise ValueError('任务配置被修改')
         self.config = json.loads(path.read_text(encoding='utf-8'))
-        if self.config['code_sha256'] != code_versions():
-            raise ValueError('执行代码与提交任务时不一致，请重新提交')
+        if self.config != self.task['_internal']['config_snapshot']:
+            raise ValueError('任务配置与提交时的配置快照不一致')
+        if self.config['service_version'] != VERSION:
+            raise ValueError('执行服务版本与提交任务时不一致，请重新提交')
         self.begin = time.monotonic()-max(0.,time.time()-datetime.fromisoformat(self.task['started_at']).timestamp())
         self.last_progress = 0.
         torch.set_num_threads(self.config['threads'])
@@ -112,16 +112,16 @@ class Worker:
                                   replay_lrs=cfg['schedule'],verbose=True,callback=self.callback)
         self.check()
         audit = dict(started_at=self.task['started_at'],finished_at=now(),elapsed_seconds=time.monotonic()-self.begin,
-            seed=cfg['seed'],device=str(self.device),data_sha256=cfg['data_sha256'],
+            seed=cfg['seed'],device=str(self.device),data_version=cfg['data_version'],
             training_cutoff_month=cfg['split']['training_cutoff'],selection_cutoff_month=cfg['selection_cutoff'],
             epochs=len(history),input_layout=cfg['layout'],parameters=cfg['parameters'],configuration=cfg,
-            model_code_sha256=cfg['code_sha256']['model.py'])
+            service_version=VERSION)
         saved = package_checkpoint(checkpoint(model,cfg['layout'],cfg['parameters'],prep,cfg['seed'],cfg['schedule'],fit_end),
-                                   cfg['profile'],self.frame,cfg['data_sha256'],cfg['selection_cutoff'],audit)
+                                   cfg['profile'],self.frame,{'data_version':cfg['data_version']},cfg['selection_cutoff'],audit)
         checkpoint_path = self.folder/'best.pt'
+        version = cfg['profile']+'-'+self.task_id.removeprefix('train_')
+        saved['model_version'] = version
         save_checkpoint(checkpoint_path,saved)
-        weight_sha = digest(checkpoint_path)
-        version = cfg['profile']+'-'+weight_sha[:16]
         save_json(self.folder/'preprocessing.json',prep)
         save_json(self.folder/'training_audit.json',audit)
         csv(self.folder/'history.csv',history)
@@ -143,13 +143,13 @@ class Worker:
             csv(self.folder/'test_predictions.csv',public_rows)
         from .engine import evidence
         fixed_path = self.folder/'evaluation_predictions.csv' if rows else None
-        fixed_version = digest(fixed_path) if fixed_path else None
+        fixed_version = version+'-test' if fixed_path else None
         evaluation = dict(recent_backtest=evidence(None,cfg['split']['latest_observed_month'],20,True,
                 'same_parameters_features_rolling_refit_protocol',None),
             registered_model_test=evidence(pd.DataFrame(rows) if rows else None,cfg['split']['latest_observed_month'],20,True,
                 'registered_checkpoint_fixed_weight_holdout',fixed_version),
             interpretation='精度得分=100-MAPE（百分数）。本次为固定新权重留出测试；无保留标签时不生成测试指标。')
-        record = dict(model_version=version,profile=cfg['profile'],checkpoint=str(checkpoint_path),sha256=weight_sha,
+        record = dict(model_version=version,profile=cfg['profile'],checkpoint=str(checkpoint_path),
             saved={k:v for k,v in saved.items() if k!='model_state_dict'},registered_at=now(),source='training',
             training_id=self.task_id,tuning_id=cfg['tuning_id'],training_data_version=cfg['data_version'],
             reference_data_version=cfg['data_version'],evidence=None,fixed_predictions=str(fixed_path) if fixed_path else None,

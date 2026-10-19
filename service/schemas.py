@@ -15,7 +15,7 @@ class PredictRequest(PublicModel):
     model_config = ConfigDict(json_schema_extra={'examples':[{'profile':'selected'}]})
     profile: Profile | None = None
     model_version: str | None = Field(default=None, max_length=80)
-    data_version: str | None = Field(default=None, pattern=r'^data_[a-f0-9]{24}$')
+    data_version: str | None = Field(default=None, pattern=r'^data_(?:[a-f0-9]{24}|[a-f0-9]{32})$')
 
 
 class ActivateData(PublicModel):
@@ -33,7 +33,7 @@ class ActivateModel(PublicModel):
 class TrainingRequest(PublicModel):
     model_config = ConfigDict(json_schema_extra={'examples':[{'mode':'holdout'}]})
     profile: Profile | None = None
-    data_version: str | None = Field(default=None, pattern=r'^data_[a-f0-9]{24}$')
+    data_version: str | None = Field(default=None, pattern=r'^data_(?:[a-f0-9]{24}|[a-f0-9]{32})$')
     name: str | None = Field(default=None, max_length=100)
     mode: Literal['holdout','full_history','custom'] = 'holdout'
     holdout_months: int | None = Field(default=None, ge=3, le=2400, strict=True)
@@ -57,7 +57,7 @@ class TrainingRequest(PublicModel):
 class TuningRequest(PublicModel):
     model_config = ConfigDict(json_schema_extra={'examples':[{'profile':'selected'}]})
     profile: Profile = 'selected'
-    data_version: str | None = Field(default=None, pattern=r'^data_[a-f0-9]{24}$')
+    data_version: str | None = Field(default=None, pattern=r'^data_(?:[a-f0-9]{24}|[a-f0-9]{32})$')
     name: str | None = Field(default=None, max_length=100)
     preset: Literal['quick','standard','thorough'] = 'standard'
     split_mode: Literal['auto','custom'] = 'auto'
@@ -152,7 +152,6 @@ class ModelStatus(PublicModel):
     model_name: str
     service_version: str
     model_version: str
-    checkpoint_sha256: str
     profile: Profile
     device: str
     registered_at: str
@@ -164,7 +163,6 @@ class ModelStatus(PublicModel):
     latest_observed_month: str
     data_imported_at: str
     data_version: str
-    data_sha256: dict[str, str]
     historical_reference_matches: bool
     seq_len: int
     pred_len: int

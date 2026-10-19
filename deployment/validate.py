@@ -3,7 +3,6 @@ import argparse
 from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone, timedelta
-import hashlib
 import importlib.metadata
 import io
 import json
@@ -182,7 +181,7 @@ def main():
     work = Path(temporary_work.name)
     baseline = json.loads((ROOT/'manifest.json').read_text(encoding='utf-8'))['files']
     protected = [name for name in baseline if not (ROOT/name).resolve().is_relative_to(output)]
-    before = {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in protected}
+    before = {name: (ROOT/name).read_bytes() for name in protected}
     print('VALIDATION_START '+str(output), flush=True)
     tests = subprocess.run([sys.executable, '-B', '-m', 'unittest', 'discover', '-s', 'tests', '-p', 'test_*.py', '-v'],
         cwd=ROOT, capture_output=True, text=True, encoding='utf-8', timeout=180)
@@ -276,7 +275,7 @@ def main():
             stop(process)
             stream.flush()
             shutil.copyfile(work/'server.log',output/'server.log')
-    after = {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in protected}
+    after = {name: (ROOT/name).read_bytes() for name in protected}
     assert before == after
     temporary_work.cleanup()
     versions = {name: importlib.metadata.version(name) for name in
@@ -314,7 +313,7 @@ def main():
         f'- 顺序请求{len(sequential)}次：P50={report["repeated_calls"]["p50_ms"]:.2f}ms，P95={report["repeated_calls"]["p95_ms"]:.2f}ms。',
         f'- 并发{args.concurrency}、请求{len(parallel)}次：P50={report["concurrent_calls"]["p50_ms"]:.2f}ms，P95={report["concurrent_calls"]["p95_ms"]:.2f}ms；失败0次。',
         f'- 首次就绪{startup_seconds:.2f}s，重启就绪{restart_seconds:.2f}s；本脚本创建的服务进程均已停止。',
-        f'- 运行前后核对{len(before)}个交付保护文件哈希，均未变化。', '',
+        f'- 运行前后直接比较{len(before)}个交付保护文件内容，均未变化。', '',
         '接口默认权重训练截至2024-07，样例数据截至2026-05，预测2026-06至2026-08；本次未将内存中训练过的其他权重作为上线权重。', '',
         '响应样例见all_response.json、selected_response.json，价格和区间明细见对应CSV，OpenAPI结构见openapi.json，机器可读记录见report.json。耗时为本机小规模试运行观测，不能作为甲方环境SLA。', '',
         '待甲方实施：', '']+['- '+item for item in report['pending']]+['']

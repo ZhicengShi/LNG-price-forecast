@@ -6,9 +6,10 @@ import pandas as pd
 import yaml
 from datasets import read_frame
 from joint_emaformer.data import REGIONS, build_frame
-from joint_emaformer._runtime import validate_parameters, digest
+from joint_emaformer._runtime import validate_parameters
 from joint_emaformer._search import candidates
 from .errors import APIError, issue
+from . import VERSION
 
 HERE = Path(__file__).resolve().parents[1]/'joint_emaformer'
 
@@ -38,14 +39,6 @@ def frames_for(engine, data_version):
     if first > latest:
         invalid('数据不包含可用训练历史')
     return metadata, {r: f.loc[first:latest].copy() for r,f in sources.items()}, first, latest
-
-
-def code_versions():
-    result = {name:digest(HERE/name) for name in ('model.py','_emaformer.py','_emaformer_layers.py',
-        'data.py','_training.py','_search.py','_runtime.py')}
-    for name in ('planning.py','worker.py'):
-        result['service/'+name] = digest(Path(__file__).resolve().parent/name)
-    return result
 
 
 def training_config(engine, request):
@@ -121,7 +114,7 @@ def training_config(engine, request):
         invalid('训练范围存在全空输入列，请检查变量方案或增加历史')
     return dict(kind='training',profile=profile,data_version=version,split=split,layout=layout,
         parameters=parameters,schedule=schedule,selection_cutoff=selection_end,features=features,
-        seed=cfg['training']['seed'],code_sha256=code_versions(),data_sha256=metadata['sha256'],
+        seed=cfg['training']['seed'],service_version=VERSION,
         device=str(engine.device),threads=engine.settings['threads'],max_duration_minutes=None,
         tuning_id=request.tuning_id,mode=request.mode)
 
@@ -216,5 +209,5 @@ def tuning_config(engine, request):
                           validation_start=str(frame.index[cutoff]),validation_end=str(frame.index[last-1])))
     return dict(kind='tuning',profile=request.profile,data_version=version,split=split,layout=layout,
         settings=settings,candidates=plan,features=features,selection_cutoff=str(end),folds=folds,
-        code_sha256=code_versions(),data_sha256=metadata['sha256'],device=str(engine.device),threads=engine.settings['threads'],
+        service_version=VERSION,device=str(engine.device),threads=engine.settings['threads'],
         max_duration_minutes=request.max_duration_minutes or engine.settings['jobs']['max_duration_minutes'])

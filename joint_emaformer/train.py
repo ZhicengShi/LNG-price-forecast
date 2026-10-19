@@ -9,7 +9,7 @@ from joint_emaformer.data import PreparedData, windows
 from joint_emaformer._training import train, checkpoint, predict
 from joint_emaformer._runtime import (common_arguments, config_paths, read_config, configure, frame_for,
     cutoff_index, package_checkpoint, save_checkpoint, load_checkpoint, prediction_rows,
-    save_prediction_results, save, csv, run_directory, resolve_path, assert_versions, digest)
+    save_prediction_results, save, csv, run_directory, resolve_path)
 
 
 def main(argv=None):
@@ -44,13 +44,12 @@ def main(argv=None):
         schedule = cfg['training']['lr_schedule']
         model, prep, history = train(PreparedData(frame, layout, device), cfg['parameters'], fit_end, seed,
                                       replay_lrs=schedule, verbose=True)
-        assert_versions(shared, versions)
         audit = dict(started_at=started_at, finished_at=datetime.now(timezone.utc).isoformat(),
                      elapsed_seconds=perf_counter()-started, seed=seed, device=str(device),
-                     data_sha256=versions, training_cutoff_month=str(frame.index[fit_end-1]),
+                     data_sources=versions, training_cutoff_month=str(frame.index[fit_end-1]),
                      selection_cutoff_month=shared['period']['validation_end'],
                      epochs=len(history), input_layout=layout, parameters=cfg['parameters'],
-                     configuration=cfg, model_code_sha256=digest(Path(__file__).with_name('model.py')))
+                     configuration=cfg)
         saved = package_checkpoint(checkpoint(model, layout, cfg['parameters'], prep, seed, schedule, fit_end),
                                    cfg['profile'], frame, versions, shared['period']['validation_end'], audit)
         save_checkpoint(output/'best.pt', saved)

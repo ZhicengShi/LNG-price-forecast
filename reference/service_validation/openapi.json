@@ -400,10 +400,6 @@
             "type": "string",
             "title": "Model Version"
           },
-          "checkpoint_sha256": {
-            "type": "string",
-            "title": "Checkpoint Sha256"
-          },
           "profile": {
             "type": "string",
             "enum": [
@@ -459,13 +455,6 @@
             "type": "string",
             "title": "Data Version"
           },
-          "data_sha256": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "type": "object",
-            "title": "Data Sha256"
-          },
           "historical_reference_matches": {
             "type": "boolean",
             "title": "Historical Reference Matches"
@@ -495,7 +484,6 @@
           "model_name",
           "service_version",
           "model_version",
-          "checkpoint_sha256",
           "profile",
           "device",
           "registered_at",
@@ -507,7 +495,6 @@
           "latest_observed_month",
           "data_imported_at",
           "data_version",
-          "data_sha256",
           "historical_reference_matches",
           "seq_len",
           "pred_len",

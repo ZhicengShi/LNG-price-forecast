@@ -2,11 +2,11 @@
 from dataclasses import dataclass
 from pathlib import Path
 import re
-import hashlib
 import numpy as np
 import openpyxl
 import pandas as pd
 import yaml
+from provenance import source_info
 
 TARGET = "终端非居民天然气价格（分省）"
 
@@ -190,7 +190,6 @@ def prepare_data(cfg, region, profile):
     if region not in REGIONS or profile not in ('all', 'selected'):
         raise ValueError('地区或变量方案无效')
     path = cfg['data'][region]
-    before = hashlib.sha256(path.read_bytes()).hexdigest()
     full = read_frame(path)
     settings = cfg['period']
     for key in ['start', 'train_end', 'validation_end', 'test_end']:
@@ -226,12 +225,10 @@ def prepare_data(cfg, region, profile):
     bounds = dict(train=[0, fit_end], val=[fit_end, validation_end], test=[validation_end, len(frame)])
     partitions = [LNGDataset(x, y, frame.index, names, a, b, seq, horizon) for a, b in bounds.values()]
     data = DatasetBundle(*partitions, x_scaler, y_scaler, dropped)
-    if before != hashlib.sha256(path.read_bytes()).hexdigest():
-        raise ValueError('读取期间数据文件发生变化，请重试')
     metadata = dict(region=region, feature_mode=profile, features=names, dropped_features=list(dropped),
         missing=missing, medians=medians.to_dict(),
         x_scaler=dict(mean=x_scaler.mean.tolist(), scale=x_scaler.scale.tolist()),
         y_scaler=dict(mean=y_scaler.mean.tolist(), scale=y_scaler.scale.tolist()),
         first_month=str(frame.index[0]), bounds=bounds, training_cutoff_month=str(train_end),
-        split_end_months=dict(val=str(val_end), test=str(test_end)), data_sha256=before)
+        split_end_months=dict(val=str(val_end), test=str(test_end)), data_source=source_info(path))
     return data, frame, metadata

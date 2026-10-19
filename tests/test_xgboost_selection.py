@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT/'xgboost'))
 from datasets import TARGET, load_global, read_frame
-from selection import analyze, digest, export_results, load_settings, selection_input, windows
+from selection import analyze, export_results, load_settings, selection_input, windows
 
 
 class XGBoostSelectionTests(unittest.TestCase):
@@ -59,7 +59,7 @@ class XGBoostSelectionTests(unittest.TestCase):
         args.folds, args.fold_months, args.permutation_repeats = 2, 12, 2
         args.greedy_pool, args.greedy_max, args.seeds = 2, 2, [42]
         args.parameter_sets = {'depth2': dict(n_estimators=3, max_depth=2, learning_rate=.03)}
-        before = digest(ROOT/'config.yaml')
+        before = (ROOT/'config.yaml').read_bytes()
         with contextlib.redirect_stdout(io.StringIO()):
             result = analyze('shanghai', shared, settings, args)
         self.assertFalse(result['selection_uses_test'])
@@ -87,7 +87,7 @@ class XGBoostSelectionTests(unittest.TestCase):
                     self.assertAlmostEqual(values['平均精度得分（%）'], 100-float(np.mean(monthly)))
             finally:
                 book.close()
-        self.assertEqual(before, digest(ROOT/'config.yaml'))
+        self.assertEqual(before, (ROOT/'config.yaml').read_bytes())
 
 
 if __name__ == '__main__':

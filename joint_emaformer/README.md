@@ -29,7 +29,7 @@ python -B joint_emaformer/train.py --config joint_emaformer/configs/all.yaml
 
 默认分别运行全变量和组合变量。训练采用AdamW、MAPE损失，24轮、batch=64、梯度裁剪0.5，学习率0.00013681810651684312。参数在configs/all.yaml和selected.yaml内；training.lr_schedule=null时，根据parameters.lr和training.epochs生成固定学习率。显式填写列表时按列表重放，用于复现搜索确定的变动学习率轨迹。--epochs可覆盖轮数；--seed、--device、--data-config、--output-dir可覆盖运行设置。
 
-配套权重训练截至2024-07（115个月），参数选择也截至该月；测试为2024-08至2026-05，每地区20个起点、每个预测步20组、三步合计60组。训练输出保存best.pt、配置、预处理参数、训练日志、训练时间、数据哈希、逐条测试预测和分月指标。结果位于outputs/train，运行不覆盖weights中的配套权重。
+配套权重训练截至2024-07（115个月），参数选择也截至该月；测试为2024-08至2026-05，每地区20个起点、每个预测步20组、三步合计60组。训练输出保存best.pt、配置、预处理参数、训练日志、训练时间、来源文件信息、逐条测试预测和分月指标。结果位于outputs/train，运行不覆盖weights中的配套权重。
 
 本目录融合模型与单区域模型的训练截止月份不同：单区域权重拟合截至2022-11并使用验证集选轮数，融合权重拟合截至2024-07。汇总表用于核对各自实验结果，解释模型差异时需同时说明训练协议。
 
@@ -44,7 +44,7 @@ python -B joint_emaformer/predict.py --profile selected --mode future
 python -B joint_emaformer/predict.py --checkpoint joint_emaformer/outputs/train/实际运行目录/selected/best.pt --mode future
 ```
 
-默认加载weights/all.pt和selected.pt复现测试。指定checkpoint后，方案、模型结构、变量顺序和预处理均由权重读取；可用--data-config指定更新的数据配置。历史测试要求数据SHA256与权重一致。future允许更新或追加完整已观测历史，使用保存的预处理，不重新拟合；最近观测月不能早于训练或参数选择截止月。
+默认加载weights/all.pt和selected.pt复现测试。指定checkpoint后，方案、模型结构、变量顺序和预处理均由权重读取；可用--data-config指定更新的数据配置。复现原指标请使用配套处理后表，程序检查时间范围与变量布局，verify.py核对预测与参考数值。future允许更新或追加完整已观测历史，使用保存的预处理，不重新拟合；最近观测月不能早于训练或参数选择截止月。
 
 当前三表截至2026-05，future输出2026-06至2026-08，每方案9行，包含地区、月份、预测步、价格、model_training_cutoff和latest_observed_month。未来实际值未知，future输出价格与元数据。模型更新通过train.py重新训练。
 
@@ -177,7 +177,7 @@ configs/search.yaml设置初始候选、搜索空间、搜索种子和复核范�
 
 最终轮数取最后一折三个最佳轮数的中位数，并冻结其学习率轨迹。最终配置写入搜索输出下各方案的final_config.yaml，可以传给train.py训练；预测新训练权重时指定实际best.pt。搜索结果包括完整候选、逐轮验证结果及复核记录。全变量和组合变量分别搜索，本次最终结构参数相同，输入布局和权重分别保存。
 
-run-dir支持恢复；恢复时核对配置、数据版本、设备和影响搜索的代码哈希。重新运行不会覆盖随包提供的最终配置或权重。
+run-dir支持恢复；恢复时核对配置、协议版本、设备与来源文件信息。不同协议版本应建立新运行目录，旧完成结果仍可查看。重新运行不会覆盖随包提供的最终配置或权重。
 
 ## 滚动回测
 

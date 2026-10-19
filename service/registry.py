@@ -8,7 +8,7 @@ import pandas as pd
 import yaml
 
 from datasets import read_frame, resolve_path
-from joint_emaformer._runtime import load_checkpoint, digest
+from joint_emaformer._runtime import load_checkpoint
 from joint_emaformer.analysis import as_arrays
 from joint_emaformer.data import REGIONS, TARGET
 from .storage import now
@@ -19,7 +19,6 @@ class RegisteredModel:
     model: object
     saved: dict
     version: str
-    sha256: str
     registered_at: str
     loaded_at: str
     fixed_test: pd.DataFrame | None
@@ -30,8 +29,6 @@ class RegisteredModel:
 
 def checked_table(spec, registry_path, profile, references):
     path = resolve_path(spec['predictions'], registry_path)
-    if digest(path) != spec['sha256']:
-        raise ValueError(f'{profile}评价或校准文件哈希不匹配')
     table = pd.read_csv(path)
     if set(table.profile) != {profile}:
         raise ValueError('评价证据的变量方案不匹配')
@@ -46,31 +43,32 @@ def checked_table(spec, registry_path, profile, references):
         actual = references[row.region].at[month, TARGET]
         if not np.isclose(actual, row.actual, rtol=0, atol=1e-12):
             raise ValueError('评价证据的真实值与参考数据不一致')
-    return table, spec['sha256']
+    return table, spec['version']
 
 
 def load_registry(path, device, store):
     path = Path(path).resolve()
     config = yaml.safe_load(path.read_text(encoding='utf-8'))
-    if config['registry_version'] != 1 or set(config['models']) != {'all', 'selected'}:
+    if config['registry_version'] != 2 or set(config['models']) != {'all', 'selected'}:
         raise ValueError('模型登记须包含all和selected两个方案')
     reference_paths = {r: resolve_path(config['reference_data'][r], path) for r in REGIONS}
-    reference_hashes = {r: digest(p) for r, p in reference_paths.items()}
     references = {r: read_frame(p) for r, p in reference_paths.items()}
     original = json.loads(resolve_path(config['reference_weights_index'], path).read_text(encoding='utf-8'))
     layouts = {item['profile']: item['input_layout'] for item in original}
     result = {}
     for profile, spec in config['models'].items():
         checkpoint = resolve_path(spec['checkpoint'], path)
-        actual_hash = digest(checkpoint)
-        if actual_hash != spec['sha256']:
-            raise ValueError(f'{profile}权重哈希不匹配')
+        version = spec['model_version']
+        if not isinstance(version,str) or not version.startswith(profile+'-') or len(version)>80:
+            raise ValueError('模型版本须以变量方案开头，且不超过80字符')
         model, saved = load_checkpoint(checkpoint, device)
         if saved['profile'] != profile:
             raise ValueError('模型登记的变量方案与权重不匹配')
+        if saved.get('model_version',version) != version:
+            raise ValueError('登记的模型版本与权重记录不一致，请使用配套版本编号')
         fixed = backtest = fixed_version = backtest_version = None
         if spec.get('fixed_test'):
-            if spec['fixed_test']['checkpoint_sha256'] != actual_hash:
+            if spec['fixed_test']['model_version'] != version:
                 raise ValueError('固定权重测试证据属于其他权重；请移除旧证据或登记新证据')
             fixed, fixed_version = checked_table(spec['fixed_test'], path, profile, references)
             if (fixed.history_cutoff < saved['training_cutoff_month']).any():
@@ -79,14 +77,15 @@ def load_registry(path, device, store):
             evidence = spec['backtest']
             protocol = json.loads(resolve_path(evidence['protocol'], path).read_text(encoding='utf-8'))
             model_config = json.loads(resolve_path(evidence['model_config'], path).read_text(encoding='utf-8'))
-            if (protocol['data_sha256'] != reference_hashes or saved['layout'] != layouts[profile]
+            if (protocol['first_month'] != saved['layout']['first_month']
+                    or protocol['selection_cutoff_month'] != saved['selection_cutoff_month']
+                    or saved['layout'] != layouts[profile]
                     or saved['parameters'] != model_config['parameters']
                     or saved['epochs'] != model_config['training']['epochs']
                     or saved['lr_schedule'] != model_config['training']['lr_schedule']):
                 raise ValueError('回测校准协议与当前模型的结构、变量布局或训练计划不一致')
             backtest, backtest_version = checked_table(evidence, path, profile, references)
-        version = profile+'-'+actual_hash[:16]
-        registered_at = store.register_model(version, dict(profile=profile, checkpoint_sha256=actual_hash))
-        result[profile] = RegisteredModel(model, saved, version, actual_hash, registered_at, now(),
+        registered_at = store.register_model(version, dict(profile=profile, checkpoint=str(checkpoint)))
+        result[profile] = RegisteredModel(model, saved, version, registered_at, now(),
                                           fixed, backtest, fixed_version, backtest_version)
     return result, references, reference_paths

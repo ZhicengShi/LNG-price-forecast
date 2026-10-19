@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "scope": "small_budget_cli_protocol_validation",
+  "tuning_candidates": 1,
+  "tuning_epochs": 1,
+  "backtest_origins_per_profile": 1,
+  "tuning_resume_passed": true,
+  "backtest_resume_passed": true,
+  "commands": [
+    {
+      "command": [
+        "joint_emaformer/tune.py",
+        "--config",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\search.yaml",
+        "--device",
+        "cpu",
+        "--run-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\search"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
+        "joint_emaformer/tune.py",
+        "--config",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\search.yaml",
+        "--device",
+        "cpu",
+        "--run-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\search"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
+        "joint_emaformer/backtest.py",
+        "--config",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\backtest.yaml",
+        "--device",
+        "cpu",
+        "--run-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\backtest",
+        "--start",
+        "2026-03",
+        "--end",
+        "2026-03"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
+        "joint_emaformer/backtest.py",
+        "--config",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\backtest.yaml",
+        "--device",
+        "cpu",
+        "--run-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\backtest",
+        "--start",
+        "2026-03",
+        "--end",
+        "2026-03"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
+        "joint_emaformer/train.py",
+        "--config",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\selected.yaml",
+        "--device",
+        "cpu",
+        "--output-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\training"
+      ],
+      "passed": true
+    },
+    {
+      "command": [
+        "joint_emaformer/predict.py",
+        "--checkpoint",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\training\\train_20261019_0928\\selected\\best.pt",
+        "--mode",
+        "test",
+        "--device",
+        "cpu",
+        "--output-dir",
+        "D:\\LNGPre\\experiment_reproduction\\outputs\\remove_file_checks_work\\cli\\prediction"
+      ],
+      "passed": true
+    }
+  ]
+}

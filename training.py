@@ -6,6 +6,7 @@ import random
 import shutil
 import sys
 from time import perf_counter
+from uuid import uuid4
 
 import numpy as np
 import pandas as pd
@@ -15,7 +16,7 @@ from tqdm.auto import tqdm
 
 from datasets import TARGET, prepare_data
 from metrics import metric_row
-from runtime import (load_settings, device_for, get_model_class, run_directory, digest,
+from runtime import (load_settings, device_for, get_model_class, run_directory,
                      forward, evaluate, save_evaluation, save_json)
 
 
@@ -98,15 +99,15 @@ def train_one(name, global_cfg, model_cfg, runtime, params, region, profile, out
     source = global_cfg['data'][region]
     started_at = datetime.now(timezone.utc).isoformat()
     started = perf_counter()
+    model_version = name.lower()+'-'+region+'-'+profile+'-'+uuid4().hex
     def save_best(epoch, score):
         saved = dict(format_version='single_region_v1', model_state_dict={k: v.detach().cpu() for k, v in model.state_dict().items()},
-                     config=cfg, best_epoch=epoch, val_MAPE_percent=score, data_sha256=base['data_sha256'])
+                     config=cfg, best_epoch=epoch, val_MAPE_percent=score, data_source=base['data_source'],
+                     model_version=model_version)
         torch.save(saved, output/'best.pt')
     history = fit(model, data.train, data.val, cfg['y_scaler'], name, device, params, save_best)
-    if digest(source) != base['data_sha256']:
-        raise ValueError('训练期间源数据发生变化，请使用稳定数据版本重新运行')
     audit = dict(started_at=started_at, finished_at=datetime.now(timezone.utc).isoformat(),
-                 elapsed_seconds=perf_counter()-started, data_sha256=base['data_sha256'],
+                 elapsed_seconds=perf_counter()-started, data_source=base['data_source'],
                  training_cutoff=base['training_cutoff_month'], validation_cutoff=base['split_end_months']['val'],
                  seed=runtime['seed'], device=str(device), epochs_run=len(history),
                  input_features=list(data.feature_names), parameters=kwargs, training_parameters=cfg['training'])

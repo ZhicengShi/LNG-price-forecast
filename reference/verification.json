@@ -260,12 +260,7 @@
       "max_absolute_price_difference": 1.3322676295501878e-15,
       "price_tolerance": 1e-06,
       "training_cutoff": "2024-07",
-      "latest_target_month": "2026-05",
-      "data_sha256": {
-        "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
-        "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
-        "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
-      }
+      "latest_target_month": "2026-05"
     },
     {
       "profile": "selected",
@@ -273,12 +268,7 @@
       "max_absolute_price_difference": 1.3322676295501878e-15,
       "price_tolerance": 1e-06,
       "training_cutoff": "2024-07",
-      "latest_target_month": "2026-05",
-      "data_sha256": {
-        "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
-        "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
-        "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
-      }
+      "latest_target_month": "2026-05"
     }
   ],
   "manifest_files": 147

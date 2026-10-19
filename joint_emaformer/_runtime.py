@@ -2,10 +2,10 @@
 import argparse
 from copy import deepcopy
 from datetime import datetime, timezone
-import hashlib
 import json
 from pathlib import Path
 import time
+from uuid import uuid4
 
 import numpy as np
 import pandas as pd
@@ -16,14 +16,11 @@ from datasets import load_global, read_frame, resolve_path
 from metrics import metric_row, report
 from .data import REGIONS, NAMES, build_frame
 from .model import JointEMAformer
+from provenance import source_info, without_file_checks
 
 HERE = Path(__file__).resolve().parent
 MODEL_NAME = '三地区融合EMAformer'
 FORMAT = 'joint_emaformer_v1'
-
-
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def load(path):
@@ -165,7 +162,7 @@ def read_sources(shared, end=None):
     frames, versions = {}, {}
     for region in REGIONS:
         path = shared['data'][region]
-        versions[region] = digest(path)
+        versions[region] = source_info(path)
         frame = read_frame(path)
         first = pd.Period(shared['period']['start'], freq='M')
         last = pd.Period(end, freq='M') if end is not None else frame.index[-1]
@@ -173,16 +170,9 @@ def read_sources(shared, end=None):
         if not len(months) or not months.isin(frame.index).all():
             raise ValueError('数据须覆盖配置的完整月份')
         frames[region] = frame.loc[months].copy()
-        if digest(path) != versions[region]:
-            raise ValueError('读取期间源数据发生变化')
     if any(not frames[REGIONS[0]].index.equals(frames[r].index) for r in REGIONS):
         raise ValueError('三地区可用历史月份须严格一致')
     return frames, versions
-
-
-def assert_versions(shared, versions):
-    if any(digest(shared['data'][r]) != versions[r] for r in REGIONS):
-        raise ValueError('运行期间源数据发生变化')
 
 
 def frame_for(shared, profile, end=None, layout=None):
@@ -206,7 +196,8 @@ def cutoff_index(frame, month):
 def package_checkpoint(base, profile, frame, versions, selection_end, audit=None):
     saved = deepcopy(base)
     saved.update(format_version=FORMAT, architecture='three_region_emaformer_v1', profile=profile,
-                 data_sha256=versions, training_cutoff_month=str(frame.index[saved['fit_end']-1]),
+                 model_version=profile+'-'+uuid4().hex,
+                 data_sources=versions, training_cutoff_month=str(frame.index[saved['fit_end']-1]),
                  selection_cutoff_month=str(selection_end), price_unit='元/立方米')
     if audit is not None:
         saved['training_audit'] = audit
@@ -214,7 +205,7 @@ def package_checkpoint(base, profile, frame, versions, selection_end, audit=None
 
 
 def load_checkpoint(path, device):
-    saved = torch.load(path, map_location='cpu', weights_only=True)
+    saved = without_file_checks(torch.load(path, map_location='cpu', weights_only=True))
     if saved.get('format_version') != FORMAT or saved['layout']['regions'] != list(REGIONS):
         raise ValueError('权重格式无效，须使用本目录的三地区配套权重')
     model = JointEMAformer(saved['layout'], saved['parameters']).to(device)

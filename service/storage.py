@@ -1,22 +1,18 @@
-"""服务独立存储：内容寻址的数据版本、原子结果及追加事件日志。"""
+"""服务独立存储：独立数据版本、原子结果及追加事件日志。"""
 from datetime import datetime, timezone
-import hashlib
 import json
 from pathlib import Path
 import re
 import shutil
 import threading
 from uuid import uuid4
+from provenance import without_file_checks, normalise_evidence_versions
 
 REGIONS = ('shanghai', 'zhejiang', 'jiangsu')
 
 
 def now():
     return datetime.now(timezone.utc).isoformat()
-
-
-def sha(payload):
-    return hashlib.sha256(payload).hexdigest()
 
 
 def save_json(path, value):
@@ -42,22 +38,24 @@ class Store:
     def register_model(self, version, metadata):
         with self.lock:
             path = self.root/'models.json'
-            records = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+            records = without_file_checks(json.loads(path.read_text(encoding='utf-8'))) if path.exists() else {}
             if version not in records:
                 records[version] = dict(registered_at=now(), **metadata)
                 save_json(path, records)
             return records[version]['registered_at']
 
     def capture_data(self, payloads, validator, **extra):
-        hashes = {r: sha(payloads[r]) for r in REGIONS}
-        version = 'data_'+sha(json.dumps(hashes, sort_keys=True).encode())[:24]
         with self.lock:
+            # 重复上传直接比较三份文件内容，不依赖任何摘要算法。
+            for directory in sorted((self.root/'data_versions').glob('data_*')):
+                if not (directory/'metadata.json').is_file():
+                    continue
+                if all((directory/(r+'.xlsx')).is_file() and (directory/(r+'.xlsx')).stat().st_size == len(payloads[r]) and
+                       (directory/(r+'.xlsx')).read_bytes() == payloads[r] for r in REGIONS):
+                    metadata, _ = self.data(directory.name)
+                    return metadata
+            version = 'data_'+uuid4().hex
             final = self.root/'data_versions'/version
-            if final.exists():
-                metadata, paths = self.data(version)
-                if metadata['sha256'] != hashes:
-                    raise ValueError('数据版本冲突')
-                return metadata
             staging = self.root/'data_versions'/('_pending_'+uuid4().hex)
             staging.mkdir()
             try:
@@ -66,7 +64,7 @@ class Store:
                     paths[region] = staging/(region+'.xlsx')
                     paths[region].write_bytes(payloads[region])
                 summary = validator(paths)
-                metadata = dict(data_version=version, imported_at=now(), sha256=hashes, **summary, **extra)
+                metadata = dict(data_version=version, imported_at=now(), **summary, **extra)
                 save_json(staging/'metadata.json', metadata)
                 staging.rename(final)
                 self.event('data_registered', data_version=version, latest_observed_month=metadata['latest_observed_month'])
@@ -79,15 +77,18 @@ class Store:
                     shutil.rmtree(staging)
 
     def data(self, version):
-        if not re.fullmatch(r'data_[a-f0-9]{24}', version):
+        if not re.fullmatch(r'data_(?:[a-f0-9]{24}|[a-f0-9]{32})', version):
             raise KeyError('数据版本编号无效')
         directory = self.root/'data_versions'/version
         if not (directory/'metadata.json').is_file():
             raise KeyError('数据版本不存在')
-        metadata = json.loads((directory/'metadata.json').read_text(encoding='utf-8'))
+        original = json.loads((directory/'metadata.json').read_text(encoding='utf-8'))
+        metadata = without_file_checks(original)
+        if metadata != original:
+            save_json(directory/'metadata.json',metadata)
         paths = {r: directory/(r+'.xlsx') for r in REGIONS}
-        if any(sha(paths[r].read_bytes()) != metadata['sha256'][r] for r in REGIONS):
-            raise ValueError('已登记的数据快照被修改，请检查服务运行目录')
+        if any(not path.is_file() for path in paths.values()):
+            raise ValueError('已登记的数据表不存在，请检查服务运行目录')
         return metadata, paths
 
     def save_prediction(self, response):
@@ -103,9 +104,12 @@ class Store:
         path = self.root/'predictions'/version/'response.json'
         if not path.is_file():
             raise KeyError('预测记录不存在')
-        result = json.loads(path.read_text(encoding='utf-8'))
+        original = json.loads(path.read_text(encoding='utf-8'))
+        result = normalise_evidence_versions(without_file_checks(original))
         # 保留既有预测文件，查询时只将旧的只读字段名转换为当前名称。
         status = result['model_status']
         if 'dataset_id' in status:
             status['data_version'] = status.pop('dataset_id')
+        if result != original:
+            save_json(path,result)
         return result

@@ -12,7 +12,7 @@ from joint_emaformer.data import windows, fill_history, REGIONS
 from joint_emaformer._training import predict
 from joint_emaformer._runtime import (HERE, common_arguments, config_paths, read_config, configure,
     frame_for, cutoff_index, load_checkpoint, prediction_rows, save_prediction_results, csv,
-    save, run_directory, resolve_path, assert_versions, digest)
+    save, run_directory, resolve_path)
 
 
 def forecast_future(model, frame, saved):
@@ -62,8 +62,6 @@ def main(argv=None):
         shared['period']['start'] = saved['layout']['first_month']
         frame, layout, versions = frame_for(shared, saved['profile'],
                 shared['period']['test_end'] if mode == 'test' else None, saved['layout'])
-        if mode == 'test' and versions != saved['data_sha256']:
-            raise ValueError('历史测试要求数据SHA256与配套权重一致；新数据请使用future或重新训练')
         base = cli.output_dir.resolve() if cli.output_dir else resolve_path(cfg['prediction']['output_dir'], path)
         if (base, mode) not in directories:
             directories[(base, mode)] = run_directory(base, mode)
@@ -79,11 +77,10 @@ def main(argv=None):
             forecast = predict(model, data, saved['preprocessing'])
             rows = prediction_rows(frame, data.starts, data.actual, forecast, saved['profile'], saved['training_cutoff_month'])
             save_prediction_results(output, rows)
-        assert_versions(shared, versions)
         save(output/'metadata.json', dict(model='三地区融合EMAformer', profile=saved['profile'],
              model_training_cutoff=saved['training_cutoff_month'], latest_observed_month=str(frame.index[-1]),
-             selection_cutoff=saved['selection_cutoff_month'], data_sha256=versions,
-             checkpoint_sha256=digest(checkpoint_path), price_unit='元/立方米', mode=mode))
+             selection_cutoff=saved['selection_cutoff_month'], data_sources=versions,
+             checkpoint_file=checkpoint_path.name, model_version=saved.get('model_version'), price_unit='元/立方米', mode=mode))
         print(f'PREDICT_COMPLETE profile={saved["profile"]} mode={mode} output={output}', flush=True)
 
 

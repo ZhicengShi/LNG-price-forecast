@@ -1,14 +1,14 @@
 # 三地区价格预测应用：数据上传、训练、调参与预测接口说明
 
-文档版本：2.0.0，2026-10-18。
+文档版本：3.0.0，2026-10-19。
 
-**本文说明服务2.0.0的22项业务操作，包括数据上传、自动调参、按推荐方案训练、模型版本选择和热切换。** Windows/Linux启动命令及快速调用见[启动与调用说明](README.md)，部署步骤见[部署说明](../deployment/README.md)。请求字段和当前接口结构也可通过运行服务的/docs和/openapi.json查看。第12.2节为前端接入建议。
+**本文说明服务3.0.0的22项业务操作，包括数据上传、自动调参、按推荐方案训练、模型版本选择和热切换。** Windows/Linux启动命令及快速调用见[启动与调用说明](README.md)，部署步骤见[部署说明](../deployment/README.md)。请求字段和当前接口结构也可通过运行服务的/docs和/openapi.json查看。第12.2节为前端接入建议。
 
 `/datasets`一次接收三地区处理后的XLSX表，形成不可变数据版本。在线业务模型为三地区融合EMAformer，一次联合处理上海、浙江、江苏；全变量和组合变量各有独立模型版本。LSTM、单区域EMAformer、MoFo保留各自命令行复现入口。
 
 ## 1. 使用流程
 
-页面建议提供“预测”“训练与检验”“调参”“历史记录”四个入口。用户通过下拉框选择数据和模型，不手填文件路径、SHA256、训练种子或记录编号。
+页面建议提供“预测”“训练与检验”“调参”“历史记录”四个入口。用户通过下拉框选择数据和模型，不手填文件路径、训练种子或记录编号。
 
 1. 下载样例，准备三地区**处理后的**XLSX表；一次上传三张表。
 2. 系统校验并保存数据版本，页面自动选中新版本。上传本身不覆盖原表、不改变全局默认数据。
@@ -47,9 +47,9 @@
 | 请求 | 除文件上传外使用`application/json`；POST预测和训练至少提交`{}`对象 |
 | 默认数据 | 由服务维护的当前默认数据版本；省略`data_version`时通常解析为它，引用tuning_id训练时优先沿用该调参任务绑定的数据版本；解析结果在接受任务时固定 |
 | 默认模型 | 每个变量方案各有一个默认模型。显式选版本不改变全局默认模型 |
-| 标识 | 数据版本用`data_`加24位小写十六进制；预测、训练、调参分别用`pred_`、`train_`、`tune_`加32位小写十六进制 |
+| 标识 | 新数据版本用`data_`加32位随机十六进制；预测、训练、调参分别用`pred_`、`train_`、`tune_`加32位随机十六进制；旧数据24位编号继续可用 |
 
-SHA256由服务自动计算，内部用于文件身份、证据绑定和模型版本生成。任何业务请求都不要求用户填写SHA256。权重版本沿用`方案-权重指纹前16位`；重复登记同一权重复用同一版本，训练任务编号仍各自保留。
+模型版本使用独立编号：随包模型为`all-bundled-v1`与`selected-bundled-v1`；API新训练为`变量方案-训练任务32位编号`，每次成功训练登记一个新版本。手工配置导入时填写与权重元数据一致的model_version和权重路径，并登记相应的评价证据版本。版本编号不从文件内容推导。
 
 数据、模型、训练任务、调参任务及预测记录列表一次返回符合查询条件的全部记录，默认按创建时间降序，同时间按编号降序。模型列表使用`models`数组，其余记录列表使用`items`数组；空列表正常返回200。
 
@@ -63,7 +63,7 @@ SHA256由服务自动计算，内部用于文件身份、证据绑定和模型�
 
 相同密钥和相同业务请求在设计保留期24小时内返回第一次操作结果，不重新训练或预测；同一密钥对应不同业务请求返回409。上传按三份文件内容及表单字段识别请求，不按multipart边界识别。第一次省略的默认数据、默认模型和配置一经解析，重试继续使用首次结果。保留期是服务策略，可由维护人员配置。
 
-响应统一带`X-Request-ID`用于日志查询。密钥和请求编号由前端、部署层处理；本服务不扩展账户、登录和角色管理接口。
+响应统一带`X-Request-ID`用于日志查询。
 
 ## 3. 接口总览与现状
 
@@ -94,7 +94,7 @@ SHA256由服务自动计算，内部用于文件身份、证据绑定和模型�
 | `GET /predictions/{prediction_id}` | 已实现 | 查询已保存完整响应 |
 | `GET /predictions/{prediction_id}/csv` | 已实现 | 下载已保存的价格及区间明细 |
 
-路径中的参数均必填，直接使用对应提交或列表接口返回的真实编号；页面自动传递。示例中的`data_111111111111111111111111`等仅是结构示意，不能当作现有服务器上的真实记录。
+路径中的参数均必填，直接使用对应提交或列表接口返回的真实编号；页面自动传递。示例中的`data_111111111111111111111111`等仅是结构示意，不是现有服务器上的真实记录。
 
 ## 4. 数据接口
 
@@ -178,7 +178,7 @@ SHA256由服务自动计算，内部用于文件身份、证据绑定和模型�
 
 上传检查包括单工作表、25列顺序及单位行、年月合法连续且不重复、三地月份严格一致、全国共同指标一致、数值有限、目标价格为正且无缺失。允许非目标字段存在空值；插补参数在后续各次训练历史内拟合。检查通过不代表适用于全部已有权重，也不代表取得有效精度或区间证据。
 
-校验失败返回422和具体Issue；文件过大返回413，格式不支持返回415。失败时不生成可选数据版本，不修改默认数据或原始三表。相同文件内容重新上传返回原有版本，用户不必自行算指纹。
+校验失败返回422和具体Issue；文件过大返回413，格式不支持返回415。失败时不生成可选数据版本，不修改默认数据或原始三表。服务直接比较三份文件的内容，相同内容重新上传返回原有版本。
 
 Linux调用示例，命令从项目根目录执行；`curl -F`自行生成boundary，不另写multipart的Content-Type：
 
@@ -246,7 +246,7 @@ ModelRecord包含[ModelStatus全部字段](#93-模型状态modelstatus)，并增
 | `source` | string | `bundled`随包、`configured`其他配置导入，或`training`接口训练生成 |
 | `training_id` | string或null | 产生该权重的训练任务；随包版本为null |
 | `tuning_id` | string或null | 参数来源调参任务；使用随包配置为null |
-| `training_data_version` | string或null | 实际拟合权重使用的数据版本；旧权重无该登记编号时为null，保留内部原始数据指纹 |
+| `training_data_version` | string或null | 实际拟合权重使用的数据版本；旧权重无该登记编号时为null，训练范围与来源记录继续保留 |
 | `is_default` | boolean | 是否为该方案当前默认权重 |
 | `load_state` | string | 模型在服务中的加载状态：`not_loaded`、`loading`、`ready`或`error`，各状态含义见下表 |
 | `parameters` | ModelParameters | 28项实际模型与训练设置，见调参字段表 |
@@ -265,7 +265,7 @@ ModelRecord包含[ModelStatus全部字段](#93-模型状态modelstatus)，并增
 
 登记是保存模型权重位置、版本、参数等信息；加载是实际读取权重，将模型放入内存或显存。登记成功后，模型可以处于`not_loaded`状态。例如登记10个模型版本时，可以只加载当前需要的版本，减少设备内存占用。选择尚未加载的版本进行预测时，服务先尝试加载；该过程使用已有权重，不会重新训练模型。加载失败时返回错误，不生成该次预测结果。
 
-模型版本身份及训练范围不随查询数据改变；`latest_observed_month`、`data_version`、`data_imported_at`、`data_sha256`和历史参考匹配状态描述本次查询选择的数据。模型列表不强制把全部权重都加载到GPU。
+模型版本身份及训练范围不随查询数据改变；`latest_observed_month`、`data_version`、`data_imported_at`和历史参考匹配状态描述本次查询选择的数据。模型列表不强制把全部权重都加载到GPU。
 
 ### 5.3 POST /models/{model_version}/activate
 
@@ -840,7 +840,7 @@ Intervals：
 | `method` | string | 当前采用matured_absolute_residual_order_statistic，即已成熟绝对误差的次序统计量 |
 | `confidence` | number | 名义水平，默认0.95，不是实测历史覆盖率 |
 | `calibration_basis` | string | 当前为same_parameters_features_rolling_refit_protocol，同结构、变量与训练计划的逐月重训参考 |
-| `calibration_version` | string或null | 校准证据文件内容指纹，服务自动计算；不是权重版本 |
+| `calibration_version` | string或null | 登记的校准证据版本编号，与模型版本分别记录 |
 | `min_residuals` | integer | 至少需要多少条已成熟误差，默认24 |
 | `residual_window` | integer | 最多使用最近多少条误差，默认24 |
 | `interpretation` | string | 区间口径及适用范围的文字说明 |
@@ -875,7 +875,6 @@ PriceInterval：
 | `model_name` | string | 三地区融合EMAformer |
 | `service_version` | string | 生成该状态的接口程序版本 |
 | `model_version` | string | 使用的权重版本 |
-| `checkpoint_sha256` | string | 系统自动计算的完整权重指纹，供追溯，不要求用户填写 |
 | `profile` | string | all或selected |
 | `device` | string | 本次服务选用的设备；仅登记未加载时表示计划推理设备 |
 | `registered_at` | string | 该权重版本首次登记时间 |
@@ -887,7 +886,6 @@ PriceInterval：
 | `latest_observed_month` | string | 本次选择的数据末月 |
 | `data_imported_at` | string | 这份数据内容版本首次导入时间 |
 | `data_version` | string | 本次实际使用的数据版本，未来可在请求中选择 |
-| `data_sha256` | object | shanghai、zhejiang、jiangsu三个键，各自为输入文件指纹字符串 |
 | `historical_reference_matches` | boolean | 与登记证据参考历史是否一致；不等同于能否执行点预测 |
 | `seq_len` | integer | 此权重历史窗口月数 |
 | `pred_len` | integer | 固定3 |
@@ -910,7 +908,7 @@ Evidence：
 | `available` | boolean | 此类历史指标是否可用 |
 | `reason` | string或null | 不可用原因；正常为null |
 | `basis` | string | 滚动重训为same_parameters_features_rolling_refit_protocol；固定权重测试为registered_checkpoint_fixed_weight_holdout |
-| `version` | string或null | 证据预测明细的内容指纹，系统生成 |
+| `version` | string或null | 登记的评价预测明细版本编号 |
 | `first_forecast_month` | string或null | 最早起点的第1个月目标月 |
 | `last_forecast_month` | string或null | 最后起点的第1个月目标月 |
 | `last_target_month` | string或null | 全部预测步中最晚目标月 |
@@ -1078,7 +1076,7 @@ outputs/service/
 
 使用Python标准库SQLite维护数据/模型登记、默认指针、任务队列和幂等关系，默认切换以事务提交；文件保存实际数据和结果。模型登记指向任务产生的持久权重。训练原始审计内部保留复现所需信息，公开请求和CSV不展示seed。
 
-上传产生新数据快照，不覆盖项目data目录、随包reference或旧快照。系统自动计算指纹和模型版本，用户不再手工填写models.yaml中的SHA256。models.yaml可保留为首次启动的随包模型引导配置，运行中模型和默认关系由登记库管理。
+上传产生新数据快照，不覆盖项目data目录、随包reference或旧快照。系统自动生成数据和训练模型的独立编号。models.yaml作为启动模型引导配置，填写独立model_version、权重路径及配套证据版本，运行中模型和默认关系由登记库管理。已登记文件按版本保留，替换权重应登记新版本。
 
 已经提交的任务、已登记模型及预测都绑定其具体数据/配置/代码来源。新上传、新训练或新默认版本不回写历史结果。取消、失败和超时保留任务及完成记录供排查，不删除用户原始数据或已成功模型。
 
@@ -1120,7 +1118,7 @@ outputs/service/
 - **上传依赖**：固定使用python-multipart==0.0.32，已写入部署依赖。[FastAPI文件上传说明](https://fastapi.tiangolo.com/tutorial/request-files/)
 - **后台计算**：训练/搜索采用单机持久任务队列加独立进程，初期不要求Redis或Celery；并发数及资源预算由维护人员设置。较重计算与轻量应用内后台任务的区别见[FastAPI后台任务说明](https://fastapi.tiangolo.com/tutorial/background-tasks/#caveat)。
 - **状态码**：202表示已接受、尚未完成；任务结果通过状态查询获取，语义见[HTTP 202规范](https://www.rfc-editor.org/rfc/rfc9110.html#name-202-accepted)。
-- **兼容性**：服务版本为2.0.0。预测成功响应保留六个顶层字段，CSV保留原12列；模型列表增加登记元数据，loaded_at允许null，错误体统一为第10节结构。旧预测文件读取时只转换旧字段名，不重算价格或覆盖原记录。
+- **兼容性**：服务版本为3.0.0。预测成功响应保留六个顶层字段，CSV保留原12列；model_status不再返回文件摘要。正常停止旧服务后启动新服务，旧数据、模型、预测及任务编号与默认关系保留；历史响应移除已停用字段并更新证据编号，价格和指标不重算。旧未完成任务标记interrupted并需重新提交，旧幂等缓存清空；升级后首次操作使用新的Idempotency-Key。旧数据24位编号继续可用。
 
 ### 12.5 实施后的验收项目
 

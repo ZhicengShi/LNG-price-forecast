@@ -1,6 +1,6 @@
 # 三地区天然气价格统一接口
 
-当前服务版本为2.0.0，支持数据上传、自动调参、按方案训练、多版本选择和模型热切换。全部22项业务操作、请求字段和返回字段见[完整接口说明](API_DESIGN_README.md)。本文件提供启动命令、常用接口及预测响应字段。
+当前服务版本为3.0.0，支持数据上传、自动调参、按方案训练、多版本选择和模型热切换。全部22项业务操作、请求字段和返回字段见[完整接口说明](API_DESIGN_README.md)。本文件提供启动命令、常用接口及预测响应字段。
 
 从experiment_reproduction目录执行。接口复用joint_emaformer中的模型、预处理及forecast_future计算，默认在CPU加载全变量、组合变量两份配套权重。每次请求选择一个方案，同时返回上海、浙江、江苏未来3个月，共9条预测。
 
@@ -211,7 +211,7 @@ POST /predictions与GET /predictions/{prediction_id}共用下面的JSON结构；
 | `method` | string | 计算方法标识。matured_absolute_residual_order_statistic表示对真实价格已取得的历史绝对误差排序，用误差阈值确定区间半宽。 |
 | `confidence` | number | 名义覆盖水平，当前为0.95，即95%；不是历史实测覆盖率。 |
 | `calibration_basis` | string | 校准来源口径。same_parameters_features_rolling_refit_protocol表示相同结构、变量及训练计划的逐月重训回测误差。 |
-| `calibration_version` | string或null | 校准历史预测明细文件的SHA256指纹，用于追溯证据文件；未登记该证据时为null。 |
+| `calibration_version` | string或null | 登记的校准证据版本编号；未登记该证据时为null。 |
 | `min_residuals` | integer | 计算区间所需的最少已成熟残差数，当前为24。 |
 | `residual_window` | integer | 最多选取的最近残差数量，当前为24。 |
 | `interpretation` | string | 区间含义的文字说明，可供页面直接展示。 |
@@ -256,7 +256,7 @@ evaluation.recent_backtest与evaluation.registered_model_test具有相同的字�
 | `available` | boolean | 这类历史评价是否可用；false时通常返回空regions数组。 |
 | `reason` | string或null | 评价不可用原因，例如没有登记证据、没有成熟完整起点或历史参考不匹配；正常可用时为null。 |
 | `basis` | string | 评价口径。same_parameters_features_rolling_refit_protocol为逐月重训协议；registered_checkpoint_fixed_weight_holdout为当前权重固定测试。 |
-| `version` | string或null | 该类历史预测明细文件的SHA256指纹；未登记证据时为null。 |
+| `version` | string或null | 登记的历史评价证据版本编号；未登记证据时为null。 |
 | `first_forecast_month` | string或null | 纳入评分的最早预测起点的第1个月目标月份。 |
 | `last_forecast_month` | string或null | 纳入评分的最后一个预测起点的第1个月目标月份。 |
 | `last_target_month` | string或null | 纳入评分的全部预测步中最晚的目标月份，通常比last_forecast_month晚2个月。 |
@@ -298,8 +298,7 @@ GET /models的models[]与预测响应model_status共用以下全部字段：
 | --- | --- | --- |
 | `model_name` | string | 模型名称，当前为三地区融合EMAformer。 |
 | `service_version` | string | 生成这份状态时的接口程序版本。 |
-| `model_version` | string | 权重版本标识，由方案与权重SHA256前16位组成；权重不变时版本不变。 |
-| `checkpoint_sha256` | string | 当前权重文件完整的SHA256指纹，用于核对模型文件。 |
+| `model_version` | string | 独立模型版本编号；随包模型如selected-bundled-v1，新训练为变量方案加训练任务的32位编号。 |
 | `profile` | string | 当前变量方案，all或selected。 |
 | `device` | string | 该次推理使用的实际设备，例如cpu或cuda。 |
 | `registered_at` | string | 该权重版本首次在当前服务存储目录登记的时间；保留存储目录时，重启后保持。 |
@@ -311,13 +310,12 @@ GET /models的models[]与预测响应model_status共用以下全部字段：
 | `latest_observed_month` | string | 本次输入处理表中的最新观测月份；未来三个目标月从其后开始。 |
 | `data_imported_at` | string | 该文件内容版本首次被服务读取、校验并登记的时间，不是原始数据发布日或数据所属月份。 |
 | `data_version` | string | 三地区文件内容共同确定的只读数据版本；可在预测、训练或调参请求中选择。 |
-| `data_sha256` | object | 三地区输入文件各自的完整SHA256指纹；键为shanghai、zhejiang、jiangsu，值均为字符串。 |
 | `historical_reference_matches` | boolean | 当前数据在校准、评价参考历史段内的数值是否一致；追加新月份可以保持true。false时旧区间与旧历史评价不可用，点预测仍可执行。 |
 | `seq_len` | integer | 模型每次读取的历史窗口月数，当前随包融合权重为6。 |
 | `pred_len` | integer | 每次直接输出的未来月数，当前为3。 |
 | `input_features` | object | 各地区实际输入字段及其顺序，包含历史目标价格；键为shanghai、zhejiang、jiangsu，值为字段名字符串数组。 |
 
-训练截止月份、最新观测月份描述数据范围，trained_at等时间戳描述实际执行或登记时间。原始训练执行时间缺失时保持null，不用文件修改时间补造。文件重新保存可能改变SHA256和data_version，historical_reference_matches则按参考月份内的数值核对。
+训练截止月份、最新观测月份描述数据范围，trained_at等时间戳描述实际执行或登记时间。原始训练执行时间缺失时保持null，不用文件修改时间补造。数据版本由data_加32位随机编号组成；相同三份文件内容重复上传复用已有版本，内容不同时生成新版本。historical_reference_matches按参考月份内的数值核对。
 
 ## 错误响应
 
@@ -365,7 +363,7 @@ GET /models的models[]与预测响应model_status共用以下全部字段：
 
 ## 自动文档入口
 
-/docs与/redoc返回HTML接口文档页面，不返回业务预测数据。/openapi.json返回机器可读的OpenAPI结构，主要包含：openapi（规范版本）、info（接口标题和版本）、paths（路径、请求方法及参数）、components（请求/响应类型定义和API密钥规则）。前面的业务字段表与当前代码的响应模型对应；完整可调用样例见[全变量响应](../reference/service_v2_validation/all_response.json)、[组合变量响应](../reference/service_v2_validation/selected_response.json)。示例文件中的prediction_id仅用于展示，应以自己实际POST返回的编号查询对应服务存储目录中的记录。
+/docs与/redoc返回HTML接口文档页面，不返回业务预测数据。/openapi.json返回机器可读的OpenAPI结构，主要包含：openapi（规范版本）、info（接口标题和版本）、paths（路径、请求方法及参数）、components（请求/响应类型定义和API密钥规则）。前面的业务字段表与当前代码的响应模型对应；完整可调用样例见[全变量响应](../reference/service_v3_validation/all_response.json)、[组合变量响应](../reference/service_v3_validation/selected_response.json)。示例文件中的prediction_id仅用于展示，应以自己实际POST返回的编号查询对应服务存储目录中的记录。
 
 ## 未来价格区间
 
@@ -373,7 +371,7 @@ GET /models的models[]与预测响应model_status共用以下全部字段：
 
 修改service/config.yaml后需重启服务，再通过POST /predictions生成新结果。已保存的预测记录保留生成时的区间设置，GET查询旧prediction_id不会重新计算。历史记录可能采用不同窗口，当前设置以实际响应中的residual_window为准；随包当前验证样例使用24条窗口。
 
-当前校准来源是随包相同变量布局、网络参数、训练轮数和学习率计划的逐月重训回测。服务会检查这些条件、证据文件SHA256、目标真实值及输入布局。它属于训练协议的历史误差参考，固定当前权重的未来覆盖率不作保证；早于2024-07选参截止月的回测起点是固定事后参数的回顾性评价。历史覆盖率按每个历史起点当时已成熟的残差逐点计算，并返回实际覆盖数量。这些价格区间与MAPE的Bootstrap置信区间不同。
+当前校准来源是随包相同变量布局、网络参数、训练轮数和学习率计划的逐月重训回测。服务会检查这些条件、目标真实值及输入布局。它属于训练协议的历史误差参考，固定当前权重的未来覆盖率不作保证；早于2024-07选参截止月的回测起点是固定事后参数的回顾性评价。历史覆盖率按每个历史起点当时已成熟的残差逐点计算，并返回实际覆盖数量。这些价格区间与MAPE的Bootstrap置信区间不同。
 
 历史参考段内的三表数值须与登记的参考数据一致，允许在其后追加新月份。若修改历史值，点预测仍可执行，旧区间和旧评价返回available=false及原因；应重新准备该数据版本对应的回测证据。校准样本不足或新权重没有匹配证据时，上下限为null，禁止用0或MAPE区间代替。实时新增预测先保留记录；其真实值成熟后的在线误差归集和周期性重新回测由运维流程执行，本版本不自动将在线结果混入随包历史校准表。
 
@@ -383,6 +381,12 @@ GET /models的models[]与预测响应model_status共用以下全部字段：
 
 service/config.yaml控制设备、线程、端口、存储位置、月份上限和区间设置，models.yaml登记权重与配套证据，内部路径按所属YAML解析。LNG_SERVICE_CONFIG指定其他服务配置，LNG_SERVICE_STORAGE可覆盖运行存储目录，LNG_SERVICE_DEVICE可覆盖设备。公开输出不暴露服务端文件路径。
 
-model_version由方案与权重SHA256前16位组成，权重不变时版本不变。API训练完成后自动计算并登记版本，无需用户填写路径或SHA256。GET /models列出全部版本，POST /predictions可以直接指定版本；POST /models/{model_version}/activate用于热切换默认模型。models.yaml保留为启动导入配置；新训练权重没有匹配回测时，返回点预测及版本信息，价格区间不可用，不能沿用其他结构或训练计划的旧证据。
+model_version为独立版本编号；API每次训练成功后登记一个新版本。GET /models列出全部版本，POST /predictions可以直接指定版本；POST /models/{model_version}/activate用于热切换默认模型。models.yaml保留为启动导入配置，填写model_version、权重路径及配套证据版本；替换权重应登记新版本，不覆盖已有版本文件。新训练权重没有匹配回测时，返回点预测及版本信息，价格区间不可用，不能沿用其他结构或训练计划的旧证据。
+
+### 升级与历史记录
+
+升级到3.0.0前先正常停止原服务，再启动新版本。首次启动保留旧数据、模型、预测、训练和调参记录的编号、默认关系与查询地址，移除旧文件摘要字段；旧预测价格和指标不重算。旧数据的24位编号仍可查询和选择，新数据生成32位编号。旧未完成任务标记为interrupted，需要重新提交；已完成结果继续保留。旧幂等缓存清空，升级后首次操作请使用新的Idempotency-Key。
+
+服务使用登记编号、时间范围、变量布局和保存的数据表追溯结果，不再核对文件摘要。已登记文件按版本保留，新增数据或权重应登记新版本。
 
 运行产物位于outputs/service：data_versions保存数据快照，trainings和tuning_jobs保存任务及模型产物，predictions保存完整预测，registry.sqlite3保存版本、任务、默认关系和幂等结果，logs/events.jsonl保存事件。相同文件内容复用首次数据版本；上传不会自动修改默认数据。启动时发现配置表变更只导入新版本，已持久化的默认关系保持，须显式选择或设为默认。按甲方数据管理要求备份整个运行目录；已有预测保留生成时的价格、区间和版本信息。

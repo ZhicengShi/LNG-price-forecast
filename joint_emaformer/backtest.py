@@ -13,9 +13,9 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from joint_emaformer.data import PreparedData, windows, REGIONS
 from joint_emaformer._training import train, predict, checkpoint
-from joint_emaformer._runtime import (HERE, common_arguments, load, save, csv, digest, configure, frame_for,
+from joint_emaformer._runtime import (HERE, common_arguments, load, save, csv, configure, frame_for,
     read_config, cutoff_index, package_checkpoint, save_checkpoint, prediction_rows, metrics_rows,
-    run_directory, resolve_path, assert_versions)
+    run_directory, resolve_path)
 from datasets import load_global
 
 
@@ -70,20 +70,18 @@ def main(argv=None):
         raise ValueError('起点范围不足以构造训练或未来3个月标签')
     origins = list(range(start, last+1))
     identity = dict(profiles=profiles, training_seeds=seeds, primary_seed=settings['primary_seed'],
-        parameters=configurations, data_sha256=inputs[profiles[0]][2],
+        parameters=configurations, data_sources=inputs[profiles[0]][2],
         first_month=str(frame.index[0]), initial_train_months=initial, origins=len(origins),
         origin_indices=origins, first_history_cutoff=str(frame.index[start-1]),
         last_history_cutoff=str(frame.index[last-1]), last_target_month=str(frame.index[last+2]),
         selection_cutoff_month=shared['period']['validation_end'], retrospective_earlier_origins=True,
-        device=str(device), torch_version=str(torch.__version__),
-        code_sha256={name: digest(HERE/name) for name in
-            ('model.py', '_emaformer.py', '_emaformer_layers.py', 'data.py', '_training.py', '_runtime.py', 'backtest.py')})
+        protocol_version=2, device=str(device), torch_version=str(torch.__version__))
     base = cli.output_dir.resolve() if cli.output_dir else resolve_path(settings['output_dir'], config_path)
     folder = cli.run_dir.resolve() if cli.run_dir else run_directory(base, 'backtest')
     folder.mkdir(parents=True, exist_ok=True)
     if (folder/'protocol.json').exists():
         if load(folder/'protocol.json') != identity:
-            raise ValueError('恢复回测时配置、代码、设备或数据版本发生变化')
+            raise ValueError('恢复回测时配置、协议、设备或源文件信息发生变化，请新建运行目录')
     else:
         save(folder/'protocol.json', identity)
     for profile in profiles:
@@ -129,7 +127,6 @@ def main(argv=None):
                                    f'cutoff={frame.index[t-1]}', file=sys.stderr)
             assert len(records) == len(origins)*9
             csv(output/'metrics.csv', metrics_rows(records))
-            assert_versions(shared, versions)
     print(f'BACKTEST_COMPLETE output={folder}', flush=True)
 
 

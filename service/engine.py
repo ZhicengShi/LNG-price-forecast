@@ -1,7 +1,6 @@
 """复用正式预测计算，组合价格、区间、历史评价及版本信息。"""
 from copy import deepcopy
 from dataclasses import replace
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -14,7 +13,7 @@ import pandas as pd
 import yaml
 
 from datasets import load_global, read_frame, resolve_path
-from joint_emaformer._runtime import configure, digest, load_checkpoint
+from joint_emaformer._runtime import configure, load_checkpoint
 from joint_emaformer.data import REGIONS, NAMES, build_frame
 from joint_emaformer.predict import forecast_future
 from . import VERSION
@@ -25,6 +24,7 @@ from .storage import Store, now
 from .catalog import Catalog
 from .errors import APIError, issue
 from .uploads import template_units, validate_tables
+from provenance import without_file_checks
 
 HERE = Path(__file__).resolve().parent
 
@@ -119,6 +119,9 @@ class Engine:
     def __init__(self, settings):
         self.settings = settings
         self.store = Store(settings['storage_dir'])
+        self.catalog = Catalog(self.store.root)
+        from .migration import migrate_history
+        migrate_history(self.store,self.catalog)
         self.shared = load_global(settings['data_config'])
         runtime = deepcopy(self.shared)
         runtime['runtime'].update(device=settings['device'], threads=settings['threads'])
@@ -126,7 +129,6 @@ class Engine:
         self.lock = threading.RLock()
         self.models, self.references, self.reference_paths = load_registry(settings['model_registry'], self.device, self.store)
         self.units = template_units(self.reference_paths)
-        self.catalog = Catalog(self.store.root)
         self.cache = {model.version:model for model in self.models.values()}
         self.load_errors = {}
         self.loading = set()
@@ -138,7 +140,7 @@ class Engine:
             checkpoint_path = resolve_path(spec['checkpoint'],settings['model_registry'])
             bundled = checkpoint_path == (HERE.parent/'joint_emaformer/weights'/f'{profile}.pt').resolve()
             record = dict(model_version=model.version,profile=profile,saved=saved,
-                checkpoint=str(checkpoint_path),sha256=model.sha256,registered_at=model.registered_at,
+                checkpoint=str(checkpoint_path),registered_at=model.registered_at,
                 source='bundled' if bundled else 'configured',training_id=None,tuning_id=None,
                 training_data_version=None,reference_data_version=None,
                 evidence_specs=deepcopy(spec),registry_path=str(settings['model_registry']),
@@ -237,12 +239,12 @@ class Engine:
         trained_at = audit.get('finished_at') or audit.get('started_at')
         schema = saved['layout']['input_schema']
         return dict(model_name='三地区融合EMAformer', service_version=VERSION, model_version=record['model_version'],
-            checkpoint_sha256=record['sha256'], profile=profile, device=str(self.device),
+            profile=profile, device=str(self.device),
             registered_at=record['registered_at'], loaded_at=model.loaded_at if model else None, trained_at=trained_at,
             training_time_status='recorded' if trained_at else 'not_recorded',
             model_training_cutoff=saved['training_cutoff_month'], parameter_selection_cutoff=saved['selection_cutoff_month'],
             latest_observed_month=metadata['latest_observed_month'], data_imported_at=metadata['imported_at'],
-            data_version=metadata['data_version'], data_sha256=metadata['sha256'], historical_reference_matches=matches,
+            data_version=metadata['data_version'], historical_reference_matches=matches,
             seq_len=saved['parameters']['seq_len'], pred_len=3,
             input_features={r: schema['common']+schema[r] for r in REGIONS})
 
@@ -293,11 +295,12 @@ class Engine:
             record = self.catalog.get('model',version)
             self.loading.add(version)
             try:
-                if digest(Path(record['checkpoint'])) != record['sha256']:
-                    raise ValueError('权重指纹不一致')
                 model,saved = load_checkpoint(record['checkpoint'],self.device)
                 if saved['layout'] != record['saved']['layout'] or saved['profile'] != record['profile']:
                     raise ValueError('权重布局与登记不一致')
+                for key in ('parameters','preprocessing','epochs','lr_schedule','training_cutoff_month','selection_cutoff_month'):
+                    if saved[key] != record['saved'][key]:
+                        raise ValueError('权重配置、预处理或训练范围与登记不一致，请登记新版本')
                 # 配套证据只在登记已通过验证的范围内读取。
                 fixed = backtest = None
                 fixed_version = backtest_version = None
@@ -305,11 +308,9 @@ class Engine:
                     fixed,backtest,fixed_version,backtest_version = self.model_evidence(record)
                 elif record.get('fixed_predictions'):
                     fixed_path = Path(record['fixed_predictions'])
-                    if digest(fixed_path) != record['fixed_version']:
-                        raise ValueError('固定权重评价记录被修改')
                     fixed,fixed_version = pd.read_csv(fixed_path),record['fixed_version']
                 from .registry import RegisteredModel
-                result = RegisteredModel(model,saved,version,record['sha256'],record['registered_at'],now(),
+                result = RegisteredModel(model,saved,version,record['registered_at'],now(),
                                          fixed,backtest,fixed_version,backtest_version)
                 self.cache[version] = result
                 while len(self.cache) > self.settings['max_loaded_models']:
@@ -391,8 +392,6 @@ class Engine:
         elif record.get('evidence')=='bootstrap':
             fixed,backtest,fixed_version,backtest_version = self.model_evidence(record)
         elif record.get('fixed_predictions'):
-            if digest(Path(record['fixed_predictions'])) != record['fixed_version']:
-                raise APIError(422,'INVALID_DATA','已登记的固定权重评价被修改')
             fixed,fixed_version = pd.read_csv(record['fixed_predictions']),record['fixed_version']
         latest = metadata['latest_observed_month']
         return dict(recent_backtest=evidence(backtest,latest,self.settings['recent_origins'],matches,
@@ -524,6 +523,7 @@ class Engine:
     def task_config(self,value):
         folder = 'trainings' if value['kind']=='training' else 'tuning_jobs'
         path = self.store.root/folder/value[value['kind']+'_id']/'effective_config.json'
-        if digest(path) != value['_internal']['config_sha256']:
+        config = without_file_checks(json.loads(path.read_text(encoding='utf-8')))
+        if config != value['_internal']['config_snapshot']:
             raise APIError(422,'INVALID_DATA','已冻结的任务配置被修改，请重新提交任务')
-        return json.loads(path.read_text(encoding='utf-8'))
+        return config

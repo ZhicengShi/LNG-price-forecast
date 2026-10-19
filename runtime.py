@@ -1,6 +1,5 @@
 """三个模型共用的配置、权重、预处理和预测输出；仅依赖本目录。"""
 import argparse
-import hashlib
 import importlib
 import json
 from datetime import datetime
@@ -14,6 +13,7 @@ import yaml
 
 from datasets import LNGDataset, TARGET, fill_inputs, read_frame, resolve_path, load_global
 from metrics import report, metric_row, save_table
+from provenance import source_info, without_file_checks
 
 ROOT = Path(__file__).resolve().parent
 REGIONS = ('shanghai', 'zhejiang', 'jiangsu')
@@ -23,10 +23,6 @@ MODEL_FOLDERS = dict(LSTM='lstm', EMAformer='emaformer', MoFo='mofo')
 
 def save_json(path, value):
     Path(path).write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False)+'\n', encoding='utf-8')
-
-
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def device_for(value):
@@ -147,7 +143,7 @@ def save_evaluation(folder, model_name, config, dataset, result, actual, predict
 
 
 def load_checkpoint(path, model_name, device):
-    saved = torch.load(path, map_location='cpu', weights_only=True)
+    saved = without_file_checks(torch.load(path, map_location='cpu', weights_only=True))
     if saved.get('format_version') != 'single_region_v1' or saved['config']['model'] != model_name:
         raise ValueError('权重须属于本复现目录及当前模型')
     cfg = saved['config']
@@ -177,12 +173,9 @@ def predict_one(checkpoint_path, global_cfg, model_name, device, output, mode='t
     model, saved = load_checkpoint(checkpoint_path, model_name, device)
     cfg = saved['config']
     source = global_cfg['data'][cfg['region']]
-    before = digest(source)
     full = read_frame(source)
     frame = full.loc[full.index >= pd.Period(cfg['first_month'], freq='M')]
-    # 历史复核须使用原数据版本；未来预测可追加已有观测，始终沿用保存的预处理。
-    if mode != 'future' and before != saved['data_sha256']:
-        raise ValueError('历史测试的数据版本与权重不一致；原实验复现须使用配套处理后表')
+    # 评价仍按权重保存的时间边界进行；未来预测沿用保存的预处理。
     x = load_inputs(frame, cfg)
     seq, horizon = cfg['model_kwargs']['seq_len'], cfg['model_kwargs']['pred_len']
     output = Path(output)
@@ -215,10 +208,9 @@ def predict_one(checkpoint_path, global_cfg, model_name, device, output, mode='t
         result, actual, pred = evaluate(model, dataset, ys, device, model_name, batch_size)
         save_evaluation(output, model_name, cfg, dataset, result, actual, pred, prefix=mode)
         print(pd.DataFrame([metric_row(model_name, result)]).to_string(index=False), flush=True)
-    if before != digest(source):
-        raise ValueError('读取和预测期间数据文件发生变化，请重试')
     save_json(output/'metadata.json', dict(model=model_name, region=cfg['region'], profile=cfg['feature_mode'],
-        mode=mode, data_sha256=before, checkpoint_sha256=digest(checkpoint_path), model_kwargs=cfg['model_kwargs'],
+        mode=mode, data_source=source_info(source), checkpoint_file=Path(checkpoint_path).name,
+        model_version=saved.get('model_version'), model_kwargs=cfg['model_kwargs'],
         features=cfg['features'], training_cutoff_month=cfg['training_cutoff_month'],
         selection_end_month=cfg['split_end_months']['val'], latest_observed_month=str(frame.index[-1]),
         unit='元/立方米', preprocessing_fitted_until=cfg['training_cutoff_month']))

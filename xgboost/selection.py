@@ -1,7 +1,6 @@
 """三地区XGBoost重要性排序及验证集组合筛选；仅依赖本复现目录和已安装的库。"""
 import argparse
 from datetime import datetime, timezone
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -22,6 +21,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from datasets import TARGET, EXCLUDED_FEATURES, REGIONS, load_global, read_frame, resolve_path, selected_names
+from provenance import source_info
 
 HERE = Path(__file__).resolve().parent
 
@@ -197,10 +197,6 @@ def select_combinations(frame, ranking, train_end, val_end, args):
     return ordered, ordered[0]
 
 
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-
-
 def json_value(value):
     if isinstance(value, dict):
         return {str(k): json_value(v) for k, v in value.items()}
@@ -258,7 +254,6 @@ def load_settings(path, data_config=None):
 def selection_input(shared, region, candidates):
     """只截取训练和验证月份；测试数据不进入排序或组合评价。"""
     source = shared['data'][region]
-    before = digest(source)
     full = read_frame(source)
     period = shared['period']
     for key in ('start', 'train_end', 'validation_end'):
@@ -285,14 +280,12 @@ def selection_input(shared, region, candidates):
         reason = ('地区停用字段' if name in EXCLUDED_FEATURES[REGIONS[region]] else
                   '训练期全空' if raw[name].iloc[:train_end].isna().all() else '未列入候选')
         excluded.append(dict(变量=name, 状态=reason))
-    if before != digest(source):
-        raise ValueError('读取期间数据发生变化')
-    return raw, raw[names], train_end, excluded, before
+    return raw, raw[names], train_end, excluded, source_info(source)
 
 
 def analyze(region, shared, settings, args):
     started_at, started = datetime.now(timezone.utc).isoformat(), perf_counter()
-    raw, frame, train_end, excluded, source_hash = selection_input(shared, region, settings['candidate_features'])
+    raw, frame, train_end, excluded, source = selection_input(shared, region, settings['candidate_features'])
     if train_end < args.seq_len+args.pred_len or len(frame)-train_end < args.pred_len:
         raise ValueError('训练或验证区间不足以构造窗口')
     print(f'{REGIONS[region]}: {len(frame.columns)}个候选变量（含历史目标），开始排序', flush=True)
@@ -310,15 +303,13 @@ def analyze(region, shared, settings, args):
         row['推荐组合保留'] = '是' if name in chosen['features'] else '否'
         row['筛选区间缺失月份数'] = int(raw[name].isna().sum())
         row['训练区间缺失月份数'] = int(raw[name].iloc[:train_end].isna().sum())
-    if digest(shared['data'][region]) != source_hash:
-        raise ValueError('筛选期间数据发生变化，请使用稳定数据版本重试')
     result = dict(region=region, label=REGIONS[region], features=list(chosen['features']),
                   # 训练配置沿用历史目标第一列，外生变量保持原始表顺序。
                   training_features=[TARGET, *[name for name in chosen['features'] if name != TARGET]],
                   parameters=chosen['parameters'], val_MAPE=chosen['val_MAPE'],
                   val_by_horizon=chosen['val_by_horizon'], candidates=len(combinations),
                   ranking=complete, ranking_folds=fold_rows, cv_metrics=cv, combinations=combinations,
-                  source_file=shared['data'][region].name, data_sha256=source_hash,
+                  source_file=shared['data'][region].name, data_source=source,
                   dates=dict(start=str(frame.index[0]), train_end=str(frame.index[train_end-1]),
                              validation_start=str(frame.index[train_end]), validation_end=str(frame.index[-1])),
                   train_months=train_end, validation_months=len(frame)-train_end,
@@ -366,7 +357,6 @@ def workbook_tables(result):
     settings = result['settings']
     explanations = [
         ['地区', result['label']], ['数据文件', result['source_file']],
-        ['数据SHA256', result['data_sha256']],
         ['训练区间', result['dates']['start']+'至'+result['dates']['train_end']],
         ['组合选择验证区间', result['dates']['validation_start']+'至'+result['dates']['validation_end']],
         ['验证预测起点数', result['validation_windows']], ['输入历史月数', settings['seq_len']],
@@ -429,8 +419,6 @@ def export_results(results, output):
 
 def check_reference(result, expected):
     """核对原实验的排序和全部组合，分月指标由本次重算补充。"""
-    if result['data_sha256'] != expected['data_sha256']:
-        raise ValueError(f'{result["region"]}数据版本与参考实验不同，不能核验原结果')
     if set(result['features']) != set(expected['features']) or result['parameters'] != expected['parameters']:
         raise AssertionError(f'{result["region"]}最终变量或参数与参考实验不一致')
     if result['candidates'] != expected['candidates']:
@@ -447,7 +435,7 @@ def check_reference(result, expected):
         np.testing.assert_allclose(actual['val_MAPE'], original['val_MAPE'], rtol=0, atol=1e-9)
     return dict(region=result['region'], passed=True, candidates=result['candidates'],
                 features_match=True, ranking_match=True, validation_metrics_match=True,
-                data_sha256=result['data_sha256'])
+                source_file=result['source_file'])
 
 
 def main(argv=None):
@@ -484,7 +472,7 @@ def main(argv=None):
         # 每地区完成即保存；长任务中断后已完成地区的结果仍可核对。
         export_results(results, output)
     save_json(output/'run.json', dict(config=settings, data_config=shared,
-              config_sha256=digest(config_path), data_config_sha256=digest(shared_path),
+              config_file=config_path.name, data_config_file=shared_path.name,
               reference_checks=checks, selected_regions=regions, selection_uses_test=False))
     print(f'SELECTION_COMPLETE output={output}', flush=True)
 

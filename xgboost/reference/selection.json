@@ -4874,7 +4874,6 @@
       }
     ],
     "source_file": "上海_处理后数据表.xlsx",
-    "data_sha256": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
     "dates": {
       "start": "2015-01",
       "train_end": "2022-11",
@@ -9108,7 +9107,6 @@
       }
     ],
     "source_file": "浙江_处理后数据表.xlsx",
-    "data_sha256": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
     "dates": {
       "start": "2015-01",
       "train_end": "2022-11",
@@ -13918,7 +13916,6 @@
       }
     ],
     "source_file": "江苏_处理后数据表.xlsx",
-    "data_sha256": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52",
     "dates": {
       "start": "2015-01",
       "train_end": "2022-11",
