@@ -1,5 +1,5 @@
 {
-  "version": "lng_experiment_reproduction_20261019_service_v3_0",
+  "version": "lng_experiment_reproduction_20261019_service_v1_0",
   "editable_configs": [
     "config.yaml",
     "emaformer/config.yaml",
@@ -441,7 +441,7 @@
       "bytes": 55065
     },
     "README.md": {
-      "bytes": 16773
+      "bytes": 16798
     },
     "reference/environment.json": {
       "bytes": 468
@@ -519,7 +519,7 @@
       "bytes": 12070
     },
     "service/__init__.py": {
-      "bytes": 64
+      "bytes": 62
     },
     "service/app.py": {
       "bytes": 18015
@@ -531,7 +531,7 @@
       "bytes": 2832
     },
     "service/API_DESIGN_README.md": {
-      "bytes": 85361
+      "bytes": 85391
     },
     "service/registry.py": {
       "bytes": 4866
