@@ -296,12 +296,12 @@ def main():
         protected_files_unchanged=len(before), fresh_dependency_installation_verified=False,
         customer_machine_verified=False, real_monthly_business_trial_complete=False,
         runtime_artifacts=None,temporary_validation_artifacts_cleaned=True,
-        pending=['甲方目标机安装与内网联调','甲方实际并发和资源占用测量','更新到最新完整业务月份',
+        pending=['目标机安装与内网联调','实际并发和资源占用测量','更新到最新完整业务月份',
                  '按月保存预测，真实值成熟后评价','需要时训练并登记最新生产权重及配套证据'])
     save_json(output/'report.json', report)
     lines = ['# 统一接口部署验证与本机试运行记录', '',
         f'执行时间：{report["generated_at"]}（北京时间）。结果：通过。', '',
-        '本次为当前'+platform.system()+'环境CPU执行的技术验证，使用已安装依赖；未进行隔离新环境安装、甲方服务器部署或连续业务月精度验收。', '',
+        '本次为当前'+platform.system()+'环境CPU执行的技术验证，使用已安装依赖；未进行隔离新环境安装、目标服务器部署或连续业务月精度验收。', '',
         f'- 测试：{test_count}项通过；两方案共18条HTTP预测与实际CLI输出核对，绝对容差0.0001元/立方米。',
         '- 统一响应的价格、区间、历史精度、模型状态均检查；18条预测区间可用。',
         '- 校准使用相同结构、变量和训练计划的滚动重训残差；名义95%，并返回历史覆盖率，不承诺固定当前权重未来95%覆盖。',
@@ -315,8 +315,8 @@ def main():
         f'- 首次就绪{startup_seconds:.2f}s，重启就绪{restart_seconds:.2f}s；本脚本创建的服务进程均已停止。',
         f'- 运行前后直接比较{len(before)}个交付保护文件内容，均未变化。', '',
         '接口默认权重训练截至2024-07，样例数据截至2026-05，预测2026-06至2026-08；本次未将内存中训练过的其他权重作为上线权重。', '',
-        '响应样例见all_response.json、selected_response.json，价格和区间明细见对应CSV，OpenAPI结构见openapi.json，机器可读记录见report.json。耗时为本机小规模试运行观测，不能作为甲方环境SLA。', '',
-        '待甲方实施：', '']+['- '+item for item in report['pending']]+['']
+        '响应样例见all_response.json、selected_response.json，价格和区间明细见对应CSV，OpenAPI结构见openapi.json，机器可读记录见report.json。耗时为本机小规模试运行观测，不能作为目标部署环境SLA。', '',
+        '后续实施事项：', '']+['- '+item for item in report['pending']]+['']
     (output/'report.md').write_text('\n'.join(lines), encoding='utf-8')
     print('VALIDATION_PASS '+json.dumps(dict(tests=test_count, values=18, sequential=len(sequential),
         concurrent=len(parallel), cli_difference=comparison, report=str(output/'report.md')), ensure_ascii=False), flush=True)

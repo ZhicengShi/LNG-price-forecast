@@ -42,10 +42,10 @@
       "bytes": 1429
     },
     "reference/service_v2_validation/report.md": {
-      "bytes": 2308
+      "bytes": 2305
     },
     "reference/service_v2_validation/report.json": {
-      "bytes": 3314
+      "bytes": 3302
     },
     "reference/service_v2_validation/openapi.json": {
       "bytes": 166388
@@ -93,7 +93,7 @@
       "bytes": 11568
     },
     "deployment/README.md": {
-      "bytes": 11294
+      "bytes": 11219
     },
     "deployment/requirements-common.txt": {
       "bytes": 741
@@ -111,7 +111,7 @@
       "bytes": 641
     },
     "deployment/validate.py": {
-      "bytes": 20446
+      "bytes": 20443
     },
     "emaformer/__init__.py": {
       "bytes": 35
@@ -180,7 +180,7 @@
       "bytes": 4949
     },
     "joint_emaformer/README.md": {
-      "bytes": 17742
+      "bytes": 17753
     },
     "joint_emaformer/reference/analysis/all_prediction_intervals.csv": {
       "bytes": 114655
@@ -441,7 +441,7 @@
       "bytes": 55065
     },
     "README.md": {
-      "bytes": 16768
+      "bytes": 16773
     },
     "reference/environment.json": {
       "bytes": 468
@@ -474,10 +474,10 @@
       "bytes": 441
     },
     "reference/service_validation/report.json": {
-      "bytes": 2757
+      "bytes": 2743
     },
     "reference/service_validation/report.md": {
-      "bytes": 1461
+      "bytes": 1567
     },
     "reference/service_validation/selected_predictions.csv": {
       "bytes": 1429
@@ -531,10 +531,7 @@
       "bytes": 2832
     },
     "service/API_DESIGN_README.md": {
-      "bytes": 80621
-    },
-    "service/README.md": {
-      "bytes": 30282
+      "bytes": 85361
     },
     "service/registry.py": {
       "bytes": 4866
@@ -621,10 +618,10 @@
       "bytes": 166439
     },
     "reference/service_v3_validation/report.json": {
-      "bytes": 3620
+      "bytes": 3608
     },
     "reference/service_v3_validation/report.md": {
-      "bytes": 2314
+      "bytes": 2311
     },
     "reference/service_v3_validation/selected_predictions.csv": {
       "bytes": 1375

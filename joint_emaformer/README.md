@@ -48,7 +48,7 @@ python -B joint_emaformer/predict.py --checkpoint joint_emaformer/outputs/train/
 
 当前三表截至2026-05，future输出2026-06至2026-08，每方案9行，包含地区、月份、预测步、价格、model_training_cutoff和latest_observed_month。未来实际值未知，future输出价格与元数据。模型更新通过train.py重新训练。
 
-HTTP服务复用本目录的计算函数，另行组合未来价格区间、历史评价和版本状态。服务启动、上传及调用说明见[统一接口README](../service/README.md)，本目录CLI原有价格CSV格式保持原样。
+HTTP服务复用本目录的计算函数，另行组合未来价格区间、历史评价和版本状态。服务启动、上传及调用说明见[完整接口说明](../service/API_DESIGN_README.md)，本目录CLI原有价格CSV格式保持原样。
 
 ## 全历史训练并预测未来三个月
 

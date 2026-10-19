@@ -62,13 +62,13 @@ python -B -m service.app --device cpu
 
 默认地址为http://127.0.0.1:8000，当前服务版本为3.0.0。GET /models查询全部模型版本及数据兼容性，POST /predictions提交{"profile":"selected"}或{"profile":"all"}，一次返回三地区未来3个月价格、经验区间、历史MAPE与精度得分，以及模型/数据版本和时间信息。支持三表上传、显式选择数据版本、自动调参、按tuning_id训练及模型热切换，无需为这些操作重启服务；已有持久化默认关系不会因新上传或配置表变更自动改变。随包旧权重的训练执行时间未记录，返回null；API新训练权重会记录实际完成时间。全部22项业务操作见[完整接口说明](service/API_DESIGN_README.md)。
 
-接口复用现有模型计算；区间使用相同参数和变量方案最近24条已成熟滚动回测残差，名义水平95%，并返回校准样本数和历史覆盖率。默认登记权重训练截至2024-07，数据截至2026-05；未来预测月份始终相对于数据末月。甲方实际使用前需更新数据、选择并登记模型版本。完整字段和调用方式见[接口说明](service/README.md)，安装与维护见[部署说明](deployment/README.md)。
+接口复用现有模型计算；区间使用相同参数和变量方案最近24条已成熟滚动回测残差，名义水平95%，并返回校准样本数和历史覆盖率。默认登记权重训练截至2024-07，数据截至2026-05；未来预测月份始终相对于数据末月。实际使用前需更新数据、选择并登记模型版本。完整字段和调用方式见[接口说明](service/API_DESIGN_README.md)，安装与维护见[部署说明](deployment/README.md)。
 
 ```powershell
 python -B deployment/validate.py
 ```
 
-该命令启动实际HTTP服务，完成测试、接口与CLI数值核对、上传、自动调参到训练的小预算流程、热切换、并发调用及重启恢复，并停止自己创建的进程、清理临时工作目录。当前3.0.0本机技术验证结果见[验证记录](reference/service_v3_validation/report.md)，20份权重元数据迁移及参数保留检查见[迁移核验](reference/version_migration_verification.json)，全部权重预测复现见[数值核验](reference/reproduction_v3_verification.json)，命令行小预算运行和恢复检查见[命令行核验](reference/cli_v3_verification.json)；甲方机器部署、隔离环境安装和真实业务月精度试运行需在对应环境与月份完成。
+该命令启动实际HTTP服务，完成测试、接口与CLI数值核对、上传、自动调参到训练的小预算流程、热切换、并发调用及重启恢复，并停止自己创建的进程、清理临时工作目录。当前3.0.0本机技术验证结果见[验证记录](reference/service_v3_validation/report.md)，20份权重元数据迁移及参数保留检查见[迁移核验](reference/version_migration_verification.json)，全部权重预测复现见[数值核验](reference/reproduction_v3_verification.json)，命令行小预算运行和恢复检查见[命令行核验](reference/cli_v3_verification.json)；目标机器部署、隔离环境安装和真实业务月精度试运行需在对应环境与月份完成。
 
 ## XGBoost变量筛选
 

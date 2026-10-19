@@ -105,8 +105,8 @@
   "runtime_artifacts": null,
   "temporary_validation_artifacts_cleaned": true,
   "pending": [
-    "甲方目标机安装与内网联调",
-    "甲方实际并发和资源占用测量",
+    "目标机安装与内网联调",
+    "实际并发和资源占用测量",
     "更新到最新完整业务月份",
     "按月保存预测，真实值成熟后评价",
     "需要时训练并登记最新生产权重及配套证据"

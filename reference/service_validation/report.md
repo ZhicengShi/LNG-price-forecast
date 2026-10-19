@@ -16,5 +16,7 @@
 
 接口默认权重训练截至2024-07，样例数据截至2026-05，预测2026-06至2026-08；本次未将内存中训练过的其他权重作为上线权重。
 
-响应样例见all_response.json、selected_response.json，价格和区间明细见对应CSV，OpenAPI结构见openapi.json，机器可读记录见report.json。耗时为本机小规模试运行观测，不能作为甲方环境SLA。
+响应样例见all_response.json、selected_response.json，价格和区间明细见对应CSV，OpenAPI结构见openapi.json，机器可读记录见report.json。耗时为本机小规模试运行观测，不能作为目标部署环境SLA。
+
+本次验证生成的临时运行目录已清理，报告、响应样例和日志继续保留。
 
