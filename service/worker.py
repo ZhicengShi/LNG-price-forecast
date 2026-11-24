@@ -14,9 +14,9 @@ import pandas as pd
 import torch
 
 from datasets import read_frame
-from joint_emaformer.data import REGIONS, NAMES, PreparedData, build_frame, windows
-from joint_emaformer._training import train, checkpoint, predict
-from joint_emaformer._runtime import package_checkpoint, save_checkpoint, prediction_rows, csv
+from CoRegionLng.data import REGIONS, NAMES, PreparedData, build_frame, windows
+from CoRegionLng._training import train, checkpoint, predict
+from CoRegionLng._runtime import package_checkpoint, save_checkpoint, prediction_rows, csv
 from .catalog import Catalog, encode
 from .storage import Store, now, save_json
 from . import VERSION
@@ -78,9 +78,7 @@ class Worker:
 
     def check(self):
         task = self.catalog.get('job',self.task_id)
-        if task['status']=='cancel_requested':
-            raise Cancelled()
-        if task['status'] not in ('running',):
+        if task['status'] != 'running':
             raise Cancelled()
         minutes = self.config['max_duration_minutes']
         if minutes is not None and time.monotonic()-self.begin >= minutes*60:

@@ -174,7 +174,7 @@
     "kind": "tuning",
     "name": "自动调参｜all｜截至2026-05",
     "profile": "all",
-    "model_name": "三地区融合EMAformer",
+    "model_name": "CoRegionLng",
     "data_version": "data_28cd50c9c4c64ce2a3e93ab8d16e4822",
     "device": "cpu",
     "status": "succeeded",
@@ -687,7 +687,7 @@
     "kind": "training",
     "name": "自动训练｜all｜截至2026-05",
     "profile": "all",
-    "model_name": "三地区融合EMAformer",
+    "model_name": "CoRegionLng",
     "data_version": "data_28cd50c9c4c64ce2a3e93ab8d16e4822",
     "device": "cpu",
     "status": "succeeded",
@@ -1188,7 +1188,7 @@
       "interpretation": "精度得分=100-MAPE（百分数）。回测按每起点重新训练的协议评价；固定权重测试属于当前登记权重。各自按最后若干完整且已成熟起点评分，注明月份及样本数；未来实际价格未知。"
     },
     "model_status": {
-      "model_name": "三地区融合EMAformer",
+      "model_name": "CoRegionLng",
       "service_version": "3.0.0",
       "model_version": "all-3e840adf82404a8e84e4ac8a703e3296",
       "profile": "all",

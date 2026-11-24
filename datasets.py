@@ -1,5 +1,7 @@
 """三地区处理后XLSX的共用读取、时间切分、训练历史预处理及窗口。"""
+from contextlib import closing
 from dataclasses import dataclass
+from itertools import islice
 from pathlib import Path
 import re
 import numpy as np
@@ -87,37 +89,49 @@ class DatasetBundle:
         """接受 NumPy 预测值，形状可为 (3, 1) 或 (batch, 3, 1)。"""
         return self.y_scaler.inverse_transform(predictions)
 
-def read_frame(path):
+class InvalidUnit(ValueError):
+    def __init__(self, field):
+        super().__init__(f'{field}的单位与模板不一致')
+        self.field = field
+
+
+def read_frame(path, *, expected_units=None, max_months=None):
     """只读取单工作表XLSX：首行字段、第二行单位、年月为YYYY-MM文本。"""
     path = Path(path)
     if path.suffix.lower() != '.xlsx':
         raise ValueError('数据输入只支持XLSX文件')
-    book = openpyxl.load_workbook(path, read_only=True, data_only=True)
-    try:
+    with path.open('rb') as stream, closing(openpyxl.load_workbook(stream, read_only=True, data_only=True)) as book:
         if len(book.worksheets) != 1:
             raise ValueError('数据表须仅包含一个工作表')
-        rows = list(book.worksheets[0].values)
-    finally:
-        book.close()
+        sheet = book.worksheets[0]
+        values = iter(sheet.values)
+        header = list(next(values, ()))
+        if header != [DATE, *FIELDS]:
+            raise ValueError('处理后数据表须按模板包含年月和24个业务字段')
+        units = list(next(values, ()))
+        if len(units) != len(header):
+            raise ValueError('数据表须提供完整单位行')
+        if expected_units is not None:
+            for field, actual, expected in zip(header, units, expected_units, strict=True):
+                if actual != expected:
+                    raise InvalidUnit(field)
+        if max_months is not None and sheet.max_row is not None and sheet.max_row > max_months + 2:
+            raise ValueError('数据月份数超过服务配置限制')
+        rows = list(islice(values, max_months + 1)) if max_months is not None else list(values)
+        if max_months is not None and len(rows) > max_months:
+            raise ValueError('数据月份数超过服务配置限制')
     while rows and all(value is None for value in rows[-1]):
         rows.pop()
-    if len(rows) < 3:
+    if not rows:
         raise ValueError('数据表须包含字段行、单位行和月度数据')
-    header = list(rows[0])
-    if header != [DATE, *FIELDS]:
-        raise ValueError('处理后数据表须按模板包含年月和24个业务字段')
     for column in ['LNG进口量（全国）', '管道气进口量（全国）', 'LNG进口量（区域）']:
-        if rows[1][header.index(column)] != '吨':
+        if units[header.index(column)] != '吨':
             raise ValueError('只接受已转换为吨的处理后表，不接受原始千克数据')
-    if rows[1][header.index(TARGET)] != '元/立方米':
+    if units[header.index(TARGET)] != '元/立方米':
         raise ValueError('目标价格单位须为元/立方米')
-    if any(not isinstance(name, str) or not name.strip() for name in header):
-        raise ValueError('数据表列名不能为空')
-    if len(header) != len(set(header)):
-        raise ValueError('数据表含重复列名')
-    if DATE not in header or rows[1][header.index(DATE)] != 'YYYY-MM':
-        raise ValueError(f'数据表须包含{DATE}列，第二行年月单位须为YYYY-MM')
-    frame = pd.DataFrame(rows[2:], columns=header)
+    if units[header.index(DATE)] != 'YYYY-MM':
+        raise ValueError('第二行年月单位须为YYYY-MM')
+    frame = pd.DataFrame(rows, columns=header)
     month_values = frame.pop(DATE)
     if not all(isinstance(value, str) and re.fullmatch(r'\d{4}-\d{2}', value) for value in month_values):
         raise ValueError('年月须为YYYY-MM文本')

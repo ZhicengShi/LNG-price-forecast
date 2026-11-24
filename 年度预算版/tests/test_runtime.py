@@ -9,10 +9,18 @@ import pandas as pd
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from annual_runtime import (VERSION, fill_inputs, load_checkpoint, prepare_training, save_checkpoint)
+from annual_runtime import (VERSION, checkpoint_path, fill_inputs, load_checkpoint,
+                            prepare_training, save_checkpoint)
 
 
 class AnnualRuntimeTests(unittest.TestCase):
+    def test_coregionlng_checkpoint_identifies_requested_model(self):
+        spec = dict(model="CoRegionLng", profile="selected", regions=["shanghai", "zhejiang", "jiangsu"])
+        path = checkpoint_path(Path(__file__).resolve().parents[1] / "weights", 2026, spec)
+        loaded = load_checkpoint(path, 2026)
+        self.assertEqual(loaded["spec"]["model"], spec["model"])
+        self.assertEqual(loaded["spec"]["profile"], spec["profile"])
+
     def test_mature_labels_and_sample_count(self):
         months = pd.period_range("2015-01", "2024-08", freq="M")
         values = np.arange(1, len(months) + 1, dtype=float)

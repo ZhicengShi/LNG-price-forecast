@@ -5,7 +5,7 @@ from pydantic import Field
 
 from .schemas import PublicModel, Region, Profile, Issue
 
-AnnualModel = Literal['all', 'lstm', 'emaformer', 'mofo', 'emmoformer', 'joint_emaformer']
+AnnualModel = Literal['all', 'lstm', 'emaformer', 'mofo', 'emmoformer', 'CoRegionLng']
 AnnualProfile = Literal['all', 'selected', 'both']
 AnnualVersion = Literal['年度预算版']
 AnnualStatus = Literal['queued', 'running', 'cancel_requested', 'succeeded', 'failed', 'cancelled', 'interrupted']

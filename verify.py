@@ -10,7 +10,7 @@ import torch
 from datasets import load_global, prepare_data
 from metrics import metric_row, save_table, COLUMNS, report
 from runtime import ROOT, MODEL_FOLDERS, device_for, load_checkpoint, evaluate, save_json
-from joint_emaformer.verify import verify as verify_joint
+from CoRegionLng.verify import verify as verify_joint
 
 
 def verify(device='auto', output=None):

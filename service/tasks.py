@@ -53,7 +53,7 @@ def submit(engine,request,kind):
             if any(fold['training_cutoff'] < cutoff for fold in config['folds']):
                 warnings.append(issue('RETROSPECTIVE_FIXED_FEATURES','较早复核折属于固定事后组合下的回顾验证'))
         task = dict(kind=kind,name=request.name or ('自动训练' if kind=='training' else '自动调参')+'｜'+config['profile']+'｜截至'+config['split']['latest_observed_month'],
-            profile=config['profile'],model_name='三地区融合EMAformer',data_version=config['data_version'],
+            profile=config['profile'],model_name='CoRegionLng',data_version=config['data_version'],
             device=config['device'],status='queued',stage='queued',submitted_at=now(),started_at=None,finished_at=None,
             elapsed_seconds=0.,queue_position=len(pending)+1,
             progress=dict(unit='epoch' if kind=='training' else 'fit',completed_units=0,total_units=len(config['schedule']) if kind=='training' else None,

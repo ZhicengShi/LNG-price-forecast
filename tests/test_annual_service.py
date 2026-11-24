@@ -38,7 +38,7 @@ class AnnualServiceTests(unittest.TestCase):
         shared_path.write_text(yaml.safe_dump(shared, allow_unicode=True), encoding='utf-8')
         settings = yaml.safe_load((ROOT/'service/config.yaml').read_text(encoding='utf-8'))
         settings.update(data_config=str(shared_path), model_registry=str(ROOT/'service/models.yaml'),
-                        search_config=str(ROOT/'joint_emaformer/configs/search.yaml'))
+                        search_config=str(ROOT/'CoRegionLng/configs/search.yaml'))
         cls.config_path = cls.workspace/'service.yaml'
         cls.config_path.write_text(yaml.safe_dump(settings, allow_unicode=True), encoding='utf-8')
         cls.environment = patch.dict(os.environ, LNG_SERVICE_CONFIG=str(cls.config_path),
@@ -101,10 +101,10 @@ class AnnualServiceTests(unittest.TestCase):
         self.assertEqual(len(value['weights']), 26)
 
     def test_filters_and_saved_results_csv_list_survive_restart(self):
-        value = self.predict({'budget_year':2025, 'model':'joint_emaformer', 'profile':'selected'})
+        value = self.predict({'budget_year':2025, 'model':'CoRegionLng', 'profile':'selected'})
         self.assertEqual(len(value['predictions']), 3)
         self.assertEqual(value['cutoff_month'], '2024-08')
-        self.assertEqual({r['model'] for r in value['predictions']}, {'joint_emaformer'})
+        self.assertEqual({r['model'] for r in value['predictions']}, {'CoRegionLng'})
         self.assertEqual({r['profile'] for r in value['predictions']}, {'selected'})
         saved = self.client.get(value['detail_url'])
         self.assertEqual(saved.json(), value)
@@ -120,9 +120,11 @@ class AnnualServiceTests(unittest.TestCase):
             self.assertEqual(restarted.get(value['detail_url']).json(), value)
 
     def test_models_schema_and_strict_request_validation(self):
-        response = self.client.get(BASE+'/models', params={'budget_year':2026,'model':'joint_emaformer','profile':'selected'})
+        response = self.client.get(BASE+'/models', params={'budget_year':2026,'model':'CoRegionLng','profile':'selected'})
         self.assertEqual(response.status_code, 200, response.text)
         self.assertEqual(response.json()['version'], VERSION)
+        self.assertEqual([(r['model'], r['model_name']) for r in response.json()['models']],
+                         [('CoRegionLng', 'CoRegionLng')])
         schema = self.client.get('/openapi.json').json()
         for path in (BASE+'/models', BASE+'/predictions', BASE+'/trainings', BASE+'/trainings/{training_id}/cancel'):
             self.assertIn(path, schema['paths'])
@@ -137,6 +139,16 @@ class AnnualServiceTests(unittest.TestCase):
         self.assertEqual(missing.status_code, 409, missing.text)
         self.assertEqual(missing.json()['error'], 'ANNUAL_WEIGHTS_UNAVAILABLE')
 
+    def test_short_history_can_reach_inference_but_cannot_train(self):
+        # The 2016 budget cutoff has eight observed months: enough for inference, but no mature label.
+        body = {'budget_year': 2016, 'model': 'CoRegionLng', 'profile': 'selected'}
+        prediction = self.client.post(BASE+'/predictions', json=body)
+        self.assertEqual(prediction.status_code, 409, prediction.text)
+        self.assertEqual(prediction.json()['error'], 'ANNUAL_WEIGHTS_UNAVAILABLE')
+        training = self.client.post(BASE+'/trainings', json=body)
+        self.assertEqual(training.status_code, 422, training.text)
+        self.assertEqual(training.json()['error'], 'INVALID_DATA')
+
     def test_future_budget_requires_august_data(self):
         for endpoint in ('/predictions','/trainings'):
             response = self.client.post(BASE+endpoint, json={'budget_year':2027,'model':'lstm','profile':'selected'})
@@ -146,7 +158,7 @@ class AnnualServiceTests(unittest.TestCase):
         self.assertEqual(tasks, [])
 
     def test_changes_after_august_do_not_enter_annual_inputs(self):
-        before = self.predict({'model':'joint_emaformer', 'profile':'selected'})
+        before = self.predict({'model':'CoRegionLng', 'profile':'selected'})
         payloads = dict(self.payloads)
         book = openpyxl.load_workbook(io.BytesIO(payloads['shanghai']))
         sheet = book.active
@@ -157,7 +169,7 @@ class AnnualServiceTests(unittest.TestCase):
         book.close()
         payloads['shanghai'] = stream.getvalue()
         version = self.upload(payloads)
-        after = self.predict({'model':'joint_emaformer', 'profile':'selected','data_version':version})
+        after = self.predict({'model':'CoRegionLng', 'profile':'selected','data_version':version})
         self.assertNotEqual(after['data_version'],before['data_version'])
         self.assertEqual(after['predictions'],before['predictions'])
 

@@ -20,8 +20,8 @@ sys.path.insert(0, str(ROOT))
 from service.app import create_app
 from service.intervals import future_intervals
 from service.errors import APIError
-from joint_emaformer.predict import forecast_future
-from joint_emaformer.data import REGIONS
+from CoRegionLng.predict import forecast_future
+from CoRegionLng.data import REGIONS
 
 
 class ServiceTests(unittest.TestCase):
@@ -38,7 +38,7 @@ class ServiceTests(unittest.TestCase):
         shared_path.write_text(yaml.safe_dump(shared, allow_unicode=True), encoding='utf-8')
         settings = yaml.safe_load((ROOT/'service/config.yaml').read_text(encoding='utf-8'))
         settings.update(data_config=str(shared_path), model_registry=str(ROOT/'service/models.yaml'),
-                        search_config=str(ROOT/'joint_emaformer/configs/search.yaml'))
+                        search_config=str(ROOT/'CoRegionLng/configs/search.yaml'))
         config_path = cls.workspace/'service.yaml'
         config_path.write_text(yaml.safe_dump(settings, allow_unicode=True), encoding='utf-8')
         cls.env = patch.dict(os.environ, {'LNG_SERVICE_STORAGE': str(cls.workspace/'runtime'),
@@ -101,7 +101,7 @@ class ServiceTests(unittest.TestCase):
             self.assertEqual(len(csv_result.content.decode('utf-8-sig').splitlines()), 10)
 
     def test_recent_backtest_metrics_match_reference_analysis(self):
-        table = pd.read_csv(ROOT/'joint_emaformer/reference/analysis/metrics.csv')
+        table = pd.read_csv(ROOT/'CoRegionLng/reference/analysis/metrics.csv')
         for profile in ('all', 'selected'):
             reply = self.client.post('/predictions', json={'profile': profile}).json()
             metric = reply['evaluation']['recent_backtest']

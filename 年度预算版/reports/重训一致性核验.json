@@ -137,7 +137,7 @@
       "training_equal": true
     },
     {
-      "model": "joint_emaformer",
+      "model": "CoRegionLng",
       "profile": "all",
       "regions": [
         "shanghai",
@@ -150,7 +150,7 @@
       "training_equal": true
     },
     {
-      "model": "joint_emaformer",
+      "model": "CoRegionLng",
       "profile": "selected",
       "regions": [
         "shanghai",

@@ -13,9 +13,9 @@ import pandas as pd
 import yaml
 
 from datasets import load_global, read_frame, resolve_path
-from joint_emaformer._runtime import configure, load_checkpoint
-from joint_emaformer.data import REGIONS, NAMES, build_frame
-from joint_emaformer.predict import forecast_future
+from CoRegionLng._runtime import configure, load_checkpoint
+from CoRegionLng.data import REGIONS, NAMES, build_frame
+from CoRegionLng.predict import forecast_future
 from . import VERSION
 from .intervals import future_intervals
 from .registry import load_registry
@@ -51,7 +51,7 @@ class DefaultModels:
 def load_settings(path=None):
     path = Path(path or os.environ.get('LNG_SERVICE_CONFIG', HERE/'config.yaml')).resolve()
     settings = yaml.safe_load(path.read_text(encoding='utf-8'))
-    settings['search_config'] = resolve_path(settings['search_config'],path) if settings.get('search_config') else HERE.parent/'joint_emaformer/configs/search.yaml'
+    settings['search_config'] = resolve_path(settings.get('search_config') or HERE.parent/'CoRegionLng/configs/search.yaml', path)
     settings.setdefault('max_loaded_models', 2)
     settings.setdefault('idempotency_hours', 24)
     settings.setdefault('upload',{})
@@ -138,7 +138,7 @@ class Engine:
             spec = registry['models'][profile]
             saved = {key:value for key,value in model.saved.items() if key != 'model_state_dict'}
             checkpoint_path = resolve_path(spec['checkpoint'],settings['model_registry'])
-            bundled = checkpoint_path == (HERE.parent/'joint_emaformer/weights'/f'{profile}.pt').resolve()
+            bundled = checkpoint_path == (HERE.parent/'CoRegionLng/weights'/f'{profile}.pt').resolve()
             record = dict(model_version=model.version,profile=profile,saved=saved,
                 checkpoint=str(checkpoint_path),registered_at=model.registered_at,
                 source='bundled' if bundled else 'configured',training_id=None,tuning_id=None,
@@ -238,7 +238,7 @@ class Engine:
         audit = saved.get('training_audit', {})
         trained_at = audit.get('finished_at') or audit.get('started_at')
         schema = saved['layout']['input_schema']
-        return dict(model_name='三地区融合EMAformer', service_version=VERSION, model_version=record['model_version'],
+        return dict(model_name='CoRegionLng', service_version=VERSION, model_version=record['model_version'],
             profile=profile, device=str(self.device),
             registered_at=record['registered_at'], loaded_at=model.loaded_at if model else None, trained_at=trained_at,
             training_time_status='recorded' if trained_at else 'not_recorded',

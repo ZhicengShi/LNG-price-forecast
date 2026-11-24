@@ -4,10 +4,10 @@
     "config.yaml",
     "emaformer/config.yaml",
     "emmoformer/config.yaml",
-    "joint_emaformer/configs/all.yaml",
-    "joint_emaformer/configs/backtest.yaml",
-    "joint_emaformer/configs/search.yaml",
-    "joint_emaformer/configs/selected.yaml",
+    "CoRegionLng/configs/all.yaml",
+    "CoRegionLng/configs/backtest.yaml",
+    "CoRegionLng/configs/search.yaml",
+    "CoRegionLng/configs/selected.yaml",
     "lstm/config.yaml",
     "mofo/config.yaml",
     "service/config.yaml",
@@ -34,7 +34,7 @@
       "bytes": 46
     },
     "README.md": {
-      "bytes": 20568
+      "bytes": 21077
     },
     "config.yaml": {
       "bytes": 2587
@@ -49,10 +49,10 @@
       "bytes": 27909
     },
     "datasets.py": {
-      "bytes": 11568
+      "bytes": 12350
     },
     "deployment/README.md": {
-      "bytes": 11219
+      "bytes": 11215
     },
     "deployment/requirements-common.txt": {
       "bytes": 741
@@ -70,7 +70,7 @@
       "bytes": 641
     },
     "deployment/validate.py": {
-      "bytes": 20443
+      "bytes": 20439
     },
     "emaformer/__init__.py": {
       "bytes": 35
@@ -171,245 +171,245 @@
     "emmoformer/weights/zhejiang/selected_preprocessing.json": {
       "bytes": 726
     },
-    "joint_emaformer/README.md": {
-      "bytes": 17708
+    "CoRegionLng/README.md": {
+      "bytes": 17146
     },
-    "joint_emaformer/__init__.py": {
-      "bytes": 47
+    "CoRegionLng/__init__.py": {
+      "bytes": 34
     },
-    "joint_emaformer/_emaformer.py": {
+    "CoRegionLng/_emaformer.py": {
       "bytes": 9590
     },
-    "joint_emaformer/_emaformer_layers.py": {
+    "CoRegionLng/_emaformer_layers.py": {
       "bytes": 6076
     },
-    "joint_emaformer/_runtime.py": {
-      "bytes": 10698
+    "CoRegionLng/_runtime.py": {
+      "bytes": 10500
     },
-    "joint_emaformer/_search.py": {
+    "CoRegionLng/_search.py": {
       "bytes": 1684
     },
-    "joint_emaformer/_training.py": {
-      "bytes": 6042
+    "CoRegionLng/_training.py": {
+      "bytes": 6002
     },
-    "joint_emaformer/analysis.py": {
-      "bytes": 12147
+    "CoRegionLng/analysis.py": {
+      "bytes": 12126
     },
-    "joint_emaformer/backtest.py": {
-      "bytes": 8206
+    "CoRegionLng/backtest.py": {
+      "bytes": 8194
     },
-    "joint_emaformer/configs/all.yaml": {
-      "bytes": 914
+    "CoRegionLng/configs/all.yaml": {
+      "bytes": 911
     },
-    "joint_emaformer/configs/backtest.yaml": {
+    "CoRegionLng/configs/backtest.yaml": {
       "bytes": 599
     },
-    "joint_emaformer/configs/search.yaml": {
+    "CoRegionLng/configs/search.yaml": {
       "bytes": 5967
     },
-    "joint_emaformer/configs/selected.yaml": {
-      "bytes": 924
+    "CoRegionLng/configs/selected.yaml": {
+      "bytes": 921
     },
-    "joint_emaformer/data.py": {
-      "bytes": 6416
+    "CoRegionLng/data.py": {
+      "bytes": 6472
     },
-    "joint_emaformer/model.py": {
-      "bytes": 4889
+    "CoRegionLng/model.py": {
+      "bytes": 4862
     },
-    "joint_emaformer/predict.py": {
-      "bytes": 4949
+    "CoRegionLng/predict.py": {
+      "bytes": 4924
     },
-    "joint_emaformer/reference/analysis/all_prediction_intervals.csv": {
+    "CoRegionLng/reference/analysis/all_prediction_intervals.csv": {
       "bytes": 114655
     },
-    "joint_emaformer/reference/analysis/annual_metrics.csv": {
-      "bytes": 14029
+    "CoRegionLng/reference/analysis/annual_metrics.csv": {
+      "bytes": 13093
     },
-    "joint_emaformer/reference/analysis/confidence_intervals.csv": {
+    "CoRegionLng/reference/analysis/confidence_intervals.csv": {
       "bytes": 41601
     },
-    "joint_emaformer/reference/analysis/metrics.csv": {
-      "bytes": 2662
+    "CoRegionLng/reference/analysis/metrics.csv": {
+      "bytes": 2506
     },
-    "joint_emaformer/reference/analysis/paired_profile_differences.csv": {
+    "CoRegionLng/reference/analysis/paired_profile_differences.csv": {
       "bytes": 1497
     },
-    "joint_emaformer/reference/analysis/prediction_interval_coverage.csv": {
+    "CoRegionLng/reference/analysis/prediction_interval_coverage.csv": {
       "bytes": 1422
     },
-    "joint_emaformer/reference/analysis/selected_prediction_intervals.csv": {
+    "CoRegionLng/reference/analysis/selected_prediction_intervals.csv": {
       "bytes": 120352
     },
-    "joint_emaformer/reference/analysis/summary.json": {
-      "bytes": 204743
+    "CoRegionLng/reference/analysis/summary.json": {
+      "bytes": 203632
     },
-    "joint_emaformer/reference/analysis/worst_origins.json": {
+    "CoRegionLng/reference/analysis/worst_origins.json": {
       "bytes": 5027
     },
-    "joint_emaformer/reference/backtest/all/model_config.json": {
-      "bytes": 1853
+    "CoRegionLng/reference/backtest/all/model_config.json": {
+      "bytes": 1850
     },
-    "joint_emaformer/reference/backtest/all/seed_2026/predictions.csv": {
+    "CoRegionLng/reference/backtest/all/seed_2026/predictions.csv": {
       "bytes": 85037
     },
-    "joint_emaformer/reference/backtest/all/seed_2026/training_audit.json": {
+    "CoRegionLng/reference/backtest/all/seed_2026/training_audit.json": {
       "bytes": 223987
     },
-    "joint_emaformer/reference/backtest/all/seed_42/predictions.csv": {
+    "CoRegionLng/reference/backtest/all/seed_42/predictions.csv": {
       "bytes": 85015
     },
-    "joint_emaformer/reference/backtest/all/seed_42/training_audit.json": {
+    "CoRegionLng/reference/backtest/all/seed_42/training_audit.json": {
       "bytes": 224027
     },
-    "joint_emaformer/reference/backtest/all/seed_7/predictions.csv": {
+    "CoRegionLng/reference/backtest/all/seed_7/predictions.csv": {
       "bytes": 85009
     },
-    "joint_emaformer/reference/backtest/all/seed_7/training_audit.json": {
+    "CoRegionLng/reference/backtest/all/seed_7/training_audit.json": {
       "bytes": 223990
     },
-    "joint_emaformer/reference/backtest/protocol.json": {
+    "CoRegionLng/reference/backtest/protocol.json": {
       "bytes": 458
     },
-    "joint_emaformer/reference/backtest/selected/model_config.json": {
-      "bytes": 1863
+    "CoRegionLng/reference/backtest/selected/model_config.json": {
+      "bytes": 1860
     },
-    "joint_emaformer/reference/backtest/selected/seed_2026/predictions.csv": {
+    "CoRegionLng/reference/backtest/selected/seed_2026/predictions.csv": {
       "bytes": 90705
     },
-    "joint_emaformer/reference/backtest/selected/seed_2026/training_audit.json": {
+    "CoRegionLng/reference/backtest/selected/seed_2026/training_audit.json": {
       "bytes": 224024
     },
-    "joint_emaformer/reference/backtest/selected/seed_42/predictions.csv": {
+    "CoRegionLng/reference/backtest/selected/seed_42/predictions.csv": {
       "bytes": 90694
     },
-    "joint_emaformer/reference/backtest/selected/seed_42/training_audit.json": {
+    "CoRegionLng/reference/backtest/selected/seed_42/training_audit.json": {
       "bytes": 223983
     },
-    "joint_emaformer/reference/backtest/selected/seed_7/predictions.csv": {
+    "CoRegionLng/reference/backtest/selected/seed_7/predictions.csv": {
       "bytes": 90665
     },
-    "joint_emaformer/reference/backtest/selected/seed_7/training_audit.json": {
+    "CoRegionLng/reference/backtest/selected/seed_7/training_audit.json": {
       "bytes": 223983
     },
-    "joint_emaformer/reference/fixed_test/all/seed_2026/history.json": {
+    "CoRegionLng/reference/fixed_test/all/seed_2026/history.json": {
       "bytes": 2557
     },
-    "joint_emaformer/reference/fixed_test/all/seed_2026/metrics.csv": {
-      "bytes": 802
+    "CoRegionLng/reference/fixed_test/all/seed_2026/metrics.csv": {
+      "bytes": 763
     },
-    "joint_emaformer/reference/fixed_test/all/seed_2026/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/all/seed_2026/predictions.csv": {
       "bytes": 13788
     },
-    "joint_emaformer/reference/fixed_test/all/seed_42/history.json": {
+    "CoRegionLng/reference/fixed_test/all/seed_42/history.json": {
       "bytes": 2559
     },
-    "joint_emaformer/reference/fixed_test/all/seed_42/metrics.csv": {
-      "bytes": 802
+    "CoRegionLng/reference/fixed_test/all/seed_42/metrics.csv": {
+      "bytes": 763
     },
-    "joint_emaformer/reference/fixed_test/all/seed_42/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/all/seed_42/predictions.csv": {
       "bytes": 13786
     },
-    "joint_emaformer/reference/fixed_test/all/seed_7/history.json": {
+    "CoRegionLng/reference/fixed_test/all/seed_7/history.json": {
       "bytes": 2556
     },
-    "joint_emaformer/reference/fixed_test/all/seed_7/metrics.csv": {
-      "bytes": 803
+    "CoRegionLng/reference/fixed_test/all/seed_7/metrics.csv": {
+      "bytes": 764
     },
-    "joint_emaformer/reference/fixed_test/all/seed_7/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/all/seed_7/predictions.csv": {
       "bytes": 13775
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_2026/history.json": {
+    "CoRegionLng/reference/fixed_test/selected/seed_2026/history.json": {
       "bytes": 2561
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_2026/metrics.csv": {
-      "bytes": 817
+    "CoRegionLng/reference/fixed_test/selected/seed_2026/metrics.csv": {
+      "bytes": 778
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_2026/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/selected/seed_2026/predictions.csv": {
       "bytes": 14676
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_42/history.json": {
+    "CoRegionLng/reference/fixed_test/selected/seed_42/history.json": {
       "bytes": 2554
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_42/metrics.csv": {
-      "bytes": 821
+    "CoRegionLng/reference/fixed_test/selected/seed_42/metrics.csv": {
+      "bytes": 782
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_42/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/selected/seed_42/predictions.csv": {
       "bytes": 14688
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_7/history.json": {
+    "CoRegionLng/reference/fixed_test/selected/seed_7/history.json": {
       "bytes": 2551
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_7/metrics.csv": {
-      "bytes": 815
+    "CoRegionLng/reference/fixed_test/selected/seed_7/metrics.csv": {
+      "bytes": 776
     },
-    "joint_emaformer/reference/fixed_test/selected/seed_7/predictions.csv": {
+    "CoRegionLng/reference/fixed_test/selected/seed_7/predictions.csv": {
       "bytes": 14705
     },
-    "joint_emaformer/reference/reproduction_check.json": {
-      "bytes": 1468
+    "CoRegionLng/reference/reproduction_check.json": {
+      "bytes": 1455
     },
-    "joint_emaformer/reference/search/all/confirm_trial_13.json": {
+    "CoRegionLng/reference/search/all/confirm_trial_13.json": {
       "bytes": 43642
     },
-    "joint_emaformer/reference/search/all/confirm_trial_24.json": {
+    "CoRegionLng/reference/search/all/confirm_trial_24.json": {
       "bytes": 134848
     },
-    "joint_emaformer/reference/search/all/confirm_trial_29.json": {
+    "CoRegionLng/reference/search/all/confirm_trial_29.json": {
       "bytes": 39734
     },
-    "joint_emaformer/reference/search/all/confirm_trial_62.json": {
+    "CoRegionLng/reference/search/all/confirm_trial_62.json": {
       "bytes": 59466
     },
-    "joint_emaformer/reference/search/all/confirmed_candidates.json": {
+    "CoRegionLng/reference/search/all/confirmed_candidates.json": {
       "bytes": 325234
     },
-    "joint_emaformer/reference/search/all/screening_trials.json": {
+    "CoRegionLng/reference/search/all/screening_trials.json": {
       "bytes": 502036
     },
-    "joint_emaformer/reference/search/all/selected_parameters.json": {
+    "CoRegionLng/reference/search/all/selected_parameters.json": {
       "bytes": 65960
     },
-    "joint_emaformer/reference/search/search_plan.json": {
+    "CoRegionLng/reference/search/search_plan.json": {
       "bytes": 45853
     },
-    "joint_emaformer/reference/search/selected/confirm_trial_13.json": {
+    "CoRegionLng/reference/search/selected/confirm_trial_13.json": {
       "bytes": 42196
     },
-    "joint_emaformer/reference/search/selected/confirm_trial_29.json": {
+    "CoRegionLng/reference/search/selected/confirm_trial_29.json": {
       "bytes": 41170
     },
-    "joint_emaformer/reference/search/selected/confirm_trial_35.json": {
+    "CoRegionLng/reference/search/selected/confirm_trial_35.json": {
       "bytes": 134537
     },
-    "joint_emaformer/reference/search/selected/confirm_trial_62.json": {
+    "CoRegionLng/reference/search/selected/confirm_trial_62.json": {
       "bytes": 59733
     },
-    "joint_emaformer/reference/search/selected/confirmed_candidates.json": {
+    "CoRegionLng/reference/search/selected/confirmed_candidates.json": {
       "bytes": 325182
     },
-    "joint_emaformer/reference/search/selected/screening_trials.json": {
+    "CoRegionLng/reference/search/selected/screening_trials.json": {
       "bytes": 483088
     },
-    "joint_emaformer/reference/search/selected/selected_parameters.json": {
+    "CoRegionLng/reference/search/selected/selected_parameters.json": {
       "bytes": 66249
     },
-    "joint_emaformer/reference/weights_index.json": {
+    "CoRegionLng/reference/weights_index.json": {
       "bytes": 12985
     },
-    "joint_emaformer/train.py": {
-      "bytes": 4326
+    "CoRegionLng/train.py": {
+      "bytes": 4301
     },
-    "joint_emaformer/tune.py": {
-      "bytes": 8892
+    "CoRegionLng/tune.py": {
+      "bytes": 8876
     },
-    "joint_emaformer/verify.py": {
-      "bytes": 2941
+    "CoRegionLng/verify.py": {
+      "bytes": 2925
     },
-    "joint_emaformer/weights/all.pt": {
-      "bytes": 13828957
+    "CoRegionLng/weights/all.pt": {
+      "bytes": 13832419
     },
-    "joint_emaformer/weights/selected.pt": {
-      "bytes": 12552891
+    "CoRegionLng/weights/selected.pt": {
+      "bytes": 12552099
     },
     "lstm/__init__.py": {
       "bytes": 30
@@ -487,16 +487,16 @@
       "bytes": 1709
     },
     "reference/cli_v3_verification.json": {
-      "bytes": 2960
+      "bytes": 2936
     },
     "reference/environment.json": {
       "bytes": 538
     },
     "reference/jiangsu_all_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/jiangsu_selected_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/relocation_verification.json": {
       "bytes": 521
@@ -514,7 +514,7 @@
       "bytes": 1389
     },
     "reference/service_v2_validation/all_response.json": {
-      "bytes": 15783
+      "bytes": 15770
     },
     "reference/service_v2_validation/openapi.json": {
       "bytes": 166388
@@ -529,22 +529,22 @@
       "bytes": 1429
     },
     "reference/service_v2_validation/selected_response.json": {
-      "bytes": 13880
+      "bytes": 13867
     },
     "reference/service_v2_validation/server.log": {
       "bytes": 8249
     },
     "reference/service_v2_validation/tests.log": {
-      "bytes": 6064
+      "bytes": 6015
     },
     "reference/service_v2_validation/workflow.json": {
-      "bytes": 40885
+      "bytes": 40846
     },
     "reference/service_v3_validation/all_predictions.csv": {
       "bytes": 1335
     },
     "reference/service_v3_validation/all_response.json": {
-      "bytes": 15702
+      "bytes": 15689
     },
     "reference/service_v3_validation/openapi.json": {
       "bytes": 166439
@@ -559,22 +559,22 @@
       "bytes": 1375
     },
     "reference/service_v3_validation/selected_response.json": {
-      "bytes": 13799
+      "bytes": 13786
     },
     "reference/service_v3_validation/server.log": {
       "bytes": 8191
     },
     "reference/service_v3_validation/tests.log": {
-      "bytes": 6531
+      "bytes": 6482
     },
     "reference/service_v3_validation/workflow.json": {
-      "bytes": 40946
+      "bytes": 40907
     },
     "reference/service_validation/all_predictions.csv": {
       "bytes": 1389
     },
     "reference/service_validation/all_response.json": {
-      "bytes": 15783
+      "bytes": 15770
     },
     "reference/service_validation/openapi.json": {
       "bytes": 21801
@@ -592,13 +592,13 @@
       "bytes": 1429
     },
     "reference/service_validation/selected_response.json": {
-      "bytes": 13880
+      "bytes": 13867
     },
     "reference/shanghai_all_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/shanghai_selected_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/source_integrity.json": {
       "bytes": 1331
@@ -613,7 +613,7 @@
       "bytes": 13022
     },
     "reference/version_migration_verification.json": {
-      "bytes": 1513
+      "bytes": 1501
     },
     "reference/weight_index.json": {
       "bytes": 73952
@@ -622,10 +622,10 @@
       "bytes": 39820
     },
     "reference/zhejiang_all_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/zhejiang_selected_metrics.csv": {
-      "bytes": 652
+      "bytes": 639
     },
     "reference/实验结果.md": {
       "bytes": 14242
@@ -637,40 +637,40 @@
       "bytes": 12399
     },
     "service/API_DESIGN_README.md": {
-      "bytes": 85391
+      "bytes": 85628
     },
     "service/__init__.py": {
       "bytes": 62
     },
     "service/app.py": {
-      "bytes": 18015
+      "bytes": 22867
     },
     "service/catalog.py": {
       "bytes": 5182
     },
     "service/config.yaml": {
-      "bytes": 619
+      "bytes": 615
     },
     "service/engine.py": {
-      "bytes": 31269
+      "bytes": 31159
     },
     "service/errors.py": {
       "bytes": 504
     },
     "service/intervals.py": {
-      "bytes": 2832
+      "bytes": 2828
     },
     "service/migration.py": {
       "bytes": 2505
     },
     "service/models.yaml": {
-      "bytes": 1610
+      "bytes": 1566
     },
     "service/planning.py": {
-      "bytes": 12796
+      "bytes": 12697
     },
     "service/registry.py": {
-      "bytes": 4866
+      "bytes": 4854
     },
     "service/schemas.py": {
       "bytes": 11649
@@ -679,28 +679,28 @@
       "bytes": 5427
     },
     "service/tasks.py": {
-      "bytes": 12314
+      "bytes": 12513
     },
     "service/uploads.py": {
-      "bytes": 5936
+      "bytes": 4817
     },
     "service/worker.py": {
-      "bytes": 19501
+      "bytes": 19640
     },
     "tests/test_emmoformer.py": {
       "bytes": 6108
     },
-    "tests/test_joint_emaformer.py": {
-      "bytes": 6022
+    "tests/test_CoRegionLng.py": {
+      "bytes": 5965
     },
     "tests/test_reproduction.py": {
       "bytes": 6520
     },
     "tests/test_service.py": {
-      "bytes": 14628
+      "bytes": 14612
     },
     "tests/test_service_workflows.py": {
-      "bytes": 21714
+      "bytes": 21706
     },
     "tests/test_xgboost_selection.py": {
       "bytes": 6036
@@ -709,7 +709,7 @@
       "bytes": 7621
     },
     "verify.py": {
-      "bytes": 4900
+      "bytes": 4896
     },
     "xgboost/config.yaml": {
       "bytes": 1496

@@ -391,7 +391,7 @@
     "interpretation": "精度得分=100-MAPE（百分数）。回测按每起点重新训练的协议评价；固定权重测试属于当前登记权重。各自按最后若干完整且已成熟起点评分，注明月份及样本数；未来实际价格未知。"
   },
   "model_status": {
-    "model_name": "三地区融合EMAformer",
+    "model_name": "CoRegionLng",
     "service_version": "1.1.0",
     "model_version": "selected-a03df2b66e12a63a",
     "profile": "selected",

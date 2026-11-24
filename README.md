@@ -1,8 +1,8 @@
 # 三地区天然气价格实验复现
 
-年度预算版已接入同一 HTTP 服务，接口前缀为 `/annual-budget`，支持年度均价预测、模型查询、异步训练、历史结果查询与 CSV 下载。运行 `python -B -m service.app` 后，在 `/docs` 中查看“年度预算版”分组。请求和数据更新流程见 [年度预算版接口说明](service/年度预算版接口说明.md)。
+年度预算版已接入同一 HTTP 服务，接口前缀为 `/annual-budget`，支持年度均价预测、模型查询、异步训练、历史结果查询与 CSV 下载。调用三地区融合模型时，`model` 字段填 `CoRegionLng`，例如向 `POST /annual-budget/predictions` 提交 `{"budget_year":2026,"model":"CoRegionLng","profile":"selected"}`。运行 `python -B -m service.app` 后，可在 `/docs` 中查看“年度预算版”分组。请求和数据更新流程见 [年度预算版接口说明](service/年度预算版接口说明.md)。
 
-本目录包含上海、浙江、江苏三地区的LSTM、EMAformer、MoFo和EMMoFormer单区域实验，以及三地区融合EMAformer。每个单区域模型文件夹包含模型定义、YAML配置、训练入口、预测入口及三地区×两种方案的6份配套权重，共24份；融合模型包含全变量、组合变量各1份同时覆盖三地区的权重，合计26份。数据输入仅使用data中的三张处理后XLSX。EMMoFormer仅包含最终版本的代码、配置、权重、预处理参数和预测结果。
+本目录包含上海、浙江、江苏三地区的LSTM、EMAformer、MoFo和EMMoFormer单区域实验，以及CoRegionLng。每个单区域模型文件夹包含模型定义、YAML配置、训练入口、预测入口及三地区×两种方案的6份配套权重，共24份；融合模型包含全变量、组合变量各1份同时覆盖三地区的权重，合计26份。数据输入仅使用data中的三张处理后XLSX。EMMoFormer仅包含最终版本的代码、配置、权重、预处理参数和预测结果。
 
 ## 文件组织
 
@@ -16,7 +16,7 @@ lstm/                       model.py、train.py、predict.py、config.yaml、wei
 emaformer/                  同上，另有模型层文件
 mofo/                       同上，另有模型核心文件
 emmoformer/                 模型及层定义、YAML、训练、预测、6份权重和预处理参数
-joint_emaformer/             三地区融合模型、训练、预测、搜索、回测与分析
+CoRegionLng/                三地区融合模型、训练、预测、搜索、回测与分析
 service/                    统一HTTP接口、未来价格区间、评价及版本信息
 deployment/                 固定依赖、启动脚本和本机部署验证
 reference/                  当前逐条预测、6张指标表、权重索引和核验记录
@@ -41,7 +41,7 @@ python -B -m unittest discover -s tests -p "test_*.py" -v
 
 verify检查数据版本、变量顺序、预处理和1800个主种子测试预测值，其中单区域模型1440个、融合模型360个。在outputs/verification生成三地区×两种方案的6张指标CSV，每张包含四个单区域模型与一个融合模型。reference中的指标表从配套实验逐条预测计算，作为核对基准。
 
-融合模型的训练、预测、参数搜索、逐月重训回测和区间分析，见[joint_emaformer/README.md](joint_emaformer/README.md)。可直接运行python -B joint_emaformer/train.py、predict.py、tune.py、backtest.py、analysis.py对应入口，命令均以前面的joint_emaformer/目录为前缀。两个方案的最终配置在joint_emaformer/configs/all.yaml和selected.yaml。
+融合模型的训练、预测、参数搜索、逐月重训回测和区间分析，见[CoRegionLng/README.md](CoRegionLng/README.md)。可直接运行python -B CoRegionLng/train.py、predict.py、tune.py、backtest.py、analysis.py对应入口，命令均以前面的CoRegionLng/目录为前缀。两个方案的最终配置在CoRegionLng/configs/all.yaml和selected.yaml。
 
 融合权重训练截至2024-07，单区域权重训练截至2022-11并通过验证集选轮数；汇总表保留各自协议的结果，解释模型差异时需同时说明训练范围。
 
@@ -49,9 +49,9 @@ verify检查数据版本、变量顺序、预处理和1800个主种子测试预�
 
 三地区融合模型已支持以下流程，命令均在本目录执行，具体配置和输出见融合模型README：
 
-- [全历史训练并预测未来三个月](joint_emaformer/README.md#全历史训练并预测未来三个月)：将对应方案的training.cutoff设为latest，重新训练，再通过--checkpoint加载本次新权重执行--mode future。
-- [留出最近三个月测试](joint_emaformer/README.md#留出最近三个月测试)：例如三表截至2026-05，将training.cutoff设为2026-02、公共period.test_end设为2026-05，运行训练后自动得到3、4、5月的真实价格与预测价格及分月指标。
-- [使用最新开发数据重新搜索参数](joint_emaformer/README.md#使用最新开发数据重新搜索参数)：在2026-02及以前划分训练和验证区间，运行tune.py，再用生成的final_config.yaml训练与测试；保留的3、4、5月不用于搜索。
+- [全历史训练并预测未来三个月](CoRegionLng/README.md#全历史训练并预测未来三个月)：将对应方案的training.cutoff设为latest，重新训练，再通过--checkpoint加载本次新权重执行--mode future。
+- [留出最近三个月测试](CoRegionLng/README.md#留出最近三个月测试)：例如三表截至2026-05，将training.cutoff设为2026-02、公共period.test_end设为2026-05，运行训练后自动得到3、4、5月的真实价格与预测价格及分月指标。
+- [使用最新开发数据重新搜索参数](CoRegionLng/README.md#使用最新开发数据重新搜索参数)：在2026-02及以前划分训练和验证区间，运行tune.py，再用生成的final_config.yaml训练与测试；保留的3、4、5月不用于搜索。
 
 以上适用于全变量all和组合变量selected两种融合方案。四个单区域模型仍按各自既定训练、验证、测试划分训练。建议保留原实验配置用于复现；使用配置副本开展业务训练时，通过--config或--data-config指定，并按副本所在目录检查相对路径。
 
@@ -174,7 +174,7 @@ checkpoint指定后，地区和方案从权重读取，无需再指定region/pro
 
 当前24份单区域权重均使用6个月历史预测未来3个月，组合变量为原验证选择结果。当前核验见reference/verification.json；既有LSTM、EMAformer和MoFo训练历史保存于training_history.csv和retrained_history.csv，窗口更新记录见reference/window6_update.json。原12个月输入的复现实验审计保留为历史记录，不代表当前单区域权重。CPU训练的dropout随机实现与CUDA不同，不保证重训得到相同权重。
 
-manifest.json记录代码、配套数据、权重及参考结果的文件清单，不进行文件摘要校验。模型和服务运行配置YAML可编辑，清单见manifest的editable_configs；如果改变实验区间或变量组合，应训练配套新权重，原参考指标仅对应原实验。既有LSTM、EMAformer和MoFo模块迁移至含空格的独立目录后，从其他工作目录重载18份权重并进行未来预测的历史核验见reference/relocation_verification.json。融合模块核验记录见joint_emaformer/reference/reproduction_check.json。
+manifest.json记录代码、配套数据、权重及参考结果的文件清单，不进行文件摘要校验。模型和服务运行配置YAML可编辑，清单见manifest的editable_configs；如果改变实验区间或变量组合，应训练配套新权重，原参考指标仅对应原实验。既有LSTM、EMAformer和MoFo模块迁移至含空格的独立目录后，从其他工作目录重载18份权重并进行未来预测的历史核验见reference/relocation_verification.json。融合模块核验记录见CoRegionLng/reference/reproduction_check.json。
 
 ## 数据与时间口径
 

@@ -162,7 +162,7 @@ validate.py明确使用CPU，自动执行单元测试、真实HTTP调用、与CP
 CUDA验证须另行执行前面的GPU运算检查、CUDA服务启动，以及all和selected两次实际HTTP预测，并检查返回设备为cuda。可用同一虚拟环境、同一配置和数据运行以下CUDA命令行预测，核对其future_predictions.csv与对应接口的地区、目标月份、预测步和价格：
 
 ```bash
-python -B joint_emaformer/predict.py --mode future --device cuda \
+python -B CoRegionLng/predict.py --mode future --device cuda \
   --output-dir outputs/linux_cuda_cli
 ```
 

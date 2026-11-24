@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+from functools import cache
 from pathlib import Path
 
 import numpy as np
@@ -11,16 +12,15 @@ import torch
 from annual_runtime import ROOT, VERSION, load_checkpoint, predict_checkpoint, read_frame, resolve_device
 
 
-def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def main():
     parser = argparse.ArgumentParser(description=VERSION+'交付核验')
     parser.add_argument('--device', choices=['auto','cpu','cuda'], default='auto')
     parser.add_argument('--output', type=Path, default=ROOT/'outputs/交付核验.json')
     args = parser.parse_args()
     device = resolve_device(args.device)
+    @cache
+    def sha256(path):
+        return hashlib.sha256(path.read_bytes()).hexdigest()
     tolerance = 1e-4 if device == 'cpu' else 1e-8
     torch.set_num_threads(2)
     if device == 'cuda':

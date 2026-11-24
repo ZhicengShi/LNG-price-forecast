@@ -5,29 +5,29 @@ reference_data:
   shanghai: ../data/上海_处理后数据表.xlsx
   zhejiang: ../data/浙江_处理后数据表.xlsx
   jiangsu: ../data/江苏_处理后数据表.xlsx
-reference_weights_index: ../joint_emaformer/reference/weights_index.json
+reference_weights_index: ../CoRegionLng/reference/weights_index.json
 models:
   all:
-    checkpoint: ../joint_emaformer/weights/all.pt
+    checkpoint: ../CoRegionLng/weights/all.pt
     model_version: all-bundled-v1
     fixed_test:
-      predictions: ../joint_emaformer/reference/fixed_test/all/seed_42/predictions.csv
+      predictions: ../CoRegionLng/reference/fixed_test/all/seed_42/predictions.csv
       version: all-fixed-test-v1
       model_version: all-bundled-v1
     backtest:
-      predictions: ../joint_emaformer/reference/backtest/all/seed_42/predictions.csv
+      predictions: ../CoRegionLng/reference/backtest/all/seed_42/predictions.csv
       version: all-backtest-v1
-      protocol: ../joint_emaformer/reference/backtest/protocol.json
-      model_config: ../joint_emaformer/reference/backtest/all/model_config.json
+      protocol: ../CoRegionLng/reference/backtest/protocol.json
+      model_config: ../CoRegionLng/reference/backtest/all/model_config.json
   selected:
-    checkpoint: ../joint_emaformer/weights/selected.pt
+    checkpoint: ../CoRegionLng/weights/selected.pt
     model_version: selected-bundled-v1
     fixed_test:
-      predictions: ../joint_emaformer/reference/fixed_test/selected/seed_42/predictions.csv
+      predictions: ../CoRegionLng/reference/fixed_test/selected/seed_42/predictions.csv
       version: selected-fixed-test-v1
       model_version: selected-bundled-v1
     backtest:
-      predictions: ../joint_emaformer/reference/backtest/selected/seed_42/predictions.csv
+      predictions: ../CoRegionLng/reference/backtest/selected/seed_42/predictions.csv
       version: selected-backtest-v1
-      protocol: ../joint_emaformer/reference/backtest/protocol.json
-      model_config: ../joint_emaformer/reference/backtest/selected/model_config.json
+      protocol: ../CoRegionLng/reference/backtest/protocol.json
+      model_config: ../CoRegionLng/reference/backtest/selected/model_config.json

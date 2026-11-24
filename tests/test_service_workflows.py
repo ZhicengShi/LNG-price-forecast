@@ -20,7 +20,7 @@ sys.path.insert(0,str(ROOT))
 from service.app import create_app
 from service.errors import APIError
 from service.storage import save_json
-from joint_emaformer.data import REGIONS
+from CoRegionLng.data import REGIONS
 
 
 class WorkflowTests(unittest.TestCase):
@@ -104,7 +104,7 @@ class WorkflowTests(unittest.TestCase):
         shared_path = self.workspace/'data.yaml'
         shared_path.write_text(yaml.safe_dump(shared,allow_unicode=True),encoding='utf-8')
         settings = yaml.safe_load((ROOT/'service/config.yaml').read_text(encoding='utf-8'))
-        search = yaml.safe_load((ROOT/'joint_emaformer/configs/search.yaml').read_text(encoding='utf-8'))
+        search = yaml.safe_load((ROOT/'CoRegionLng/configs/search.yaml').read_text(encoding='utf-8'))
         small = deepcopy(search['initial_candidates'][1])
         small.update(seq_len=6,d_model=32,e_layers=1,head_layers=1,head_multiplier=1,max_epochs=1,patience=1,batch_size=64)
         search.update(search_trials=1,finalists=1,validation_folds=1,fold_months=3,initial_candidates=[small])

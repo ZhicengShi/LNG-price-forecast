@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 
-from joint_emaformer.analysis import prediction_intervals
+from CoRegionLng.analysis import prediction_intervals
 
 
 def future_intervals(predictions, table, origin, reference_matches, settings, version):

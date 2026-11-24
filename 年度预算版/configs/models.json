@@ -1319,7 +1319,7 @@
   },
   {
     "spec": {
-      "model": "joint_emaformer",
+      "model": "CoRegionLng",
       "profile": "all",
       "regions": [
         "shanghai",
@@ -1613,7 +1613,7 @@
   },
   {
     "spec": {
-      "model": "joint_emaformer",
+      "model": "CoRegionLng",
       "profile": "selected",
       "regions": [
         "shanghai",

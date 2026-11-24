@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 from uuid import uuid4
 
+import pandas as pd
 import torch
 
 from . import VERSION as SERVICE_VERSION
@@ -20,7 +21,7 @@ from .storage import now, save_json
 VERSION = '年度预算版'
 PACKAGE = Path(__file__).resolve().parents[1] / VERSION
 MODEL_NAMES = {'lstm': 'LSTM', 'emaformer': 'EMAformer', 'mofo': 'MoFo',
-               'emmoformer': 'EMMoFormer', 'joint_emaformer': '联合 EMAformer'}
+               'emmoformer': 'EMMoFormer', 'CoRegionLng': 'CoRegionLng'}
 
 
 def runtime():
@@ -126,27 +127,20 @@ class AnnualService:
                              budget_year=budget_year, cutoff_month=period['cutoff_month'], weight_source='bundled'))
         return dict(version=VERSION, **period, models=rows)
 
-    def dataset(self, requested):
+    def dataset(self, requested, cutoff_month):
         version = requested or self.engine.catalog.default('data')[0]
         self.engine.catalog.get('dataset', version)
         try:
             metadata, paths = self.engine.store.data(version)
         except (KeyError, ValueError) as exc:
             raise APIError(422, 'INVALID_DATA', '年度预测数据版本不可用') from exc
+        if not metadata['first_month'] <= cutoff_month <= metadata['latest_observed_month']:
+            raise APIError(422, 'INVALID_DATA', f'数据须覆盖预算截止月 {cutoff_month}')
         return version, metadata, paths
 
     def training(self, identifier):
         checked_identifier(identifier, 'atrain')
         return self.engine.task(identifier, 'annual_training', public=False)
-
-    def validate_history(self, configs, paths, budget_year):
-        try:
-            for config in configs:
-                raw, _ = runtime().read_history(config['spec'], paths, budget_year)
-                if len(raw) < config['spec']['seq_len'] + 16:
-                    raise ValueError('历史长度不足以形成完整年度训练标签')
-        except (ValueError, KeyError) as exc:
-            raise APIError(422, 'INVALID_DATA', str(exc)) from exc
 
     def predict(self, body):
         with self.engine.lock:
@@ -173,8 +167,7 @@ class AnnualService:
             configs = select_configs(configs, model, profile)
             if not configs:
                 raise APIError(422, 'INVALID_REQUEST', '没有符合条件的年度模型')
-            version, metadata, paths = self.dataset(requested_data)
-            self.validate_history(configs, paths, body.budget_year)
+            version, metadata, paths = self.dataset(requested_data, period['cutoff_month'])
             checkpoints = [runtime().checkpoint_path(weights_dir, body.budget_year, c['spec']) for c in configs]
             if any(not p.is_file() for p in checkpoints):
                 raise APIError(409, 'ANNUAL_WEIGHTS_UNAVAILABLE', '该预算年度的权重尚未准备，请先提交年度训练',
@@ -243,8 +236,12 @@ class AnnualService:
                 raise APIError(429, 'QUEUE_FULL', '任务队列已满，请稍后重试')
             period = annual_period(body.budget_year)
             configs = select_configs(self.configs, body.model, body.profile)
-            data_version, metadata, paths = self.dataset(body.data_version)
-            self.validate_history(configs, paths, body.budget_year)
+            data_version, metadata, _ = self.dataset(body.data_version, period['cutoff_month'])
+            first_month = pd.Period(metadata['first_month'], freq='M')
+            cutoff = pd.Period(period['cutoff_month'], freq='M')
+            history_months = cutoff.ordinal - first_month.ordinal + 1
+            if history_months < max(c['spec']['seq_len'] for c in configs) + 16:
+                raise APIError(422, 'INVALID_DATA', '历史长度不足以形成完整年度训练标签')
             identifier = 'atrain_' + uuid4().hex
             folder = self.engine.store.root/'annual_trainings'/identifier
             config = dict(version=VERSION, service_version=SERVICE_VERSION, kind='annual_training',

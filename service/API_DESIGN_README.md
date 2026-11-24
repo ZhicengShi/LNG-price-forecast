@@ -20,7 +20,7 @@
 
 ### 1.1 功能与适用范围
 
-服务采用三地区融合EMAformer，同时处理上海、浙江、江苏的月度数据，每次预测未来3个月的地区价格，共返回9条预测。支持全变量`all`与组合变量`selected`两种方案，分别管理模型版本及默认模型。
+服务采用CoRegionLng，同时处理上海、浙江、江苏的月度数据，每次预测未来3个月的地区价格，共返回9条预测。支持全变量`all`与组合变量`selected`两种方案，分别管理模型版本及默认模型。
 
 接口接收三地区处理后的XLSX数据表，支持版本登记、训练、自动调参、模型启用、价格预测及历史结果查询。LSTM、单区域EMAformer、MoFo及完整滚动回测使用项目提供的命令行入口，调用方式见各模块说明。
 
@@ -57,7 +57,7 @@
 | 类型 | `string`文本、`integer`整数、`number`有限数值、`boolean`布尔、`object`对象、`array`数组；`null`表示未记录或不可用，不表示0 |
 | 地区 | `shanghai`上海、`zhejiang`浙江、`jiangsu`江苏；三地一次联合处理 |
 | 变量方案 | `all`全变量、`selected`组合变量；预测及训练的默认方案为selected，显式指定模型或调参任务时按对应记录推断；同时提供的方案须一致 |
-| 模型 | 接口业务模型为三地区融合EMAformer；预测长度固定3个月 |
+| 模型 | 接口业务模型为CoRegionLng；预测长度固定3个月 |
 | 月份 | 严格`YYYY-MM`，例如`2026-02`，并检查真实年月合法性 |
 | 时间戳 | 使用带时区的ISO 8601格式；服务返回UTC时间，调用方可转换为业务所在地时间 |
 | 百分数 | 名称带`_percent`的数值已乘100；2.5表示2.5%。`confidence=0.95`表示95% |
@@ -440,7 +440,7 @@ TrainingTask与TuningTask均包含以下字段，各自补充字段分别见6.3�
 | `kind` | string | `training`或`tuning` |
 | `name` | string | 中文任务名称 |
 | `profile` | string | 变量方案 |
-| `model_name` | string | 三地区融合EMAformer |
+| `model_name` | string | CoRegionLng |
 | `data_version` | string | 接受时绑定的数据版本，后续切换默认数据不影响它 |
 | `device` | string | 服务器给本任务安排的实际设备，如cpu、cuda |
 | `status` | string | 见任务状态表 |
@@ -594,7 +594,7 @@ TrainingResult：
 
 ### 7.1 POST /tuning-jobs
 
-调参任务输出推荐参数、候选排名及冻结训练计划。服务复用[tune.py](../joint_emaformer/tune.py)的候选生成和训练算法，搜索范围读取[服务端搜索配置](../joint_emaformer/configs/search.yaml)。正式权重由后续训练任务生成；保留测试成绩不参与本次搜索排名。
+调参任务输出推荐参数、候选排名及冻结训练计划。服务复用[tune.py](../CoRegionLng/tune.py)的候选生成和训练算法，搜索范围读取[服务端搜索配置](../CoRegionLng/configs/search.yaml)。正式权重由后续训练任务生成；保留测试成绩不参与本次搜索排名。
 
 | 请求字段 | 类型 | 必填及默认 | 含义 |
 | --- | --- | --- | --- |
@@ -982,7 +982,7 @@ upper = prediction + e₍ₖ₎
 
 | 字段 | 类型 | 含义 |
 | --- | --- | --- |
-| `model_name` | string | 三地区融合EMAformer |
+| `model_name` | string | CoRegionLng |
 | `service_version` | string | 生成该状态的接口程序版本 |
 | `model_version` | string | 使用的权重版本 |
 | `profile` | string | all或selected |
@@ -1159,7 +1159,7 @@ GET任务成功返回200表示任务记录查询成功，任务本身的执行�
 | 动力煤价格 | 元/吨 | 动力煤价格指标 |
 | 终端非居民天然气价格（分省） | 元/立方米 | 历史目标价格，始终作为输入，须完整且为正 |
 
-全国共同指标按[data.py](../joint_emaformer/data.py)的COMMON清单核对三地一致，区域字段允许不同。非目标列允许空值，实际选为输入后须检查拟合历史中是否有可用值；目标标签须完整。
+全国共同指标按[data.py](../CoRegionLng/data.py)的COMMON清单核对三地一致，区域字段允许不同。非目标列允许空值，实际选为输入后须检查拟合历史中是否有可用值；目标标签须完整。
 
 ### 11.2 两种变量方案
 
@@ -1227,8 +1227,8 @@ outputs/service/
 | [service/config.yaml](config.yaml) | 服务地址、设备、运行目录、上传限制、任务预算及区间设置 |
 | [service/models.yaml](models.yaml) | 启动时导入权重、模型版本及配套评价证据 |
 | [config.yaml](../config.yaml) | 三地区初始处理表路径及公共数据设置 |
-| [全变量配置](../joint_emaformer/configs/all.yaml)、[组合变量配置](../joint_emaformer/configs/selected.yaml) | 各方案的模型参数、训练计划及变量设置 |
-| [search.yaml](../joint_emaformer/configs/search.yaml) | 默认搜索范围及标准搜索预算 |
+| [全变量配置](../CoRegionLng/configs/all.yaml)、[组合变量配置](../CoRegionLng/configs/selected.yaml) | 各方案的模型参数、训练计划及变量设置 |
+| [search.yaml](../CoRegionLng/configs/search.yaml) | 默认搜索范围及标准搜索预算 |
 | 任务effective_config.json | 任务接受时固定的实际参数、日期、数据版本、设备及程序版本 |
 | registry.sqlite3 | 运行中的版本登记、任务状态及默认关系 |
 

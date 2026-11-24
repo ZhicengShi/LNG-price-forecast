@@ -5,13 +5,13 @@ import numpy as np
 import pandas as pd
 import yaml
 from datasets import read_frame
-from joint_emaformer.data import REGIONS, build_frame
-from joint_emaformer._runtime import validate_parameters
-from joint_emaformer._search import candidates
+from CoRegionLng.data import REGIONS, build_frame
+from CoRegionLng._runtime import validate_parameters
+from CoRegionLng._search import candidates
 from .errors import APIError, issue
 from . import VERSION
 
-HERE = Path(__file__).resolve().parents[1]/'joint_emaformer'
+HERE = Path(__file__).resolve().parents[1]/'CoRegionLng'
 
 
 def invalid(message):
@@ -146,8 +146,6 @@ def tuning_config(engine, request):
     if request.profile=='selected' and str(end)<engine.shared['period']['validation_end']:
         invalid('开发期末月不能早于既定组合变量的选择截止月；较早历史仅用于开发期内的回顾复核')
     split = date_split(first,latest,train_end,validation=str(end),test_end=test_end)
-    if end > latest or end < first:
-        invalid('开发期超出可用月份')
     overrides = request.search_space or {}
     if set(overrides)-set(settings['search_space']):
         invalid('search_space含未知字段')

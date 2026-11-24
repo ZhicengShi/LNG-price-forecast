@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parent
 VERSION = "年度预算版"
 TARGET = "终端非居民天然气价格（分省）"
 REGIONS = {"shanghai": "上海", "zhejiang": "浙江", "jiangsu": "江苏"}
-MODELS = ("lstm", "emaformer", "mofo", "emmoformer", "joint_emaformer")
+MODELS = ("lstm", "emaformer", "mofo", "emmoformer", "CoRegionLng")
 MODEL_CLASSES = dict(zip(MODELS[:4], ("LSTM", "EMAformer", "MoFo", "EMMoFormer")))
 
 
@@ -42,7 +42,7 @@ class SingleBudgetModel(nn.Module):
         return self.network(x, first_unseen)
 
 
-class BudgetJointEMAformer(nn.Module):
+class BudgetCoRegionLng(nn.Module):
     def __init__(self, original, indices, width):
         super().__init__()
         self.original, self.width = original, width
@@ -75,13 +75,13 @@ def build_model(spec):
         raise ValueError("年度预算版模型或历史窗口配置无效")
     namespace = f"{__package__}." if __package__ else ""
     module = importlib.import_module(f"{namespace}models.{name}.model")
-    if name == "joint_emaformer":
+    if name == "CoRegionLng":
         layout = spec["layout"]
         if layout["pred_len"] != 1 or parameters["seq_len"] != 6:
             raise ValueError("年度预算版须使用六个月输入并输出一个年度均价")
-        model = BudgetJointEMAformer(module.JointEMAformer(layout, parameters),
-                                     packed_indices(layout, spec["columns"]),
-                                     sum(map(len, spec["columns"])))
+        model = BudgetCoRegionLng(module.CoRegionLng(layout, parameters),
+                                  packed_indices(layout, spec["columns"]),
+                                  sum(map(len, spec["columns"])))
     else:
         if parameters["pred_len"] != 1 or parameters["seq_len"] != 6:
             raise ValueError("年度预算版须使用六个月输入并输出一个年度均价")
@@ -197,8 +197,9 @@ def resolve_device(choice):
 
 
 def checkpoint_path(weights_dir, budget_year, spec):
-    group = "joint" if spec["model"] == "joint_emaformer" else spec["regions"][0]
-    return Path(weights_dir) / str(budget_year) / spec["model"] / spec["profile"] / f"{group}.pt"
+    model = spec["model"]
+    group = "joint" if model == "CoRegionLng" else spec["regions"][0]
+    return Path(weights_dir) / str(budget_year) / model / spec["profile"] / f"{group}.pt"
 
 
 def load_checkpoint(path, budget_year):

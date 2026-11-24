@@ -1,0 +1,47 @@
+{
+  "model": "CoRegionLng",
+  "passed": true,
+  "replayed_seed": 42,
+  "reference_seeds": [
+    42,
+    7,
+    2026
+  ],
+  "fixed_checkpoints": 2,
+  "fixed_values": 360,
+  "search_candidates": 128,
+  "search_confirmation_fits": 72,
+  "backtest_training_runs": 252,
+  "backtest_values": 2268,
+  "bitwise_training_states": true,
+  "bitwise_last_backtest_states": true,
+  "max_backtest_price_difference": 8.881784197001252e-16,
+  "max_training_loss_difference": 0.0,
+  "search_all_records_exact": true,
+  "data_versions": {
+    "shanghai": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
+    "zhejiang": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
+    "jiangsu": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52"
+  },
+  "confidence_intervals": 384,
+  "confidence_max_difference": 0.0,
+  "annual_metric_rows": 72,
+  "tests_passed": 15,
+  "backtest_resume_verified": true,
+  "search_resume_verified": true,
+  "cpu_prediction_verified": true,
+  "no_seed_in_prediction_tables": true,
+  "original_single_region_files_and_weights_preserved": true,
+  "relocation_verified": true,
+  "relocation": {
+    "copied_directory_contains_spaces": true,
+    "started_from_other_directory": true,
+    "checkpoints": 20,
+    "test_values": 1440,
+    "future_profiles": [
+      "all",
+      "selected"
+    ],
+    "cpu_max_price_difference": 6.0965056117634475e-05
+  }
+}

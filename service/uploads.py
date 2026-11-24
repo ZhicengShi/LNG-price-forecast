@@ -1,12 +1,11 @@
 """处理表验证、上传限制及数据统计；不依赖任何已加载模型。"""
 import io
-from itertools import islice
 from pathlib import Path
 import zipfile
 import numpy as np
 import openpyxl
-from datasets import DATE, FIELDS, TARGET, read_frame
-from joint_emaformer.data import REGIONS, NAMES, COMMON
+from datasets import FIELDS, TARGET, InvalidUnit, read_frame
+from CoRegionLng.data import REGIONS, NAMES, COMMON
 from .errors import APIError, issue
 
 
@@ -33,29 +32,10 @@ def validate_tables(paths, max_months, template_units):
     frames, summaries, warnings = {}, [], []
     for region in REGIONS:
         try:
-            with Path(paths[region]).open('rb') as stream:
-                book = openpyxl.load_workbook(stream, read_only=True, data_only=True)
-                try:
-                    if len(book.worksheets) != 1:
-                        raise ValueError('仅支持一个工作表')
-                    worksheet = book.active
-                    header, units = list(worksheet.iter_rows(min_row=1, max_row=2, values_only=True))
-                    if list(header) != [DATE,*FIELDS]:
-                        raise ValueError('字段名称或顺序与模板不一致')
-                    if list(units) != template_units[region]:
-                        wrong = next((i for i,(a,b) in enumerate(zip(units, template_units[region])) if a != b), 0)
-                        raise APIError(422, 'INVALID_DATA', NAMES[region]+'单位行与模板不一致',
-                            [issue('INVALID_UNIT','请使用样例中的单位',region,field=header[wrong])])
-                    row_count = worksheet.max_row
-                    if row_count is None:
-                        row_count = sum(1 for _ in islice(worksheet.iter_rows(values_only=True),max_months+3))
-                    if row_count > max_months+2:
-                        raise ValueError('数据月份数超过服务配置限制')
-                finally:
-                    book.close()
-            frame = read_frame(paths[region])
-        except APIError:
-            raise
+            frame = read_frame(paths[region], expected_units=template_units[region], max_months=max_months)
+        except InvalidUnit as exc:
+            raise APIError(422, 'INVALID_DATA', NAMES[region]+'单位行与模板不一致',
+                           [issue('INVALID_UNIT', '请使用样例中的单位', region, field=exc.field)]) from exc
         except Exception as exc:
             raise APIError(422, 'INVALID_DATA', NAMES[region]+'数据表校验失败',
                            [issue('INVALID_TABLE', str(exc) if isinstance(exc,ValueError) else '工作簿无法读取',region,

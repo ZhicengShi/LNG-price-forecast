@@ -8,9 +8,9 @@
   "legacy_metadata_fields_removed": true,
   "updated_json_files": [
     "manifest.json",
-    "joint_emaformer\\reference\\weights_index.json",
-    "joint_emaformer\\reference\\analysis\\summary.json",
-    "joint_emaformer\\reference\\backtest\\protocol.json",
+    "CoRegionLng\\reference\\weights_index.json",
+    "CoRegionLng\\reference\\analysis\\summary.json",
+    "CoRegionLng\\reference\\backtest\\protocol.json",
     "reference\\verification.json",
     "reference\\weight_index.json",
     "reference\\service_v2_validation\\all_response.json",

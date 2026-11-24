@@ -9,7 +9,7 @@ threads: 4
 api_key_env: LNG_API_KEY
 max_months: 2400
 recent_origins: 20
-search_config: ../joint_emaformer/configs/search.yaml
+search_config: ../CoRegionLng/configs/search.yaml
 max_loaded_models: 2
 idempotency_hours: 24
 upload:

@@ -1,6 +1,6 @@
 # 年度预算版
 
-本目录提供上海、浙江、江苏的下一年度天然气平均价格预测，包含 LSTM、EMAformer、MoFo、EMMoFormer 和联合 EMAformer 五个模型。每个模型均提供全变量和组合变量方案，输出单位为元/立方米。将本目录完整复制到其他位置后，可以独立训练、预测和核验。
+本目录提供上海、浙江、江苏的下一年度天然气平均价格预测，包含 LSTM、EMAformer、MoFo、EMMoFormer 和CoRegionLng 五个模型。每个模型均提供全变量和组合变量方案，输出单位为元/立方米。将本目录完整复制到其他位置后，可以独立训练、预测和核验。
 
 在完整交付目录中，年度预测和训练已接入共用 HTTP 服务，接口前缀为 `/annual-budget`。从上一级目录运行 `python -B -m service.app`，即可在 `/docs` 查看年度预算版接口。调用示例和数据版本流程见 [年度预算版接口说明](../service/年度预算版接口说明.md)。
 
@@ -53,10 +53,10 @@ python -B -m unittest discover -s tests -v
 只运行联合模型组合变量方案，可执行以下命令，输出三地区各一个均价。
 
 ```powershell
-python -B predict.py --budget-year 2026 --model joint_emaformer --profile selected --device cpu
+python -B predict.py --budget-year 2026 --model CoRegionLng --profile selected --device cpu
 ```
 
-`--model` 支持 `all`、`lstm`、`emaformer`、`mofo`、`emmoformer`、`joint_emaformer`。`--profile` 支持 `all`（全变量）、`selected`（组合变量）、`both`（两套）。`--data-dir` 指定三地区数据文件夹，`--weights-dir` 指定权重根目录，`--output` 指定结果 CSV。
+`--model` 支持 `all`、`lstm`、`emaformer`、`mofo`、`emmoformer`、`CoRegionLng`。联合模型的源码位于 `models/CoRegionLng/`，配套权重位于 `weights/<预算年度>/CoRegionLng/`。`--profile` 支持 `all`（全变量）、`selected`（组合变量）、`both`（两套）。`--data-dir` 指定三地区数据文件夹，`--weights-dir` 指定权重根目录，`--output` 指定结果 CSV。
 
 ## 更新数据与重新训练
 
@@ -71,7 +71,7 @@ python -B predict.py --budget-year 2026 --weights-dir outputs/重训权重 --out
 
 当三地数据均更新至 2026 年 8 月后，可以把上述命令中的预算年改为 2027，并使用 `--data-dir` 指定更新后的数据目录。训练仅使用截至预算年前一年 8 月的记录。每个预算年都有对应权重，预测入口校验权重年份与截止月。
 
-训练采用配置中保存的网络结构、学习率、轮数和种子。年度标签损失为标准化均价的均方误差。LSTM、EMAformer、MoFo 使用既有固定配置，EMMoFormer 和联合 EMAformer 使用年度实验开发期预选的配置。重训结果会受到设备和库版本影响。
+训练采用配置中保存的网络结构、学习率、轮数和种子。年度标签损失为标准化均价的均方误差。LSTM、EMAformer、MoFo 使用既有固定配置，EMMoFormer 和CoRegionLng 使用年度实验开发期预选的配置。重训结果会受到设备和库版本影响。
 
 ## 评价范围
 

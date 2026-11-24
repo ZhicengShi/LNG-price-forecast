@@ -8,9 +8,9 @@ import pandas as pd
 import yaml
 
 from datasets import read_frame, resolve_path
-from joint_emaformer._runtime import load_checkpoint
-from joint_emaformer.analysis import as_arrays
-from joint_emaformer.data import REGIONS, TARGET
+from CoRegionLng._runtime import load_checkpoint
+from CoRegionLng.analysis import as_arrays
+from CoRegionLng.data import REGIONS, TARGET
 from .storage import now
 
 

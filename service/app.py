@@ -285,8 +285,8 @@ def create_app(config_path=None):
     @router.get('/annual-budget/models', tags=['年度预算版'], summary='年度预算模型、变量与可用年份',
                 response_model=annual_api.AnnualModelList)
     def annual_models(request: Request, budget_year: int=Query(default=2026,ge=2000,le=9998),
-                      model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
-                      profile: Literal['all','selected','both'] | None=None):
+                      model: annual_api.AnnualModel | None=None,
+                      profile: annual_api.AnnualProfile | None=None):
         return request.app.state.engine.annual.models(budget_year,model,profile)
 
     @router.post('/annual-budget/predictions', tags=['年度预算版'], summary='预测下一年度平均价格',
@@ -298,8 +298,8 @@ def create_app(config_path=None):
     @router.get('/annual-budget/predictions', tags=['年度预算版'], summary='年度预算预测历史',
                 response_model=annual_api.AnnualPredictionList)
     def annual_predictions(request: Request,budget_year: int | None=Query(default=None,ge=2000,le=9998),
-                           model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
-                           profile: Literal['all','selected','both'] | None=None,data_version: str | None=None):
+                           model: annual_api.AnnualModel | None=None,
+                           profile: annual_api.AnnualProfile | None=None,data_version: str | None=None):
         return request.app.state.engine.annual.predictions(budget_year,model,profile,data_version)
 
     @router.get('/annual-budget/predictions/{prediction_id}', tags=['年度预算版'], summary='查询年度预算预测结果',
@@ -324,8 +324,8 @@ def create_app(config_path=None):
     @router.get('/annual-budget/trainings', tags=['年度预算版'], summary='年度预算训练任务列表',
                 response_model=annual_api.AnnualTrainingList)
     def annual_trainings(request: Request,budget_year: int | None=Query(default=None,ge=2000,le=9998),
-                         model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
-                         profile: Literal['all','selected','both'] | None=None,status: api.TaskStatus | None=None,
+                         model: annual_api.AnnualModel | None=None,
+                         profile: annual_api.AnnualProfile | None=None,status: api.TaskStatus | None=None,
                          data_version: str | None=None):
         return dict(version='年度预算版',items=list_tasks(request.app.state.engine,'annual_training',
                     budget_year=budget_year,model=model,profile=profile,status=status,data_version=data_version))

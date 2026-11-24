@@ -190,7 +190,7 @@ def main():
     if tests.returncode:
         raise RuntimeError('测试未通过，请查看'+str(output/'tests.log'))
     test_count = int(re.search(r'Ran (\d+) tests', tests.stderr).group(1))
-    cli = subprocess.run([sys.executable, '-B', str(ROOT/'joint_emaformer/predict.py'), '--mode', 'future',
+    cli = subprocess.run([sys.executable, '-B', str(ROOT/'CoRegionLng/predict.py'), '--mode', 'future',
         '--device', 'cpu', '--output-dir', str(work/'cli')], cwd=ROOT, capture_output=True, text=True, encoding='utf-8', timeout=120)
     (work/'cli.log').write_text(cli.stdout+cli.stderr, encoding='utf-8')
     if cli.returncode:

@@ -1,0 +1,43 @@
+# training.lr_schedule=null???parameters.lr?training.epochs????????
+model: CoRegionLng
+data_config: ../../config.yaml
+profile: selected
+parameters:
+  seq_len: 6
+  d_model: 256
+  n_heads: 4
+  e_layers: 2
+  ff_multiplier: 2
+  activation: gelu
+  norm_first: true
+  window_norm: true
+  channel_embedding: false
+  cycle: 24
+  dropout: 0.2
+  embedding_dropout: 0.05
+  attention_dropout: 0.0
+  head_dropout: 0.05
+  head_layers: 3
+  head_multiplier: 2
+  output_mode: delta
+  residual_scale: 0.25
+  missing: linear_history
+  loss: mape
+  optimizer: AdamW
+  batch_size: 64
+  weight_decay: 0.01
+  grad_clip: 0.5
+  scheduler: none
+  max_epochs: 24
+  patience: 15
+  lr: 0.00013681810651684312
+training:
+  cutoff: 2024-07
+  seed: 42
+  epochs: 24
+  lr_schedule: null
+  output_dir: ../outputs/train
+prediction:
+  mode: test
+  checkpoint: ../weights/selected.pt
+  output_dir: ../outputs/predict
