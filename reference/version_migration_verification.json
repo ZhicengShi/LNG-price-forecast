@@ -32,5 +32,8 @@
     "json_examples": 14,
     "api_operations": 22,
     "active_digest_computations": 0
-  }
+  },
+  "artifact_scope": "historical_single_region_12_month_window",
+  "current_verification": "reference/verification.json",
+  "current_update": "reference/window6_update.json"
 }

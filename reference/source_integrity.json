@@ -10,5 +10,8 @@
   "model/_mofo_core.py": "f4b5957116d16cf69ef54eedad9aab82fec2db2311e1d7b62f95bfa2361f9d9a",
   "LNGData/上海_处理后数据表.xlsx": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
   "LNGData/江苏_处理后数据表.xlsx": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52",
-  "LNGData/浙江_处理后数据表.xlsx": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193"
+  "LNGData/浙江_处理后数据表.xlsx": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193",
+  "artifact_scope": "historical_single_region_12_month_window",
+  "current_verification": "reference/verification.json",
+  "current_update": "reference/window6_update.json"
 }

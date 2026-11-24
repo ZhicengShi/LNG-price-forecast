@@ -1,4 +1,6 @@
-# 相对路径相对于本YAML；数据路径、时间边界、历史窗口和缺失策略读取公共配置。
+# 相对路径相对于本YAML；数据路径、时间边界和缺失策略读取公共配置。
+# XGBoost组合选择保留12个月历史窗口；单区域神经网络使用公共配置的6个月。
+history_months: 12
 data_config: ../config.yaml
 regions: [shanghai, zhejiang, jiangsu]
 output_dir: outputs

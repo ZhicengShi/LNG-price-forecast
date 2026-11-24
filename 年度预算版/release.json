@@ -1,0 +1,42 @@
+{
+  "version": "年度预算版",
+  "package_date": "2026-11-19",
+  "data_first_month": "2015-01",
+  "data_last_month": "2026-05",
+  "budget_years_with_weights": [
+    2024,
+    2025,
+    2026
+  ],
+  "default_budget_year": 2026,
+  "reference_budget_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "settled_budget_years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "input_months": 6,
+  "output": "次年1–12月算术平均价格",
+  "unit": "元/立方米",
+  "random_seed": 42,
+  "loss": "标准化年度均价的均方误差",
+  "training_origins": "逐月起点，目标期第5至16个月全部已观测",
+  "checkpoints": 78,
+  "latest_checkpoints": 26,
+  "data_sha256": {
+    "上海_处理后数据表.xlsx": "0e1242ede72dffab84fd43f02a7813fc5ed498d75faf785525993b1d54a39329",
+    "江苏_处理后数据表.xlsx": "ee0714c2909ed77c479f4487b69165aee237c7e926f6c9951e2195bb35d07d52",
+    "浙江_处理后数据表.xlsx": "469306c195f55a815dc0f6b438a1bf9dacedf2f9ae7113c047966f997dfce193"
+  }
+}

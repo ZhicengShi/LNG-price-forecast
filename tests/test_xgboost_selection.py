@@ -21,6 +21,28 @@ from selection import analyze, export_results, load_settings, selection_input, w
 
 
 class XGBoostSelectionTests(unittest.TestCase):
+    def test_xgboost_keeps_twelve_months_when_neural_models_use_six(self):
+        _, shared, args, _, _ = load_settings(ROOT/'xgboost/config.yaml')
+        self.assertEqual(shared['window']['seq_len'], 6)
+        self.assertEqual(args.seq_len, 12)
+        self.assertEqual(args.pred_len, 3)
+
+    def test_restored_combinations_are_validation_winners_and_match_training_config(self):
+        import json
+        shared = load_global(ROOT/'config.yaml')
+        results = json.loads((ROOT/'xgboost/reference/selection.json').read_text(encoding='utf-8'))
+        counts = dict(shanghai=4, zhejiang=3, jiangsu=5)
+        for result in results:
+            region = result['region']
+            features = shared['features']['selected'][region]
+            self.assertEqual(features, result['training_features'])
+            self.assertEqual(len(features), counts[region])
+            self.assertEqual(features[0], TARGET)
+            best = result['combinations'][0]
+            self.assertEqual(set(features), set(best['features']))
+            self.assertEqual(result['parameters'], best['parameters'])
+            self.assertAlmostEqual(result['val_MAPE'], best['val_MAPE'])
+
     def test_test_period_cannot_change_selection_inputs(self):
         shared = load_global(ROOT/'config.yaml')
         original = selection_input(shared, 'shanghai', 'all')

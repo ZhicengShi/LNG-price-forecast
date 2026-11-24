@@ -12,7 +12,7 @@ from time import perf_counter
 from typing import Literal
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi import APIRouter, Depends, FastAPI, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.security import APIKeyHeader
@@ -27,6 +27,8 @@ from .errors import APIError, issue
 from .uploads import inspect_xlsx
 from .tasks import submit, list_tasks, cancel, tuning_results
 from . import schemas as api
+from .annual import AnnualService
+from . import annual_schemas as annual_api
 
 
 def create_app(config_path=None):
@@ -36,8 +38,9 @@ def create_app(config_path=None):
     @asynccontextmanager
     async def lifespan(app):
         app.state.engine = await run_in_threadpool(Engine,settings)
-        app.state.engine.start_jobs()
         try:
+            app.state.engine.annual = AnnualService(app.state.engine)
+            app.state.engine.start_jobs()
             yield
         finally:
             await run_in_threadpool(app.state.engine.close)
@@ -60,6 +63,9 @@ def create_app(config_path=None):
             '/tuning-jobs': {'profile','status','data_version'},
             '/tuning-jobs/{tuning_id}/results': {'phase'},
             '/predictions': {'profile','model_version','data_version','generated_from','generated_to'},
+            '/annual-budget/models': {'budget_year','model','profile'},
+            '/annual-budget/predictions': {'budget_year','model','profile','data_version'},
+            '/annual-budget/trainings': {'budget_year','model','profile','status','data_version'},
         }.get(getattr(route,'path',''),set()) if request.method=='GET' else set()
         unknown = set(request.query_params)-allowed
         if unknown:
@@ -275,6 +281,67 @@ def create_app(config_path=None):
     @router.post('/tuning-jobs/{tuning_id}/cancel',summary='取消调参任务',response_model=api.CancelTuning,responses={202:{'model':api.CancelTuning}})
     def cancel_tuning(tuning_id: str,body: EmptyRequest,request: Request):
         return mutation(request,{},lambda:cancel(request.app.state.engine,tuning_id,'tuning'))
+
+    @router.get('/annual-budget/models', tags=['年度预算版'], summary='年度预算模型、变量与可用年份',
+                response_model=annual_api.AnnualModelList)
+    def annual_models(request: Request, budget_year: int=Query(default=2026,ge=2000,le=9998),
+                      model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
+                      profile: Literal['all','selected','both'] | None=None):
+        return request.app.state.engine.annual.models(budget_year,model,profile)
+
+    @router.post('/annual-budget/predictions', tags=['年度预算版'], summary='预测下一年度平均价格',
+                 response_model=annual_api.AnnualPredictionResponse)
+    def annual_predict(body: annual_api.AnnualPredictRequest,request: Request):
+        return mutation(request,body.model_dump(exclude_unset=True),
+                        lambda:(request.app.state.engine.annual.predict(body),200))
+
+    @router.get('/annual-budget/predictions', tags=['年度预算版'], summary='年度预算预测历史',
+                response_model=annual_api.AnnualPredictionList)
+    def annual_predictions(request: Request,budget_year: int | None=Query(default=None,ge=2000,le=9998),
+                           model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
+                           profile: Literal['all','selected','both'] | None=None,data_version: str | None=None):
+        return request.app.state.engine.annual.predictions(budget_year,model,profile,data_version)
+
+    @router.get('/annual-budget/predictions/{prediction_id}', tags=['年度预算版'], summary='查询年度预算预测结果',
+                response_model=annual_api.AnnualPredictionResponse)
+    def annual_prediction(prediction_id: str,request: Request):
+        return request.app.state.engine.annual.prediction(prediction_id)
+
+    @router.get('/annual-budget/predictions/{prediction_id}/csv', tags=['年度预算版'], summary='下载年度预算预测明细',
+                response_class=Response,
+                responses={200:{'content':{'text/csv':{'schema':{'type':'string','format':'binary'}}}}})
+    def annual_csv(prediction_id: str,request: Request):
+        payload = request.app.state.engine.annual.prediction_csv(prediction_id)
+        return Response(payload,media_type='text/csv',
+                        headers={'Content-Disposition':f'attachment; filename="{prediction_id}.csv"'})
+
+    @router.post('/annual-budget/trainings', tags=['年度预算版'], summary='提交年度预算训练任务',status_code=202,
+                 response_model=annual_api.AnnualTrainingTask)
+    def annual_training(body: annual_api.AnnualTrainingRequest,request: Request):
+        return mutation(request,body.model_dump(exclude_unset=True),
+                        lambda:(request.app.state.engine.annual.submit_training(body),202))
+
+    @router.get('/annual-budget/trainings', tags=['年度预算版'], summary='年度预算训练任务列表',
+                response_model=annual_api.AnnualTrainingList)
+    def annual_trainings(request: Request,budget_year: int | None=Query(default=None,ge=2000,le=9998),
+                         model: Literal['all','lstm','emaformer','mofo','emmoformer','joint_emaformer'] | None=None,
+                         profile: Literal['all','selected','both'] | None=None,status: api.TaskStatus | None=None,
+                         data_version: str | None=None):
+        return dict(version='年度预算版',items=list_tasks(request.app.state.engine,'annual_training',
+                    budget_year=budget_year,model=model,profile=profile,status=status,data_version=data_version))
+
+    @router.get('/annual-budget/trainings/{training_id}', tags=['年度预算版'], summary='年度预算训练进度与结果',
+                response_model=annual_api.AnnualTrainingTask)
+    def annual_training_detail(training_id: str,request: Request):
+        return request.app.state.engine.task(training_id,'annual_training')
+
+    @router.post('/annual-budget/trainings/{training_id}/cancel', tags=['年度预算版'], summary='取消年度预算训练',
+                 response_model=annual_api.AnnualCancelTraining,responses={202:{'model':annual_api.AnnualCancelTraining}})
+    def annual_cancel(training_id: str,body: EmptyRequest,request: Request):
+        def operation():
+            value,status = cancel(request.app.state.engine,training_id,'annual_training')
+            return dict(version='年度预算版',**value),status
+        return mutation(request,{},operation)
 
     app.include_router(router)
     return app

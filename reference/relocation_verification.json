@@ -6,5 +6,8 @@
   "weights_reloaded": 18,
   "future_prediction": true,
   "copied_package": "D:\\LNGPre\\tmp\\single region relocation check",
-  "verification_output": "D:\\LNGPre\\tmp\\single_relocation_verification"
+  "verification_output": "D:\\LNGPre\\tmp\\single_relocation_verification",
+  "artifact_scope": "historical_single_region_12_month_window",
+  "current_verification": "reference/verification.json",
+  "current_update": "reference/window6_update.json"
 }

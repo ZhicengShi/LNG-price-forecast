@@ -223,7 +223,7 @@ def load_settings(path, data_config=None):
     shared = load_global(shared_path)
     ranking, combination = settings['ranking'], settings['combination']
     args = SimpleNamespace(**ranking, **combination, ranking_model=ranking['model'],
-                           seq_len=shared['window']['seq_len'], pred_len=shared['window']['pred_len'],
+                           seq_len=settings['history_months'], pred_len=shared['window']['pred_len'],
                            missing=shared['preprocessing']['missing'], seeds=settings['seeds'],
                            parameter_sets=settings['parameters']['variants'],
                            base_parameters=settings['parameters']['base'])

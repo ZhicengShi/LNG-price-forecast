@@ -1,0 +1,17 @@
+{
+  "version": "年度预算版",
+  "device": "cuda",
+  "status": "通过",
+  "checkpoints": 78,
+  "reloaded_predictions": 90,
+  "reference_predictions": 210,
+  "metric_groups": 30,
+  "budget_years": [
+    2024,
+    2025,
+    2026
+  ],
+  "max_price_difference": 4.899458616591801e-11,
+  "tolerance": 1e-08,
+  "torch_version": "2.14.0+cu130"
+}

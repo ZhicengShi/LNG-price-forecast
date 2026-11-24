@@ -1,0 +1,204 @@
+# 本目录仅包含最终配置；每个地区、变量方案使用各自的结构与训练参数。
+# 输入维度、目标位置、历史窗口、输出步长和首月相位由公共数据配置自动确定。
+# --epochs 可临时覆盖所选实验的最大轮数；新运行不会覆盖 weights。
+model: EMMoFormer
+data_config: ../config.yaml
+training:
+  regions:
+  - shanghai
+  - zhejiang
+  - jiangsu
+  profiles:
+  - all
+  - selected
+  output_dir: outputs/train
+prediction:
+  regions:
+  - shanghai
+  - zhejiang
+  - jiangsu
+  profiles:
+  - all
+  - selected
+  mode: test
+  checkpoint_dir: weights
+  batch_size: 16
+  output_dir: outputs/predict
+experiments:
+  shanghai:
+    all:
+      parameters:
+        d_model: 64
+        n_heads: 4
+        temporal_depth: 1
+        channel_depth: 1
+        dropout: 0.0
+        head_dropout: 0.1
+        calendar_cycle: 12
+        window_norm: revin
+        std_floor: 0.0
+        temporal_weight_init: 0.1
+        channel_norm: post_layer
+        ff_multiplier: 4
+        head_layers: 1
+        head_multiplier: 2
+        head_history: true
+        embedding_residual: true
+        use_modulator: true
+      training:
+        lr: 0.0003
+        batch_size: 16
+        optimizer: Adam
+        weight_decay: 0.0
+        loss: mae
+        grad_clip: 1.0
+        scheduler: none
+        epochs: 160
+        patience: 20
+    selected:
+      parameters:
+        d_model: 64
+        n_heads: 4
+        temporal_depth: 1
+        channel_depth: 1
+        dropout: 0.05
+        head_dropout: 0.1
+        calendar_cycle: 12
+        window_norm: revin
+        std_floor: 0.05
+        temporal_weight_init: 0.1
+        channel_norm: post_layer
+        ff_multiplier: 4
+        head_layers: 1
+        head_multiplier: 2
+        head_history: true
+        embedding_residual: true
+        use_modulator: true
+      training:
+        lr: 0.001
+        batch_size: 16
+        optimizer: Adam
+        weight_decay: 0.0
+        loss: mape
+        grad_clip: 1.0
+        scheduler: none
+        epochs: 160
+        patience: 20
+  zhejiang:
+    all:
+      parameters:
+        d_model: 128
+        n_heads: 2
+        temporal_depth: 2
+        channel_depth: 2
+        dropout: 0.2
+        head_dropout: 0.0
+        calendar_cycle: 12
+        window_norm: revin
+        std_floor: 0.0
+        temporal_weight_init: 0.05
+        channel_norm: post_layer
+        ff_multiplier: 2
+        head_layers: 3
+        head_multiplier: 2
+        head_history: false
+        embedding_residual: false
+        use_modulator: true
+      training:
+        lr: 0.0008260586854801185
+        batch_size: 16
+        optimizer: Adam
+        weight_decay: 0.0
+        loss: mse
+        grad_clip: 1.0
+        scheduler: none
+        epochs: 160
+        patience: 20
+    selected:
+      parameters:
+        d_model: 32
+        n_heads: 4
+        temporal_depth: 1
+        channel_depth: 1
+        dropout: 0.1
+        head_dropout: 0.1
+        calendar_cycle: 12
+        window_norm: revin
+        std_floor: 0.05
+        temporal_weight_init: 0.1
+        channel_norm: post_layer
+        ff_multiplier: 4
+        head_layers: 1
+        head_multiplier: 2
+        head_history: true
+        embedding_residual: true
+        use_modulator: true
+      training:
+        lr: 0.0003
+        batch_size: 16
+        optimizer: Adam
+        weight_decay: 0.0
+        loss: mape
+        grad_clip: 1.0
+        scheduler: none
+        epochs: 160
+        patience: 20
+  jiangsu:
+    all:
+      parameters:
+        d_model: 128
+        n_heads: 8
+        temporal_depth: 1
+        channel_depth: 2
+        dropout: 0.1
+        head_dropout: 0.05
+        calendar_cycle: 12
+        window_norm: center
+        std_floor: 0.0
+        temporal_weight_init: 0.25
+        channel_norm: rms
+        ff_multiplier: 4
+        head_layers: 2
+        head_multiplier: 4
+        head_history: false
+        embedding_residual: true
+        use_modulator: true
+      training:
+        lr: 0.0010673964450514098
+        batch_size: 16
+        optimizer: AdamW
+        weight_decay: 0.001
+        loss: mape
+        grad_clip: 1.0
+        scheduler: cosine
+        epochs: 160
+        patience: 20
+    selected:
+      parameters:
+        d_model: 32
+        n_heads: 4
+        temporal_depth: 1
+        channel_depth: 2
+        dropout: 0.0
+        head_dropout: 0.0
+        calendar_cycle: 12
+        window_norm: center
+        std_floor: 0.0
+        temporal_weight_init: 0.05
+        channel_norm: post_layer
+        ff_multiplier: 4
+        head_layers: 1
+        head_multiplier: 2
+        head_history: true
+        embedding_residual: false
+        use_modulator: false
+      training:
+        lr: 0.00034106524299288
+        batch_size: 16
+        optimizer: AdamW
+        weight_decay: 0.001
+        loss: mape
+        grad_clip: 1.0
+        scheduler: none
+        epochs: 160
+        patience: 20

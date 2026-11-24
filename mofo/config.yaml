@@ -8,7 +8,8 @@ parameters:
   d_model: 24
   head: 4
   d_layers: 1
-  periodic: 12
+  # 周期分块长度不超过6个月输入窗口。
+  periodic: 6
   bias: true
   cias: true
   channel_fusion: true

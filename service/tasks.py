@@ -19,7 +19,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def identifier(task):
-    return task['training_id'] if task['kind']=='training' else task['tuning_id']
+    return task['tuning_id'] if task['kind']=='tuning' else task['training_id']
+
+
+def task_directory(storage, task):
+    folders = {'training':'trainings', 'tuning':'tuning_jobs', 'annual_training':'annual_trainings'}
+    return Path(storage)/folders[task['kind']]/identifier(task)
 
 
 def public_task(engine,task):
@@ -98,7 +103,8 @@ def cancel(engine,task_id,kind):
         internal.setdefault('cancel_requested_at',now())
         return dict(status=status,finished_at=now() if status=='cancelled' else None,_internal=internal)
     task = engine.catalog.update_job(task_id,change)
-    return {kind+'_id':task_id,'status':task['status'],
+    id_field = 'tuning_id' if kind=='tuning' else 'training_id'
+    return {id_field:task_id,'status':task['status'],
             'requested_at':task['_internal'].get('cancel_requested_at',task['finished_at'] or now()),
             'message':'任务已取消' if task['status']=='cancelled' else '已请求停止，等待安全检查点'},200 if repeated else 202
 
@@ -195,8 +201,8 @@ class JobManager:
         self.engine.catalog.update_job(task_id,claim)
         if not claimed:
             return
-        folder = self.engine.store.root/('trainings' if task['kind']=='training' else 'tuning_jobs')/task_id
-        self.stream = (folder/('training.log' if task['kind']=='training' else 'tuning.log')).open('a',encoding='utf-8')
+        folder = task_directory(self.engine.store.root,task)
+        self.stream = (folder/('tuning.log' if task['kind']=='tuning' else 'training.log')).open('a',encoding='utf-8')
         env = dict(os.environ,PYTHONDONTWRITEBYTECODE='1',PYTHONIOENCODING='utf-8')
         try:
             self.process = subprocess.Popen([sys.executable,'-X','utf8','-B','-m','service.worker',

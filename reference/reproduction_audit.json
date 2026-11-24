@@ -813,5 +813,8 @@
   "original_project_files_unchanged": true,
   "metric_tables": 6,
   "metrics_include_horizon_scores": true,
-  "note": "18组均从头训练，最佳轮数、验证MAPE和最佳权重参数张量与原实验逐项完全一致；元数据记录本次审计时间，不冒充原训练时间。"
+  "note": "18组均从头训练，最佳轮数、验证MAPE和最佳权重参数张量与原实验逐项完全一致；元数据记录本次审计时间，不冒充原训练时间。",
+  "artifact_scope": "historical_single_region_12_month_window",
+  "current_verification": "reference/verification.json",
+  "current_update": "reference/window6_update.json"
 }

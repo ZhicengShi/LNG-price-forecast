@@ -1,0 +1,1262 @@
+[
+  {
+    "path": "weights/2024/emaformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "4a7d61e8c86aac93bd280eccfa1301b93e1fe93a465594802085384dec62131d",
+    "source_checkpoint_sha256": "e617b6b934bc59a1f1d51aac7f2ddb7e60456943ef705c757561f6da7861d13e"
+  },
+  {
+    "path": "weights/2024/lstm/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "17abc0bb92c646954a06a8ffafdace9d9fa70bbb14e4d869251598929cd60707",
+    "source_checkpoint_sha256": "aff82ac7ef6e09c318f202aacb96a000fba703380b361ed3eb44ea9f8aa6be7a"
+  },
+  {
+    "path": "weights/2024/mofo/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "1406eeb2a28d9c805d486ba50182f44f598d4b237a578d0654b8b934db3389ba",
+    "source_checkpoint_sha256": "c178d31640623c87c4043c0a9f5ff83c79c58c1c9abd5fb75b3fc1c74df0c029"
+  },
+  {
+    "path": "weights/2024/emaformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "bd2736cb2c0bbbded2370253dc10c9b1dee338899e0377f87148ca418045d475",
+    "source_checkpoint_sha256": "30007663bf7947d83bcb9e1b41e9a98800f743d8357dc6624983f132effe7422"
+  },
+  {
+    "path": "weights/2024/lstm/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "10078185e260a8fc7dd43fcfde95fa6a63ff187c1e2193d748017d3205524042",
+    "source_checkpoint_sha256": "53c99f8fd0ea2c27049a904e7f7c0f5fc64653b1010d253f2838ff5abfaac416"
+  },
+  {
+    "path": "weights/2024/mofo/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "2af0e5c215ee4202f8d5fb8a6d9883f967de25b01de19b192a7fbed566311187",
+    "source_checkpoint_sha256": "49edfa87fb3a673c90e0d1c737dc062eda787968b95bee0416bd668e13af0349"
+  },
+  {
+    "path": "weights/2024/emaformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "7b7069c77775f8a5cca93e24b87d0299298598754f911778f24e40147aa38c4b",
+    "source_checkpoint_sha256": "6cfce83047a313ba827566cd8d017f755f3805e323f759215d4cf702ecf87514"
+  },
+  {
+    "path": "weights/2024/lstm/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "9081736a4682b841d480ea1a2ad7b840e94f18a0389713d1285e2931985b2968",
+    "source_checkpoint_sha256": "5f691cfbbea5e464c5a41d84f9e5a2011d9b5d34f4bd43ef04153ad28568f436"
+  },
+  {
+    "path": "weights/2024/mofo/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "c95b3d2e2cd8bf319656ade15b9da71270339e21e4613d2a175cdc37d6c87950",
+    "source_checkpoint_sha256": "f5da60614051779dfc588e710d07f33e0bf5b6c3b58f1de24d469306e1406a3b"
+  },
+  {
+    "path": "weights/2024/emaformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "e1fc65997dfd32a2db498ac7d5f4d6a0ff5f4dd8d24d98f25c4d61486c5905b4",
+    "source_checkpoint_sha256": "741b2de14865ff2db17cc10ef98c1b00fe7041df6c5e1597e35d6c1f70766ab8"
+  },
+  {
+    "path": "weights/2024/lstm/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "4fb15c7e343fa18cb4175083d5efff5545dddb5d9fb48d9c68247cf8210cc0ab",
+    "source_checkpoint_sha256": "391acaf234cf415f248ddbb2c0e60d546957228aac0eb6c89dc84b017a5577a1"
+  },
+  {
+    "path": "weights/2024/mofo/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "595212fc231c89f3627eec1e54362a1784d816072d44773bc6339035e567c675",
+    "source_checkpoint_sha256": "96e8de1ce411a86c4adac57dffee20bc85ec764f26e0cebce3ff05c711897a6c"
+  },
+  {
+    "path": "weights/2024/emaformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "f11bf1f9e553e381f2ac3d027bdcfd96c577b63fe06b1c33c9946ed6806cdade",
+    "source_checkpoint_sha256": "4f5cdf2ec6d268a0eb453575155fe4be2a6a02a5a4d370e2a82760b3f6178360"
+  },
+  {
+    "path": "weights/2024/lstm/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b26665bd44641ca0f35597ecae4bb8d30aff1528da86abd1a1d4b620e8458d02",
+    "source_checkpoint_sha256": "9b9cdf33fd71cf14ddfd6a162b6c7c06be938e3c8b8c4680c582d1d9796a2aeb"
+  },
+  {
+    "path": "weights/2024/mofo/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "75d046075ef272ab86c91d1f54581b2f9a2ff19eb0cb31265fd8d4fcaf224ae4",
+    "source_checkpoint_sha256": "c40d1ecacd2cc29e04da70e16db7b7175c4a6128b4babd057a23c3668c1bc4fa"
+  },
+  {
+    "path": "weights/2024/emaformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "7c4f9bc86b6ae89a7ae7ebb2a1c42305da2bb098abe163e80fa0440fc99e5213",
+    "source_checkpoint_sha256": "48a8e2d62a72ed54f1097f6209230a798c2b3b49fc7cd7f93fa558b0d10d969e"
+  },
+  {
+    "path": "weights/2024/lstm/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "a7e06e14fb2062cfe5faf22477aadd6198bc838b00d11d166cde9332a6273d37",
+    "source_checkpoint_sha256": "d9e96b96ba5ea839684d9b2181923d7dce3fb3eec90f40bb9f9da0ddb874a3e0"
+  },
+  {
+    "path": "weights/2024/mofo/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "6eccf370e901a89495627a286c3c7d2e18f02ca88af67aedbbd82bd1d1c5d449",
+    "source_checkpoint_sha256": "b53d7324fbcb8ccf6997a7e2c03dbf90ea9bf96edc774f0f7e34087e068fc715"
+  },
+  {
+    "path": "weights/2025/emaformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "2236060d6b2d2df231bd96017e46b5b91213a4b3b3c6d95efc1f418976fbbb9a",
+    "source_checkpoint_sha256": "85fecd0635fdc9586f8ab79d5043b809deb40bea5e3906bea850ca5e818617cd"
+  },
+  {
+    "path": "weights/2025/lstm/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "68009182b5c71ba28be10b548d31a54a7ee1664d329e9ec3523c9744fbe901c8",
+    "source_checkpoint_sha256": "55bb2712339ed94e96880359b2644f0f0e84ebf2f4a5ec218a151105104ac43c"
+  },
+  {
+    "path": "weights/2025/mofo/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "7bdc0962120829f4730fd3b0d31b44f1b00941068dc1df37d8b11b035df668b6",
+    "source_checkpoint_sha256": "ead64d51ca2d2d33adc1a4b49440142a1ff41dd4fe9875fca96d2d4b8828bf08"
+  },
+  {
+    "path": "weights/2025/emaformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "bac66cf3f78ea811db9ec70a8469e95409b4cbb2f0ae059dafc144e0fc5fac94",
+    "source_checkpoint_sha256": "87fbf08d3169331e3dcfe0dec7acab4cb0d453ea41eaad272862060fa12bad41"
+  },
+  {
+    "path": "weights/2025/lstm/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "110eb96b7acda6f89d98e74b0f970b29a99ee43cf71af5d0dbadf257b5949a7b",
+    "source_checkpoint_sha256": "e194f87f9bb528c6a841e2c995a4e31681e878ce7b65e018d6b53ff6362ff9d5"
+  },
+  {
+    "path": "weights/2025/mofo/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "3c36357531f4e0428187fcb38bad45c3693350dd93df9e6df972e86fd8d77799",
+    "source_checkpoint_sha256": "53e7f579b9922809da510ccab24075877912c8cf5762294f2af6b2682f47d15a"
+  },
+  {
+    "path": "weights/2025/emaformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "5db4473bf1aace0399addb65e41030cb80bccaa580186a86076342f2516bb762",
+    "source_checkpoint_sha256": "fdfe3367492c91c2e4e344df04c5830cfc6ae13c3951741d6a82c4a44fe2886f"
+  },
+  {
+    "path": "weights/2025/lstm/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "da31c12a4dcc5973fcceadd030f8d737157a781007d22c8b0feed87f6ec1ed3a",
+    "source_checkpoint_sha256": "b833b3444415a27a1ea7a1c98f7b10c9f2f8d7b72fdaaab848b6c2229918428a"
+  },
+  {
+    "path": "weights/2025/mofo/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "ca46fec192f274d295bafb0fae1c3895a0dc44b375e5da23e0c07a0e5f949abc",
+    "source_checkpoint_sha256": "20b6e50cf00436a9fcfa9bf97632ffabf3dfb16aab4af4c7c708fafb73f45d98"
+  },
+  {
+    "path": "weights/2025/emaformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "5f933c2100535fc9545cbda241b4d8e12d19a7468c855fea6f28996c94f1b0fd",
+    "source_checkpoint_sha256": "ac7eff3c6fcd4c2615cdff5349ac12c31ecdb2626a867729c85016b70e99a846"
+  },
+  {
+    "path": "weights/2025/lstm/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "ea9ce86b5747816617cbd60663ec680e73cd100b6e87066d687fe96856d004ff",
+    "source_checkpoint_sha256": "f78637d873149c9d8d698716c611ae2ac00d8952c0bfbfa5bfc53121d8de91de"
+  },
+  {
+    "path": "weights/2025/mofo/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "d2663999794c060597b83f09a5fdda173880b816da4713e8bc1f0c50aafc061f",
+    "source_checkpoint_sha256": "644127042ab44e23f70c7be53a25aa43c773a52336e4dffdb5cfdb5594056082"
+  },
+  {
+    "path": "weights/2025/emaformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "6ea75558f80ca312f4828b6741a20041b6ba2eff95be8627c2e8c034d2f31570",
+    "source_checkpoint_sha256": "27b4a5bf2c5698e245b2273271dbe9d7ded00c4999604047087d9c2e483df66f"
+  },
+  {
+    "path": "weights/2025/lstm/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "a84e07f55e69fae7bffab0daad3406ff64d56f546ad12211bce7acea246ae00d",
+    "source_checkpoint_sha256": "56112a0aa6de6a374675791b55eef66ce76dc3297a12c0eb3bb8913d59fbc034"
+  },
+  {
+    "path": "weights/2025/mofo/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b04d7e4e3fba8f907e873f3f2a78e0f92b4e200eda6687afb8e3a6e8b152d7e8",
+    "source_checkpoint_sha256": "694caf1afe4bc7e19cffa4e4de9b680ff6bcafebbd616e538402681a91c5ad7b"
+  },
+  {
+    "path": "weights/2025/emaformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "1b1e0f3565c52b54f970ac9454ab1a567afa0a8f77b1288a0115d0c133e769bb",
+    "source_checkpoint_sha256": "0c7a0b6473d8eb462477b6251c8e99ffe262ca842369a1d97b9209783ab915ce"
+  },
+  {
+    "path": "weights/2025/lstm/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "e145d425510605cb80956b95446be034429d2d62ad94e8fdfac4d613c00bba43",
+    "source_checkpoint_sha256": "f15b8c0b5bc89e505b00993f5bb2b7ba79c1738de6539549dd030dff55f3ac78"
+  },
+  {
+    "path": "weights/2025/mofo/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "39c330e3e91492217247eb170b10d7afa4d2750aa7286aff5ca0933940b1913c",
+    "source_checkpoint_sha256": "72effb7027f00d3b827eadcf19e56a7b890620a227f5a9f2f670f1504c54ad43"
+  },
+  {
+    "path": "weights/2026/emaformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "efaa3ecf5af94754ebba1820e8bf8b9b92d3100364c309c61c08701e45988e54",
+    "source_checkpoint_sha256": "249fdb77f4e348a4b7a2923f92bdf922d59d5e67d9bc4b547fe880f7d3a9fa88"
+  },
+  {
+    "path": "weights/2026/lstm/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "cc460a8845d2f3e72b3e83a5480f494d6eb735f5905e73ea766551caf80895a7",
+    "source_checkpoint_sha256": "9d72d74373deabb7e1364661439019c16a9501c5435ebf64555e99081e1a0e2e"
+  },
+  {
+    "path": "weights/2026/mofo/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "0d2637e91de93a3aaa96a230e474dd199664394c5ffeb7a1c88d76ee46c0fca7",
+    "source_checkpoint_sha256": "c5000fe803ec1d74f371ecaf1e1d9e37efc7e0e7ee5f1d47f731cab9e4414bc9"
+  },
+  {
+    "path": "weights/2026/emaformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "97194ca5eb728829b5aa13c8177f53bd35f7c2a00da1fd1b7aa3bd322b9a7aab",
+    "source_checkpoint_sha256": "88d6e82786cb32d12857ebc44600a8d136097310f3af36b667b128c6313e9efa"
+  },
+  {
+    "path": "weights/2026/lstm/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b81f61eec2ac3ce633d19da0c21363ffa9b109d633f6ee6ce712b225660d0ef0",
+    "source_checkpoint_sha256": "d52829aa3b067b315eab1ca3eb735dfcac8574874aa5b64b2a4dc60a755861ef"
+  },
+  {
+    "path": "weights/2026/mofo/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "56e0f20891d1719a71028a57962aa29bd16deaaf7bf0bc94cb8a39b8eee0f3b9",
+    "source_checkpoint_sha256": "15241b5dd4b90bc242f2935f25f531a78cc2805b2c203a344726901b7453d15a"
+  },
+  {
+    "path": "weights/2026/emaformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b55e9ba275caccf38acde2e256cd33f5391b928bf236cdb42d1872156b2defcf",
+    "source_checkpoint_sha256": "e4387501891818fa1161e326ad2703a2082a33077e2485dd67ba59d6f7264284"
+  },
+  {
+    "path": "weights/2026/lstm/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "531b5b9174e500ec2c4466b243e3b760ece3eebc798562b8914fe1066b640709",
+    "source_checkpoint_sha256": "54c1ab97335d36067cec225c68f3e3fd4efd55b4e0d93a24e8dfa2813dd8db5e"
+  },
+  {
+    "path": "weights/2026/mofo/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "d69e80e2fb4f4ab18136b53163efbb9b0371f0e25ced49a6c34e4f5c4aa2fa36",
+    "source_checkpoint_sha256": "d60cd9d1406d92ab886f8f9064d81ffed549fd32edfb8fe58e15c44a2a39b693"
+  },
+  {
+    "path": "weights/2026/emaformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "000d914710db7c6e1fe130683d96f713c43432c012505fcb844f6ede15e04fba",
+    "source_checkpoint_sha256": "3e95d2b35ee3de7621f8d2ff75b2414962e6d3b69217502a23705512b328d48d"
+  },
+  {
+    "path": "weights/2026/lstm/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "674af308f85590b96230cf92b174fa5fe0141bf2aca5ed023683c32b4132f48c",
+    "source_checkpoint_sha256": "b57a852efaa38a6403be01143140470cef65121d26b658168f320b65a1194997"
+  },
+  {
+    "path": "weights/2026/mofo/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "a19ab12284d5d7086bb491dd40d8d19b6490cf652290bd77f24825ee9dcb8551",
+    "source_checkpoint_sha256": "220f64bfa7c88df6a6522c6663d9d08cd84ac95e61a4461d06c531a472a5e430"
+  },
+  {
+    "path": "weights/2026/emaformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "d66e5536619d20063a509bf83a51b12302edbce76a16ad5e4b87287284ebe88e",
+    "source_checkpoint_sha256": "8ea18a1f8405daf28507ca9f9a57fb7e25c761c0625532a8e2f7b48de4465bd5"
+  },
+  {
+    "path": "weights/2026/lstm/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "953dafeded9e9bf1ec6d92d8f48500b16694fa21d83323208d8b914540547023",
+    "source_checkpoint_sha256": "bf623aec980d94d6ec78c99858e58640e1d4fcff6828c4e1183dd6a898cf966d"
+  },
+  {
+    "path": "weights/2026/mofo/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "7d57590c4fe35e2850b95deec39f83eca4c311bd73ce3b0c57dc1f4c3ec19ae4",
+    "source_checkpoint_sha256": "fc7a419ed526a5e76db9db7ec8ed32eef0aa8dfbffa773b34409384524e897c7"
+  },
+  {
+    "path": "weights/2026/emaformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emaformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "393debe07bad1062202189e9c614eefc54913098d00c3c090b2f3659071c7501",
+    "source_checkpoint_sha256": "3b439136ca42cc3bcbf53d243a07c998e6b9301379053ca802fb2f862f07f55b"
+  },
+  {
+    "path": "weights/2026/lstm/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "lstm",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b26726287d17c5e263e3d6705bd03583a2dafcb1a52f5ff9a930d90e7c821e60",
+    "source_checkpoint_sha256": "770fb11ed37e72a6250f1f54d5c40c9100481f48e239f7db7f94e88cc5753c42"
+  },
+  {
+    "path": "weights/2026/mofo/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "mofo",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "a89a3ee476c68e3e62e9b4592ed4bed766dd0af36db30572c91e1242813b8e90",
+    "source_checkpoint_sha256": "aa21019fd1c279ad49b56c74f3745ac0103c0d2b70c9bd6135845e8e8a58fff2"
+  },
+  {
+    "path": "weights/2024/emmoformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "2da0883a6217f0f5e7b4410601bb487ad24972b01cd6920dc6424592fc64c70d",
+    "source_checkpoint_sha256": "696fba420beec66d5714e0964920e2efa0b22ecedcfc7891f9fb4da5ff588cbc"
+  },
+  {
+    "path": "weights/2025/emmoformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "f64b26352b0e6b3f5fa7856325534494e2f125fa5e06f09c40c969b59824dc02",
+    "source_checkpoint_sha256": "698d0cb19388e8d50c0918c6cda0016badc3022feb70d82bcebe7572f306861e"
+  },
+  {
+    "path": "weights/2026/emmoformer/all/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "4d5c5c43d6ff9ecff644c6d06667cb374f0b3aa077f003ee61ca3295062b7dfc",
+    "source_checkpoint_sha256": "a06e4693f5302679eb16242d140d790bbfa06d8afddc4c6e3479dd963507e635"
+  },
+  {
+    "path": "weights/2024/emmoformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "e475e4ac962928eb1ee029c2f7a9e9c79eb660d30d08c6d72b80b2712abf55ce",
+    "source_checkpoint_sha256": "8b7e6f17e4162f3cacd4b64fb144793076b1afda3c39c5d89b0cbfb31f035a8b"
+  },
+  {
+    "path": "weights/2025/emmoformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b4d34817658997a9f25357d2fab0cec57cfa6f41bf02ed14a31854031efabc7e",
+    "source_checkpoint_sha256": "8d1446c5ff53a8cb452512924f9ee0abc38264cda017707343b35c5c37dd1990"
+  },
+  {
+    "path": "weights/2026/emmoformer/selected/jiangsu.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "f4ff206762c04eb85a7d6704265d59c47c56ecde57a7dc42ecb194d6e27b37cd",
+    "source_checkpoint_sha256": "6f2bf27a66f10c2246432b59107dd6757bf1078685773d717606011be921d1a8"
+  },
+  {
+    "path": "weights/2024/emmoformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "15c62519a395de4183dcfb75d4731d92baaf1999c2a17f4a98290cd86550df02",
+    "source_checkpoint_sha256": "263d921f9df65a074fdd7b3963cc6ecb2cccfce272db74d57d1aa97bffda7e11"
+  },
+  {
+    "path": "weights/2025/emmoformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "7c822d281435b85d971fe6d283b68a0c74f568ce95ab693a1028bc7718670bb9",
+    "source_checkpoint_sha256": "81a8f2f08e7a2a90e4f14a87edaa9236999d57dda1c76b7f55340f3877c4752a"
+  },
+  {
+    "path": "weights/2026/emmoformer/all/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "b8f337f0c9ba23330c9e9ba7168a25cf482f7c624c3b8c94425c18872df45451",
+    "source_checkpoint_sha256": "ba112f24f2a0107583d0b6fe7cee96da5f426258af4d50cbcdeef3a950e8b2f1"
+  },
+  {
+    "path": "weights/2024/emmoformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "772930a8370818c1558a8c62b4ac5c08a5ccf059c5a3660bd2cb4f2c1a62bf20",
+    "source_checkpoint_sha256": "d055e2260d093b47b607d13c5912558f7ecfb7405526b6c4ddb60d1d5ef20e27"
+  },
+  {
+    "path": "weights/2025/emmoformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "68c973c18cedfcb9bdb2c5a371a7f5b6636bef04457de85c148845035b7d86b0",
+    "source_checkpoint_sha256": "792607cb0716a460de733ceb2b3942fa060c63e278a030b9fce2f52103ec7e02"
+  },
+  {
+    "path": "weights/2026/emmoformer/selected/shanghai.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "53cbef407fac1d0e99bba79b9d18f2ebe3123d6d84118eee44fe61703ee3f379",
+    "source_checkpoint_sha256": "4aaba3d73c4d37d9218eb45037f31dd0ce4079e64b5cdc49312c5d52d553b72b"
+  },
+  {
+    "path": "weights/2024/emmoformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "9d420745f967747438ef3eda2dbc01ec57950a1210d76d9dd88a09915fe8c8c0",
+    "source_checkpoint_sha256": "b634b38b94ac2715135c03182eb7bd0abf6c942ee7f5bfe389fc2e54c47d3cdb"
+  },
+  {
+    "path": "weights/2025/emmoformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "40f40b0dc543707e32919e96e2396359c2dbc6a9c680c20b9908ce04628d7c13",
+    "source_checkpoint_sha256": "592aa75d4ea1346928d1fec34028cd2fdb64588f1508f9e4d44c37077d60b9aa"
+  },
+  {
+    "path": "weights/2026/emmoformer/all/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "all",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "950ad6c8e3acab44fdb2e51d26912e6ceb20233f75354b7c3f5cedc8f559757f",
+    "source_checkpoint_sha256": "34023bd652f36ce48589ce6a68de577b86dfdfa7db658af74938ed94b3ad54ad"
+  },
+  {
+    "path": "weights/2024/emmoformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "cd11556d3d21b864d8bb9d0272152475b924de723f63f95e908136b6ca2f545a",
+    "source_checkpoint_sha256": "a87e25d969c3a4eff9480e4351ea8f5f143cb94ffa4c517a12d2b913b5b82d13"
+  },
+  {
+    "path": "weights/2025/emmoformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "068160cb7d1d7b2a1799a4a427e2898236a3b0b244809a42761a281cf37e7b02",
+    "source_checkpoint_sha256": "b230594db4a47c5710a638b2b30c256774f965ece63c5348e9df17a691f9fad8"
+  },
+  {
+    "path": "weights/2026/emmoformer/selected/zhejiang.pt",
+    "version": "年度预算版",
+    "model": "emmoformer",
+    "profile": "selected",
+    "regions": [
+      "zhejiang"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 1,
+    "sha256": "8043a7d0ed691378b498f54d78111a800b10a499b30e97c4125a9661571072b0",
+    "source_checkpoint_sha256": "eedc4fe729e9dca4d63b319836fa64d4f5c32a3e294b3c8147231977d9d96fca"
+  },
+  {
+    "path": "weights/2024/joint_emaformer/all/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "66c25c63edc9df18062806f79cf0d9efe3864018a4db17c2dcca5f3534433145",
+    "source_checkpoint_sha256": "f920e5d8288aab975a86ca091722ee7c8cb2e5b702b9472a8e3397284321641b"
+  },
+  {
+    "path": "weights/2025/joint_emaformer/all/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "e50921d130f149e26d0f71d5e4f74c321e9964f61c2aad3d94c5d051237ba95b",
+    "source_checkpoint_sha256": "e12bc6ebc32d6885e3632ad66fc53af2be6f063cab5b4412e65dcbee32b9e43b"
+  },
+  {
+    "path": "weights/2026/joint_emaformer/all/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "all",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "d7bb324412024564a888459f92a949a4411052200bc1e0874cd0cc799b41edc8",
+    "source_checkpoint_sha256": "c6ec8f9260710fd67d949d28099d899cb5044983037e5b3a5476f70bd330d70d"
+  },
+  {
+    "path": "weights/2024/joint_emaformer/selected/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2024,
+    "cutoff_month": "2023-08",
+    "n_train": 83,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "e0f90378f10d4b6b5da9c3ea3c68f4364a12dc00e38dbb1586098a4b2882e989",
+    "source_checkpoint_sha256": "357d35adc92591277da23b895547cca1cd13c407f7e346bb171a6bef7bb3681f"
+  },
+  {
+    "path": "weights/2025/joint_emaformer/selected/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2025,
+    "cutoff_month": "2024-08",
+    "n_train": 95,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "54ccd54f530b2b5536709d6e6bd99fe715ba939dc59df4f73b54cb9413e750c7",
+    "source_checkpoint_sha256": "bc8f743226708bc1aa91ad2f2178609baf5b6dd737887fc9d035015919482824"
+  },
+  {
+    "path": "weights/2026/joint_emaformer/selected/joint.pt",
+    "version": "年度预算版",
+    "model": "joint_emaformer",
+    "profile": "selected",
+    "regions": [
+      "shanghai",
+      "zhejiang",
+      "jiangsu"
+    ],
+    "budget_year": 2026,
+    "cutoff_month": "2025-08",
+    "n_train": 107,
+    "seq_len": 6,
+    "output_count": 3,
+    "sha256": "f35ebcf1bb839600506e0c5c6fc642c73db628f1d52c78626514f68f60ec9efb",
+    "source_checkpoint_sha256": "4b91802f3f519239409d17058ba136e70b1aa7fceee1e5c61fb738bd59b01a8b"
+  }
+]

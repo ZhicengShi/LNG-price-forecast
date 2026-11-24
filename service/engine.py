@@ -521,8 +521,8 @@ class Engine:
         return public_task(self,value) if public else value
 
     def task_config(self,value):
-        folder = 'trainings' if value['kind']=='training' else 'tuning_jobs'
-        path = self.store.root/folder/value[value['kind']+'_id']/'effective_config.json'
+        from .tasks import task_directory
+        path = task_directory(self.store.root,value)/'effective_config.json'
         config = without_file_checks(json.loads(path.read_text(encoding='utf-8')))
         if config != value['_internal']['config_snapshot']:
             raise APIError(422,'INVALID_DATA','已冻结的任务配置被修改，请重新提交任务')

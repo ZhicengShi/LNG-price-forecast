@@ -11,5 +11,7 @@
   "cuda_available": true,
   "training_device": "cuda",
   "training_seed": 42,
-  "note": "原始单区域实验的框架环境；CPU预测和GPU预测将分别核对。"
+  "note": "当前单区域6个月输入、3个月预测的训练环境；CPU和GPU分别重载核验。",
+  "single_history_months": 6,
+  "forecast_months": 3
 }

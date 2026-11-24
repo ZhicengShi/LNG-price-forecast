@@ -82,9 +82,12 @@ class ReproductionTests(unittest.TestCase):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
                 train_one('LSTM', cfg, model_cfg, runtime, params, 'shanghai', 'selected', output)
             history = pd.read_csv(output/'history.csv')
-            # 源实验第一轮；删除tqdm包装会改变DataLoader随机流，MSE约变为1.0630。
+            # 6个月输入方案第一轮；与随包训练历史核对DataLoader随机流。
             if device == 'cuda':
-                self.assertAlmostEqual(float(history.iloc[0].train_MSE), 1.0654219874629267, delta=1e-4)
+                archived = pd.read_csv(ROOT/'reference/training_history.csv')
+                first = archived[(archived.region == 'shanghai') & (archived.profile == 'selected')
+                                 & (archived.model == 'LSTM') & (archived.epoch == 1)].iloc[0]
+                self.assertAlmostEqual(float(history.iloc[0].train_MSE), float(first.train_MSE), delta=1e-4)
             else:
                 # CPU与CUDA的dropout随机实现不同；CPU只核验训练流程完整性。
                 self.assertTrue(np.isfinite(float(history.iloc[0].train_MSE)))
@@ -93,6 +96,28 @@ class ReproductionTests(unittest.TestCase):
             self.assertIn('training_audit', saved)
             self.assertEqual(saved['config']['training_cutoff_month'], '2022-11')
             self.assertEqual(list(pd.read_csv(output/'test_metrics.csv')), COLUMNS)
+
+    def test_single_region_six_month_windows_and_saved_checkpoints(self):
+        from runtime import load_checkpoint
+        cfg = load_global(ROOT/'config.yaml')
+        self.assertEqual(cfg['window'], {'seq_len': 6, 'pred_len': 3})
+        for region in ('shanghai', 'zhejiang', 'jiangsu'):
+            for profile in ('all', 'selected'):
+                data, _, _ = prepare_data(cfg, region, profile)
+                self.assertEqual(data.train[0][0].shape[0], 6)
+                self.assertEqual(data.train[0][1].shape[0], 3)
+                self.assertEqual(list(data.test.starts), list(range(115, 135)))
+                for folder, name in [('lstm','LSTM'), ('emaformer','EMAformer'), ('mofo','MoFo')]:
+                    model, saved = load_checkpoint(ROOT/folder/'weights'/region/(profile+'.pt'), name, 'cpu')
+                    self.assertEqual(saved['config']['model_kwargs']['seq_len'], 6)
+                    self.assertEqual(saved['config']['model_kwargs']['pred_len'], 3)
+                    if name == 'MoFo':
+                        self.assertEqual(model.periodic, 6)
+                    x, _ = data.test[0]
+                    with torch.inference_mode():
+                        value = forward(model, torch.from_numpy(x)[None], torch.tensor([115]), name)
+                    self.assertEqual(tuple(value.shape), (1, 3, 1))
+                    self.assertTrue(torch.isfinite(value).all())
 
 
 if __name__ == '__main__':

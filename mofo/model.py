@@ -1,6 +1,6 @@
-"""项目既有MoFo月度单区域模型，过去12个月预测未来3个月。
+"""项目既有MoFo月度单区域模型，过去6个月预测未来3个月。
 
-核心位于_mofo_core.py，默认d_model=24、head=4、d_layers=1、periodic=12。
+核心位于_mofo_core.py，默认d_model=24、head=4、d_layers=1、periodic=6。
 通道独立主干后通过线性层融合各变量，输出(batch, 3, 1)。
 数据由共用datasets.prepare_data构造，最后历史月相位由预测入口传入。
 """
@@ -14,8 +14,8 @@ from ._mofo_core import MoFo as MoFoCore
 
 
 class MoFo(MoFoCore):
-    def __init__(self, input_size, target_index=0, seq_len=12, pred_len=3,
-                 d_model=24, head=4, d_layers=1, periodic=12,
+    def __init__(self, input_size, target_index=0, seq_len=6, pred_len=3,
+                 d_model=24, head=4, d_layers=1, periodic=6,
                  bias=True, cias=True, channel_fusion=True):
         for name, value in {"input_size": input_size, "seq_len": seq_len,
                             "pred_len": pred_len, "d_model": d_model, "head": head,
@@ -25,7 +25,7 @@ class MoFo(MoFoCore):
         if d_model % head:
             raise ValueError("d_model 必须能被 head 整除")
         if periodic > seq_len:
-            raise ValueError("官方分块要求 periodic <= seq_len；12个月历史请用 periodic<=12")
+            raise ValueError("周期分块要求 periodic <= seq_len；6个月历史请用 periodic<=6")
         if target_index is not None and (not isinstance(target_index, int)
                                         or isinstance(target_index, bool)
                                         or not 0 <= target_index < input_size):
@@ -90,7 +90,7 @@ class MoFo(MoFoCore):
 class MoFoDataset(Dataset):
     """输出 (x, y, phase)。MoFo使用最后一个历史月的位置，而非首个预测月。"""
 
-    def __init__(self, dataset, periodic=12):
+    def __init__(self, dataset, periodic=6):
         if not isinstance(periodic, int) or isinstance(periodic, bool) or periodic < 1:
             raise ValueError("periodic 必须为正整数")
         self.dataset = dataset

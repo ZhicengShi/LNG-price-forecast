@@ -101,14 +101,14 @@ from torch.utils.data import Dataset
 
 
 class EMAformer(Model):
-    """过去12个月 -> 未来3个月；预测结果为 (batch, 3, 1)。
+    """过去6个月 -> 未来3个月；预测结果为 (batch, 3, 1)。
 
     核心参数使用官方 run.py 默认值。
     输入必须包含历史目标价格，仅将其编码token送入原预测头。
     forward(x, cycle_index) 的 cycle_index 为预测首月的全局行号 % cycle。
     """
 
-    def __init__(self, input_size, target_index=0, seq_len=12, pred_len=3,
+    def __init__(self, input_size, target_index=0, seq_len=6, pred_len=3,
                  d_model=512, n_heads=8, e_layers=2, d_ff=2048,
                  dropout=0.1, output_proj_dropout=0.1, cycle=24,
                  factor=1, activation="gelu", use_norm=True, output_attention=False):

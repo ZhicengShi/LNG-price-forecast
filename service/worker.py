@@ -310,10 +310,15 @@ def main():
     parser.add_argument('--storage',type=Path,required=True)
     parser.add_argument('--job',required=True)
     args = parser.parse_args()
-    if not re.fullmatch(r'(train|tune)_[a-f0-9]{32}',args.job):
+    if not re.fullmatch(r'(train|tune|atrain)_[a-f0-9]{32}',args.job):
         raise ValueError('任务编号无效')
     try:
-        worker = Worker(args.storage,args.job)
+        task = Catalog(args.storage).get('job',args.job)
+        if task['kind']=='annual_training':
+            from .annual_worker import AnnualWorker
+            worker = AnnualWorker(args.storage,args.job)
+        else:
+            worker = Worker(args.storage,args.job)
     except Exception:
         catalog = Catalog(args.storage)
         catalog.update_job(args.job,dict(status='failed',finished_at=now(),error=dict(code='PREPARATION_FAILED',message='任务准备失败，请检查冻结配置和数据',retryable=True)))

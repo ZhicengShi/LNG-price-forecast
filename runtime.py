@@ -1,4 +1,4 @@
-"""三个模型共用的配置、权重、预处理和预测输出；仅依赖本目录。"""
+"""单区域模型共用的配置、权重、预处理和预测输出；仅依赖本目录。"""
 import argparse
 import importlib
 import json
@@ -18,7 +18,7 @@ from provenance import source_info, without_file_checks
 ROOT = Path(__file__).resolve().parent
 REGIONS = ('shanghai', 'zhejiang', 'jiangsu')
 NAMES = dict(shanghai='上海', zhejiang='浙江', jiangsu='江苏')
-MODEL_FOLDERS = dict(LSTM='lstm', EMAformer='emaformer', MoFo='mofo')
+MODEL_FOLDERS = dict(LSTM='lstm', EMAformer='emaformer', MoFo='mofo', EMMoFormer='emmoformer')
 
 
 def save_json(path, value):
@@ -106,6 +106,8 @@ def run_directory(parent, prefix):
 def forward(model, x, starts, name):
     if name == 'EMAformer':
         value = model(x, starts % model.cycle_len)
+    elif name == 'EMMoFormer':
+        value = model(x, starts)
     elif name == 'MoFo':
         value = model(x, (starts-1) % model.periodic)
     else:

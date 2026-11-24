@@ -3,6 +3,7 @@
   "editable_configs": [
     "config.yaml",
     "emaformer/config.yaml",
+    "emmoformer/config.yaml",
     "joint_emaformer/configs/all.yaml",
     "joint_emaformer/configs/backtest.yaml",
     "joint_emaformer/configs/search.yaml",
@@ -26,59 +27,17 @@
     ".git/**"
   ],
   "files": {
-    "reference/service_v2_validation/workflow.json": {
-      "bytes": 40885
-    },
-    "reference/service_v2_validation/tests.log": {
-      "bytes": 6064
-    },
-    "reference/service_v2_validation/server.log": {
-      "bytes": 8249
-    },
-    "reference/service_v2_validation/selected_response.json": {
-      "bytes": 13880
-    },
-    "reference/service_v2_validation/selected_predictions.csv": {
-      "bytes": 1429
-    },
-    "reference/service_v2_validation/report.md": {
-      "bytes": 2305
-    },
-    "reference/service_v2_validation/report.json": {
-      "bytes": 3302
-    },
-    "reference/service_v2_validation/openapi.json": {
-      "bytes": 166388
-    },
-    "reference/service_v2_validation/all_response.json": {
-      "bytes": 15783
-    },
-    "reference/service_v2_validation/all_predictions.csv": {
-      "bytes": 1389
-    },
-    "tests/test_service_workflows.py": {
-      "bytes": 21714
-    },
-    "service/worker.py": {
-      "bytes": 19501
-    },
-    "service/tasks.py": {
-      "bytes": 12314
-    },
-    "service/planning.py": {
-      "bytes": 12796
-    },
-    "service/uploads.py": {
-      "bytes": 5936
-    },
-    "service/catalog.py": {
-      "bytes": 5182
-    },
-    "service/errors.py": {
-      "bytes": 504
+    ".gitattributes": {
+      "bytes": 42
     },
     ".gitignore": {
       "bytes": 46
+    },
+    "README.md": {
+      "bytes": 20568
+    },
+    "config.yaml": {
+      "bytes": 2587
     },
     "data/上海_处理后数据表.xlsx": {
       "bytes": 27386
@@ -119,8 +78,11 @@
     "emaformer/_emaformer_layers.py": {
       "bytes": 5578
     },
+    "emaformer/config.yaml": {
+      "bytes": 995
+    },
     "emaformer/model.py": {
-      "bytes": 9785
+      "bytes": 9783
     },
     "emaformer/predict.py": {
       "bytes": 275
@@ -129,22 +91,88 @@
       "bytes": 272
     },
     "emaformer/weights/jiangsu/all.pt": {
-      "bytes": 36911913
+      "bytes": 36900803
     },
     "emaformer/weights/jiangsu/selected.pt": {
-      "bytes": 36094248
+      "bytes": 36080259
     },
     "emaformer/weights/shanghai/all.pt": {
-      "bytes": 37014505
+      "bytes": 37003459
     },
     "emaformer/weights/shanghai/selected.pt": {
-      "bytes": 36042984
+      "bytes": 36028867
     },
     "emaformer/weights/zhejiang/all.pt": {
-      "bytes": 36860649
+      "bytes": 36849603
     },
     "emaformer/weights/zhejiang/selected.pt": {
-      "bytes": 35991656
+      "bytes": 35977539
+    },
+    "emmoformer/__init__.py": {
+      "bytes": 51
+    },
+    "emmoformer/_layers.py": {
+      "bytes": 4292
+    },
+    "emmoformer/_training.py": {
+      "bytes": 11440
+    },
+    "emmoformer/config.yaml": {
+      "bytes": 5088
+    },
+    "emmoformer/model.py": {
+      "bytes": 12210
+    },
+    "emmoformer/predict.py": {
+      "bytes": 281
+    },
+    "emmoformer/reference/metrics.csv": {
+      "bytes": 1271
+    },
+    "emmoformer/reference/test_predictions.csv": {
+      "bytes": 36393
+    },
+    "emmoformer/train.py": {
+      "bytes": 266
+    },
+    "emmoformer/weights/jiangsu/all.pt": {
+      "bytes": 2819651
+    },
+    "emmoformer/weights/jiangsu/all_preprocessing.json": {
+      "bytes": 3070
+    },
+    "emmoformer/weights/jiangsu/selected.pt": {
+      "bytes": 200769
+    },
+    "emmoformer/weights/jiangsu/selected_preprocessing.json": {
+      "bytes": 1018
+    },
+    "emmoformer/weights/shanghai/all.pt": {
+      "bytes": 565278
+    },
+    "emmoformer/weights/shanghai/all_preprocessing.json": {
+      "bytes": 3284
+    },
+    "emmoformer/weights/shanghai/selected.pt": {
+      "bytes": 503571
+    },
+    "emmoformer/weights/shanghai/selected_preprocessing.json": {
+      "bytes": 845
+    },
+    "emmoformer/weights/zhejiang/all.pt": {
+      "bytes": 3344773
+    },
+    "emmoformer/weights/zhejiang/all_preprocessing.json": {
+      "bytes": 2926
+    },
+    "emmoformer/weights/zhejiang/selected.pt": {
+      "bytes": 143635
+    },
+    "emmoformer/weights/zhejiang/selected_preprocessing.json": {
+      "bytes": 726
+    },
+    "joint_emaformer/README.md": {
+      "bytes": 17708
     },
     "joint_emaformer/__init__.py": {
       "bytes": 47
@@ -170,6 +198,18 @@
     "joint_emaformer/backtest.py": {
       "bytes": 8206
     },
+    "joint_emaformer/configs/all.yaml": {
+      "bytes": 914
+    },
+    "joint_emaformer/configs/backtest.yaml": {
+      "bytes": 599
+    },
+    "joint_emaformer/configs/search.yaml": {
+      "bytes": 5967
+    },
+    "joint_emaformer/configs/selected.yaml": {
+      "bytes": 924
+    },
     "joint_emaformer/data.py": {
       "bytes": 6416
     },
@@ -178,9 +218,6 @@
     },
     "joint_emaformer/predict.py": {
       "bytes": 4949
-    },
-    "joint_emaformer/README.md": {
-      "bytes": 17753
     },
     "joint_emaformer/reference/analysis/all_prediction_intervals.csv": {
       "bytes": 114655
@@ -377,8 +414,11 @@
     "lstm/__init__.py": {
       "bytes": 30
     },
+    "lstm/config.yaml": {
+      "bytes": 848
+    },
     "lstm/model.py": {
-      "bytes": 2381
+      "bytes": 2380
     },
     "lstm/predict.py": {
       "bytes": 265
@@ -387,22 +427,22 @@
       "bytes": 262
     },
     "lstm/weights/jiangsu/all.pt": {
-      "bytes": 33929
+      "bytes": 34865
     },
     "lstm/weights/jiangsu/selected.pt": {
-      "bytes": 24773
+      "bytes": 25393
     },
     "lstm/weights/shanghai/all.pt": {
-      "bytes": 35209
+      "bytes": 36081
     },
     "lstm/weights/shanghai/selected.pt": {
-      "bytes": 24133
+      "bytes": 24753
     },
     "lstm/weights/zhejiang/all.pt": {
-      "bytes": 33417
+      "bytes": 34289
     },
     "lstm/weights/zhejiang/selected.pt": {
-      "bytes": 23493
+      "bytes": 24113
     },
     "metrics.py": {
       "bytes": 1916
@@ -413,8 +453,11 @@
     "mofo/_mofo_core.py": {
       "bytes": 8660
     },
+    "mofo/config.yaml": {
+      "bytes": 959
+    },
     "mofo/model.py": {
-      "bytes": 5565
+      "bytes": 5558
     },
     "mofo/predict.py": {
       "bytes": 265
@@ -423,190 +466,79 @@
       "bytes": 262
     },
     "mofo/weights/jiangsu/all.pt": {
-      "bytes": 57829
+      "bytes": 56221
     },
     "mofo/weights/jiangsu/selected.pt": {
-      "bytes": 55449
+      "bytes": 53085
     },
     "mofo/weights/shanghai/all.pt": {
-      "bytes": 58277
+      "bytes": 56669
     },
     "mofo/weights/shanghai/selected.pt": {
-      "bytes": 55257
+      "bytes": 52829
     },
     "mofo/weights/zhejiang/all.pt": {
-      "bytes": 57701
+      "bytes": 56093
     },
     "mofo/weights/zhejiang/selected.pt": {
-      "bytes": 55065
-    },
-    "README.md": {
-      "bytes": 16798
-    },
-    "reference/environment.json": {
-      "bytes": 468
-    },
-    "reference/jiangsu_all_metrics.csv": {
-      "bytes": 564
-    },
-    "reference/jiangsu_selected_metrics.csv": {
-      "bytes": 564
-    },
-    "reference/relocation_verification.json": {
-      "bytes": 344
-    },
-    "reference/reproduction_audit.json": {
-      "bytes": 30442
-    },
-    "reference/retrained_history.csv": {
-      "bytes": 46569
-    },
-    "reference/service_validation/all_predictions.csv": {
-      "bytes": 1389
-    },
-    "reference/service_validation/all_response.json": {
-      "bytes": 15783
-    },
-    "reference/service_validation/openapi.json": {
-      "bytes": 21801
-    },
-    "reference/service_validation/relocation.json": {
-      "bytes": 441
-    },
-    "reference/service_validation/report.json": {
-      "bytes": 2743
-    },
-    "reference/service_validation/report.md": {
-      "bytes": 1567
-    },
-    "reference/service_validation/selected_predictions.csv": {
-      "bytes": 1429
-    },
-    "reference/service_validation/selected_response.json": {
-      "bytes": 13880
-    },
-    "reference/shanghai_all_metrics.csv": {
-      "bytes": 564
-    },
-    "reference/shanghai_selected_metrics.csv": {
-      "bytes": 564
-    },
-    "reference/source_integrity.json": {
-      "bytes": 1154
-    },
-    "reference/test_predictions.csv": {
-      "bytes": 103190
-    },
-    "reference/training_history.csv": {
-      "bytes": 46569
-    },
-    "reference/verification.json": {
-      "bytes": 9146
-    },
-    "reference/weight_index.json": {
-      "bytes": 21942
-    },
-    "reference/zhejiang_all_metrics.csv": {
-      "bytes": 564
-    },
-    "reference/zhejiang_selected_metrics.csv": {
-      "bytes": 564
-    },
-    "requirements.txt": {
-      "bytes": 239
-    },
-    "runtime.py": {
-      "bytes": 12070
-    },
-    "service/__init__.py": {
-      "bytes": 62
-    },
-    "service/app.py": {
-      "bytes": 18015
-    },
-    "service/engine.py": {
-      "bytes": 31269
-    },
-    "service/intervals.py": {
-      "bytes": 2832
-    },
-    "service/API_DESIGN_README.md": {
-      "bytes": 85391
-    },
-    "service/registry.py": {
-      "bytes": 4866
-    },
-    "service/schemas.py": {
-      "bytes": 11649
-    },
-    "service/storage.py": {
-      "bytes": 5427
-    },
-    "tests/test_joint_emaformer.py": {
-      "bytes": 6022
-    },
-    "tests/test_reproduction.py": {
-      "bytes": 4839
-    },
-    "tests/test_service.py": {
-      "bytes": 14430
-    },
-    "tests/test_xgboost_selection.py": {
-      "bytes": 4860
-    },
-    "training.py": {
-      "bytes": 7621
-    },
-    "verify.py": {
-      "bytes": 4460
-    },
-    "xgboost/reference/original_selection.json": {
-      "bytes": 196258
-    },
-    "xgboost/reference/reproduction_check.json": {
-      "bytes": 1282
-    },
-    "xgboost/reference/run.json": {
-      "bytes": 3252
-    },
-    "xgboost/reference/selected_features.yaml": {
-      "bytes": 517
-    },
-    "xgboost/reference/selection.json": {
-      "bytes": 426447
-    },
-    "xgboost/reference/上海_XGBoost变量筛选.xlsx": {
-      "bytes": 28345
-    },
-    "xgboost/reference/江苏_XGBoost变量筛选.xlsx": {
-      "bytes": 28858
-    },
-    "xgboost/reference/浙江_XGBoost变量筛选.xlsx": {
-      "bytes": 26496
-    },
-    "xgboost/run.py": {
-      "bytes": 340
-    },
-    "xgboost/selection.py": {
-      "bytes": 28555
+      "bytes": 52637
     },
     "provenance.py": {
       "bytes": 1709
     },
-    "service/migration.py": {
-      "bytes": 2505
+    "reference/cli_v3_verification.json": {
+      "bytes": 2960
     },
-    "reference/version_migration_verification.json": {
-      "bytes": 1336
+    "reference/environment.json": {
+      "bytes": 538
+    },
+    "reference/jiangsu_all_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/jiangsu_selected_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/relocation_verification.json": {
+      "bytes": 521
+    },
+    "reference/reproduction_audit.json": {
+      "bytes": 30619
     },
     "reference/reproduction_v3_verification.json": {
-      "bytes": 10342
+      "bytes": 10519
     },
-    "reference/cli_v3_verification.json": {
-      "bytes": 2783
+    "reference/retrained_history.csv": {
+      "bytes": 35856
     },
-    ".gitattributes": {
-      "bytes": 42
+    "reference/service_v2_validation/all_predictions.csv": {
+      "bytes": 1389
+    },
+    "reference/service_v2_validation/all_response.json": {
+      "bytes": 15783
+    },
+    "reference/service_v2_validation/openapi.json": {
+      "bytes": 166388
+    },
+    "reference/service_v2_validation/report.json": {
+      "bytes": 3302
+    },
+    "reference/service_v2_validation/report.md": {
+      "bytes": 2305
+    },
+    "reference/service_v2_validation/selected_predictions.csv": {
+      "bytes": 1429
+    },
+    "reference/service_v2_validation/selected_response.json": {
+      "bytes": 13880
+    },
+    "reference/service_v2_validation/server.log": {
+      "bytes": 8249
+    },
+    "reference/service_v2_validation/tests.log": {
+      "bytes": 6064
+    },
+    "reference/service_v2_validation/workflow.json": {
+      "bytes": 40885
     },
     "reference/service_v3_validation/all_predictions.csv": {
       "bytes": 1335
@@ -637,6 +569,190 @@
     },
     "reference/service_v3_validation/workflow.json": {
       "bytes": 40946
+    },
+    "reference/service_validation/all_predictions.csv": {
+      "bytes": 1389
+    },
+    "reference/service_validation/all_response.json": {
+      "bytes": 15783
+    },
+    "reference/service_validation/openapi.json": {
+      "bytes": 21801
+    },
+    "reference/service_validation/relocation.json": {
+      "bytes": 441
+    },
+    "reference/service_validation/report.json": {
+      "bytes": 2743
+    },
+    "reference/service_validation/report.md": {
+      "bytes": 1567
+    },
+    "reference/service_validation/selected_predictions.csv": {
+      "bytes": 1429
+    },
+    "reference/service_validation/selected_response.json": {
+      "bytes": 13880
+    },
+    "reference/shanghai_all_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/shanghai_selected_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/source_integrity.json": {
+      "bytes": 1331
+    },
+    "reference/test_predictions.csv": {
+      "bytes": 139557
+    },
+    "reference/training_history.csv": {
+      "bytes": 35856
+    },
+    "reference/verification.json": {
+      "bytes": 13022
+    },
+    "reference/version_migration_verification.json": {
+      "bytes": 1513
+    },
+    "reference/weight_index.json": {
+      "bytes": 73952
+    },
+    "reference/window6_update.json": {
+      "bytes": 39820
+    },
+    "reference/zhejiang_all_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/zhejiang_selected_metrics.csv": {
+      "bytes": 652
+    },
+    "reference/实验结果.md": {
+      "bytes": 14242
+    },
+    "requirements.txt": {
+      "bytes": 239
+    },
+    "runtime.py": {
+      "bytes": 12399
+    },
+    "service/API_DESIGN_README.md": {
+      "bytes": 85391
+    },
+    "service/__init__.py": {
+      "bytes": 62
+    },
+    "service/app.py": {
+      "bytes": 18015
+    },
+    "service/catalog.py": {
+      "bytes": 5182
+    },
+    "service/config.yaml": {
+      "bytes": 619
+    },
+    "service/engine.py": {
+      "bytes": 31269
+    },
+    "service/errors.py": {
+      "bytes": 504
+    },
+    "service/intervals.py": {
+      "bytes": 2832
+    },
+    "service/migration.py": {
+      "bytes": 2505
+    },
+    "service/models.yaml": {
+      "bytes": 1610
+    },
+    "service/planning.py": {
+      "bytes": 12796
+    },
+    "service/registry.py": {
+      "bytes": 4866
+    },
+    "service/schemas.py": {
+      "bytes": 11649
+    },
+    "service/storage.py": {
+      "bytes": 5427
+    },
+    "service/tasks.py": {
+      "bytes": 12314
+    },
+    "service/uploads.py": {
+      "bytes": 5936
+    },
+    "service/worker.py": {
+      "bytes": 19501
+    },
+    "tests/test_emmoformer.py": {
+      "bytes": 6108
+    },
+    "tests/test_joint_emaformer.py": {
+      "bytes": 6022
+    },
+    "tests/test_reproduction.py": {
+      "bytes": 6520
+    },
+    "tests/test_service.py": {
+      "bytes": 14628
+    },
+    "tests/test_service_workflows.py": {
+      "bytes": 21714
+    },
+    "tests/test_xgboost_selection.py": {
+      "bytes": 6036
+    },
+    "training.py": {
+      "bytes": 7621
+    },
+    "verify.py": {
+      "bytes": 4900
+    },
+    "xgboost/config.yaml": {
+      "bytes": 1496
+    },
+    "xgboost/reference/original_selection.json": {
+      "bytes": 196258
+    },
+    "xgboost/reference/reproduction_check.json": {
+      "bytes": 1282
+    },
+    "xgboost/reference/run.json": {
+      "bytes": 3359
+    },
+    "xgboost/reference/selected_features.yaml": {
+      "bytes": 517
+    },
+    "xgboost/reference/selection.json": {
+      "bytes": 426447
+    },
+    "xgboost/reference/上海_XGBoost变量筛选.xlsx": {
+      "bytes": 28345
+    },
+    "xgboost/reference/江苏_XGBoost变量筛选.xlsx": {
+      "bytes": 28858
+    },
+    "xgboost/reference/浙江_XGBoost变量筛选.xlsx": {
+      "bytes": 26496
+    },
+    "xgboost/run.py": {
+      "bytes": 340
+    },
+    "xgboost/selection.py": {
+      "bytes": 28554
     }
-  }
+  },
+  "feature_policy": "validation_selected_combination",
+  "updated_at": "2026-10-22T05:59:11.948615+00:00",
+  "single_history_months": 6,
+  "forecast_months": 3,
+  "mofo_periodic": 6,
+  "selected_feature_counts": [
+    4,
+    3,
+    5
+  ]
 }

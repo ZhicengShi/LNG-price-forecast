@@ -1,0 +1,298 @@
+{
+  "configurations": 26,
+  "predictions": 30,
+  "max_prediction_delta": 4.850964074876174e-11,
+  "max_state_delta": 0.0,
+  "rows": [
+    {
+      "model": "emaformer",
+      "profile": "all",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emaformer",
+      "profile": "all",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emaformer",
+      "profile": "all",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emaformer",
+      "profile": "selected",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emaformer",
+      "profile": "selected",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emaformer",
+      "profile": "selected",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "all",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "all",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "all",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "selected",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "selected",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "emmoformer",
+      "profile": "selected",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "joint_emaformer",
+      "profile": "all",
+      "regions": [
+        "shanghai",
+        "zhejiang",
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "joint_emaformer",
+      "profile": "selected",
+      "regions": [
+        "shanghai",
+        "zhejiang",
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "all",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "all",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "all",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "selected",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "selected",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "lstm",
+      "profile": "selected",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "all",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "all",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "all",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "selected",
+      "regions": [
+        "jiangsu"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "selected",
+      "regions": [
+        "shanghai"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    },
+    {
+      "model": "mofo",
+      "profile": "selected",
+      "regions": [
+        "zhejiang"
+      ],
+      "max_state_delta": 0.0,
+      "scaler_equal": true,
+      "origins_equal": true,
+      "training_equal": true
+    }
+  ]
+}

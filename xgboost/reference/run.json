@@ -48,7 +48,8 @@
           "learning_rate": 0.03
         }
       }
-    }
+    },
+    "history_months": 12
   },
   "data_config": {
     "data": {
@@ -129,5 +130,7 @@
     "zhejiang",
     "jiangsu"
   ],
-  "selection_uses_test": false
+  "selection_uses_test": false,
+  "ranking_history_months": 12,
+  "independent_of_single_model_window": true
 }

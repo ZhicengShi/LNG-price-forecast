@@ -10,7 +10,7 @@ from torch import nn
 
 class LSTM(nn.Module):
     def __init__(self, input_size, hidden_size=32, num_layers=1,
-                 dropout=0.1, seq_len=12, pred_len=3):
+                 dropout=0.1, seq_len=6, pred_len=3):
         super().__init__()
         for name, value in {"input_size": input_size, "hidden_size": hidden_size,
                             "num_layers": num_layers, "seq_len": seq_len,
